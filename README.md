@@ -6,3 +6,11 @@ Web Loiter is an innovative web application that draws inspiration from Discord,
 [Click here to view Web Loiter's Live Site!](add url here)
 
 
+## Navigate to:
+
+[User Stories](add url here)\
+[Feature List](add url here)\
+[Database Schema](add url here)\
+[Backend Routes](add url here)
+
+
