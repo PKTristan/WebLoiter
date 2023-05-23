@@ -31,6 +31,6 @@ WebLoiter is an innovative web application that draws inspiration from Discord, 
 
 ### Deployment:
 ![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
-![Docker](https://img.shields.io/badge/Dockerfile-0DB7ED?style=for-the-badge&logo=docker&logoColor=white)
+
 
 
