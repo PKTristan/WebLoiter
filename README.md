@@ -11,7 +11,7 @@ WebLoiter is an innovative web application that draws inspiration from Discord, 
 [User Stories](https://github.com/PKTristan/WebLoiter/wiki/User-Stories)\
 [MVP List](https://github.com/PKTristan/WebLoiter/wiki/MVP-List)\
 [Database Schema](https://github.com/PKTristan/WebLoiter/wiki/Database-Schema)\
-[Backend Routes](https://github.com/PKTristan/WebLoiter/wiki/Backend-Routes)
+[API Docs](https://github.com/PKTristan/WebLoiter/wiki/API-Documentation)
 
 
 ## Technologies/Frameworks Used:
