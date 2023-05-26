@@ -13,6 +13,7 @@ WebLoiter is an innovative web application that draws inspiration from Discord, 
 [Database Schema](https://github.com/PKTristan/WebLoiter/wiki/Database-Schema)\
 [API Docs](https://github.com/PKTristan/WebLoiter/wiki/API-Documentation)\
 [Wireframes](https://github.com/PKTristan/WebLoiter/wiki/Wireframes)
+[Redux State Shape](https://github.com/PKTristan/WebLoiter/wiki/Redux-State-Shape)
 
 
 ## Technologies/Frameworks Used:
