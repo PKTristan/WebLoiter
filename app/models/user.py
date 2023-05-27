@@ -17,6 +17,9 @@ class User(db.Model, UserMixin):
     bio = db.Column(db.String(1000), nullable=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
+    servers = db.relationship('Server', back_populates='owner')
+    servermembers = db.relationship('ServerMembers', back_populates='users')
+
     @db.validates('email')
     def validate_email(self, key, email):
         if not validate_email_format(email):
