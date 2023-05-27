@@ -1,8 +1,8 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
 
-class Channel(db.Model, UserMixin):
+
+class Channel(db.Model):
     __tablename__ = 'channels'
 
     if environment == 'production':
