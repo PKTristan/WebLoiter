@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from .user import User
 import re
 
 class Server(db.Model):
@@ -17,7 +18,7 @@ class Server(db.Model):
     direct_message = db.Column(db.Boolean, nullable=True, default=False)
 
     owner = db.relationship('User', back_populates='servers')
-    s_members = db.relationship('User', secondary='servermembers', back_populates='s_memberships')
+    members = db.relationship('ServerMembers', back_populates='server')
 
     @db.validates('avatar')
     def validate_avatar(self, key, avatar):
