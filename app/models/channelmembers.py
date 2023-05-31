@@ -1,4 +1,4 @@
-from .db import db, enviroment, SCHEMA
+from .db import db, environment, SCHEMA
 
 
 class ChannelMembers(db.Model):
