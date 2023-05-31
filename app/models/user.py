@@ -19,8 +19,8 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     servers = db.relationship('Server', back_populates='owner')
-    s_memberships = db.relationship('Server', secondary='servermembers', back_populates='s_members')
-    c_memberships = db.relationship('Channel', secondary='channelmembers', back_populates='c_members')
+    s_memberships = db.relationship('ServerMembers', back_populates='user')
+    c_memberships = db.relationship('ChannelMembers', back_populates='user')
 
     @db.validates('email')
     def validate_email(self, key, email):
