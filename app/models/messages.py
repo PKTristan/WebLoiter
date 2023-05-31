@@ -15,3 +15,11 @@ class Message(db.Model):
 
     user = db.relationship('User', backref=db.backref('messages', lazy=True))
     channel = db.relationship('Channel', backref=db.backref('messages', lazy=True))
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'message': self.message,
+            'user_id': self.user_id,
+            'channel_id': self.channel_id
+        }

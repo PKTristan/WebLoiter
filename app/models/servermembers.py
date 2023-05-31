@@ -7,8 +7,16 @@ class ServerMembers(db.Model):
     if enviroment == "production":
         __table_args__ = {'schema': SCHEMA}
 
-    member_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id'), primary_key=True)
-    server_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.servers.id'), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    member_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id'))
+    server_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.servers.id'))
 
     users = db.relationship('User', back_populates='servermembers')
     server = db.relationship('Server', back_populates='members')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'member_id': self.member_id,
+            'server_id': self.server_id
+        }

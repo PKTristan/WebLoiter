@@ -7,8 +7,16 @@ class ChannelMembers(db.Model):
     if enviroment == "production":
         __table_args__ = {'schema': SCHEMA}
 
-    member_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id'), primary_key=True)
-    channel_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.channels.id'), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    member_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id'))
+    channel_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.channels.id'))
 
     users = db.relationship('User', back_populates='servermembers')
     channel = db.relationship('Channel', back_populates='members')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'member_id': self.member_id,
+            'channel_id': self.channel_id
+        }

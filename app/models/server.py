@@ -12,12 +12,13 @@ class Server(db.model):
     owner_id = db.Column(db.Integer, db.ForeignKey(
         f'{SCHEMA}.users.id'
     ))
-    owner = db.relationship('User', back_populates='servers')
     type = db.Column(db.String, nullable=False)
     avatar = db.Column(db.String, nullable=True, default='https://i.imgur.com/YnEnRlg.jpg')
     server_details = db.Column(db.String(100), nullable=True)
     private = db.Column(db.Boolean, nullable=True, default=False)
     direct_message = db.Column(db.Boolean, nullable=True, default=False)
+
+    owner = db.relationship('User', back_populates='servers')
 
 
     @db.validates('avatar')
@@ -25,6 +26,18 @@ class Server(db.model):
         if not validate_url_format(avatar):
             raise AssertionError('Invalid URL format for avatar')
         return avatar
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'server_name': self.server_name,
+            'owner_id': self.owner_id,
+            'type': self.type,
+            'avatar': self.avatar,
+            'server_details': self.server_details,
+            'private': self.private,
+            'direct_message': self.direct_message
+        }
 
 
 def validate_url_format(url) -> bool:
