@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+import re
 
 
 class User(db.Model, UserMixin):
@@ -53,9 +54,9 @@ class User(db.Model, UserMixin):
 
 
 def validate_email_format(email) -> bool:
-    # check for valid email
-    return True
+    email_pattern = re.compile(r'^[\w\.-]+@[\w\.-]+\.\w+$')
+    return bool(email_pattern.match(email))
 
 def validate_url_format(url) -> bool:
-    # check fro proper url
-    return True
+    url_pattern = re.compile(r'^https?://[\w\-]+(\.[\w\-]+){1,2}\.[\w\-]{2,3}[/#?]?.*$')
+    return bool(url_pattern.match(url))
