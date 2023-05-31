@@ -8,8 +8,8 @@ class ServerMembers(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    member_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id'))
-    server_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.servers.id'))
+    member_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    server_id = db.Column(db.Integer, db.ForeignKey('servers.id'))
 
     server = db.relationship('Server', backref='servermembers')
     user = db.relationship('User', backref='servermembers')

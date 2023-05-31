@@ -10,7 +10,7 @@ class Server(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     server_name = db.Column(db.String, nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey(
-        f'{SCHEMA}.users.id'
+        'users.id'
     ))
     server_type = db.Column(db.String, nullable=False)
     avatar = db.Column(db.String, nullable=True, default='https://i.imgur.com/YnEnRlg.jpg')
