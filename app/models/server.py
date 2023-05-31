@@ -1,4 +1,4 @@
-from .db import db, environment, SCHEMA
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 import re
 
 class Server(db.Model):
@@ -9,7 +9,7 @@ class Server(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     server_name = db.Column(db.String, nullable=False)
-    owner_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id'))
+    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     server_type = db.Column(db.String, nullable=False)
     avatar = db.Column(db.String, nullable=True, default='https://i.imgur.com/YnEnRlg.jpg')
     server_details = db.Column(db.String(100), nullable=True)

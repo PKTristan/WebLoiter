@@ -1,4 +1,4 @@
-from .db import db, environment, SCHEMA
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
 class ChannelMembers(db.Model):
@@ -8,8 +8,8 @@ class ChannelMembers(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    member_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id'))
-    channel_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.channels.id'))
+    member_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+    channel_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('channels.id')))
 
     user = db.relationship('User', backref='channelmembers')
     channel = db.relationship('Channel', backref='channelmembers')
