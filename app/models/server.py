@@ -19,7 +19,7 @@ class Server(db.Model):
     direct_message = db.Column(db.Boolean, nullable=True, default=False)
 
     owner = db.relationship('User', back_populates='servers')
-
+    s_members = db.relationship('User', secondary='servermembers', back_populates='s_memberships')
 
     @db.validates('avatar')
     def validate_avatar(self, key, avatar):

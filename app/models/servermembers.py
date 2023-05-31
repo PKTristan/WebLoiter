@@ -11,8 +11,8 @@ class ServerMembers(db.Model):
     member_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id'))
     server_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.servers.id'))
 
-    users = db.relationship('User', back_populates='servermembers')
-    server = db.relationship('Server', back_populates='members')
+    server = db.relationship('Server', backref='servermembers')
+    user = db.relationship('User', backref='servermembers')
 
     def to_dict(self):
         return {

@@ -11,8 +11,8 @@ class ChannelMembers(db.Model):
     member_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id'))
     channel_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.channels.id'))
 
-    users = db.relationship('User', back_populates='servermembers')
-    channel = db.relationship('Channel', back_populates='members')
+    user = db.relationship('User', backref='channelmembers')
+    channel = db.relationship('Channel', backref='channelmembers')
 
     def to_dict(self):
         return {
