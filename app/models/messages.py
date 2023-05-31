@@ -10,8 +10,8 @@ class Message(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     message = db.Column(db.String(2000), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('{SCHEMA}.users.id'))
-    channel_id = db.Column(db.Integer, db.ForeignKey('{SCHEMA}.channels.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id'))
+    channel_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.channels.id'))
 
     user = db.relationship('User', backref=db.backref('messages', lazy=True))
     channel = db.relationship('Channel', backref=db.backref('messages', lazy=True))
