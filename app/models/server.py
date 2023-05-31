@@ -1,7 +1,7 @@
 from .db import db, environment, SCHEMA
 import re
 
-class Server(db.model):
+class Server(db.Model):
     __tablename__ = 'servers'
 
     if environment == "production":
