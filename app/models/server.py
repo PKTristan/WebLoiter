@@ -12,7 +12,7 @@ class Server(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey(
         f'{SCHEMA}.users.id'
     ))
-    type = db.Column(db.String, nullable=False)
+    server_type = db.Column(db.String, nullable=False)
     avatar = db.Column(db.String, nullable=True, default='https://i.imgur.com/YnEnRlg.jpg')
     server_details = db.Column(db.String(100), nullable=True)
     private = db.Column(db.Boolean, nullable=True, default=False)
@@ -32,7 +32,7 @@ class Server(db.Model):
             'id': self.id,
             'server_name': self.server_name,
             'owner_id': self.owner_id,
-            'type': self.type,
+            'server_type': self.server_type,
             'avatar': self.avatar,
             'server_details': self.server_details,
             'private': self.private,
