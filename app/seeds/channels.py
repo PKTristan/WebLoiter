@@ -36,6 +36,6 @@ def undo_channels():
     if environment == 'production':
         db.session.execute(f"TRUNCATE table {SCHEMA}.channels RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM servers"))
+        db.session.execute(text("DELETE FROM channels"))
 
     db.session.commit()
