@@ -88,7 +88,7 @@ def seed_channel_members():
 
 
 
-def undo_Channel_members():
+def undo_channel_members():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.Channelmembers RESTART IDENTITY CASCADE;")
     else:

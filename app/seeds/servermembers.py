@@ -2,7 +2,7 @@ from app.models import db, ServerMembers, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
-def seed_Server_members():
+def seed_server_members():
     demo = ServerMembers(
         member_id = 1,
         server_id = 1
@@ -88,7 +88,7 @@ def seed_Server_members():
 
 
 
-def undo_Server_members():
+def undo_server_members():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.Servermembers RESTART IDENTITY CASCADE;")
     else:
