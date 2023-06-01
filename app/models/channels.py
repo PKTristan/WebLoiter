@@ -10,7 +10,7 @@ class Channel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     channel_name = db.Column(db.String(50), nullable=False)
-    server_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('servers.id'), ondelete='CASCADE'))
+    server_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('servers.id'), name='fk_channel_server_id', ondelete='CASCADE'))
 
     server = db.relationship('Server', backref=db.backref('channels', lazy=True))
     members = db.relationship('ChannelMembers', back_populates='channel')

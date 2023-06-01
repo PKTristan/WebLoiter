@@ -8,8 +8,8 @@ class ChannelMembers(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    member_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete='CASCADE'))
-    channel_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('channels.id'), ondelete='CASCADE'))
+    member_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), name='fk_cm_member_id', ondelete='CASCADE'))
+    channel_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('channels.id'), name='fk_cm_channel_id', ondelete='CASCADE'))
 
     user = db.relationship('User', back_populates='c_memberships')
     channel = db.relationship('Channel', back_populates='members')
