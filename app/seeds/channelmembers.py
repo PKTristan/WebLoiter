@@ -2,7 +2,7 @@ from app.models import db, ChannelMembers, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
-def seed_channelmembers():
+def seed_channel_members():
     demo = ChannelMembers(
         member_id = 1,
         server_id = 1
