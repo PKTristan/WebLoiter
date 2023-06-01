@@ -5,67 +5,67 @@ from sqlalchemy.sql import text
 def seed_channel_members():
     demo = ChannelMembers(
         member_id = 1,
-        server_id = 1
+        channel_id = 1
     )
     demo2 = ChannelMembers(
         member_id = 1,
-        server_id = 3
+        channel_id = 3
     )
     demo3 = ChannelMembers(
         member_id = 1,
-        server_id = 5
+        channel_id = 5
     )
     demo4 = ChannelMembers(
         member_id = 1,
-        server_id = 6
+        channel_id = 6
     )
     marnie = ChannelMembers(
         member_id = 2,
-        server_id = 1
+        channel_id = 1
     )
     marnie2 = ChannelMembers(
         member_id = 2,
-        server_id = 2
+        channel_id = 2
     )
     marnie3 = ChannelMembers(
         member_id = 2,
-        server_id = 4
+        channel_id = 4
     )
     bobbie = ChannelMembers(
         member_id = 3,
-        server_id = 1
+        channel_id = 1
     )
     bobbie2 = ChannelMembers(
         member_id = 3,
-        server_id = 3
+        channel_id = 3
     )
     bobbie3 = ChannelMembers(
         member_id = 3,
-        server_id = 4
+        channel_id = 4
     )
     alice = ChannelMembers(
         member_id = 4,
-        server_id = 1
+        channel_id = 1
     )
     alice2 = ChannelMembers(
         member_id = 4,
-        server_id = 5
+        channel_id = 5
     )
     alice3 = ChannelMembers(
         member_id = 4,
-        server_id = 6
+        channel_id = 6
     )
     bob = ChannelMembers(
         member_id = 5,
-        server_id = 1
+        channel_id = 1
     )
     bob2 = ChannelMembers(
         member_id = 5,
-        server_id = 2
+        channel_id = 2
     )
     bob3 = ChannelMembers(
         member_id = 5,
-        server_id = 4
+        channel_id = 4
     )
 
     db.session.add(demo)
@@ -88,10 +88,10 @@ def seed_channel_members():
 
 
 
-def undo_channel_members():
+def undo_Channel_members():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.channelmembers RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.Channelmembers RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM channelmembers"))
+        db.session.execute(text("DELETE FROM Channelmembers"))
 
     db.session.commit()
