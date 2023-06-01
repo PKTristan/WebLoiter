@@ -30,9 +30,59 @@ def seed_servers():
         private=True,
         direct_message=False
     )
+    demos_server = Server(
+        server_name='demoserver',
+        owner_id=1,
+        server_type='Direct Message',
+        avatar='https://i.imgur.com/4d2kR0m.jpg',
+        server_details=None,
+        private=True,
+        direct_message=True
+    )
+    marnies_server = Server(
+        server_name='marniesserver',
+        owner_id=2,
+        server_type='Direct Message',
+        avatar='https://i.imgur.com/4d2kR0m.jpg',
+        server_details=None,
+        private=True,
+        direct_message=True
+    )
+    bobbies_server = Server(
+        server_name='bobbysserver',
+        owner_id=3,
+        server_type='Direct Message',
+        avatar='https://i.imgur.com/4d2kR0m.jpg',
+        server_details=None,
+        private=True,
+        direct_message=True
+    )
+    alices_server = Server(
+        server_name='aliceserver',
+        owner_id=4,
+        server_type='Direct Message',
+        avatar='https://i.imgur.com/4d2kR0m.jpg',
+        server_details=None,
+        private=True,
+        direct_message=True
+    )
+    bobs_server = Server(
+        server_name='bobsserver',
+        owner_id=5,
+        server_type='Direct Message',
+        avatar='https://i.imgur.com/4d2kR0m.jpg',
+        server_details=None,
+        private=True,
+        direct_message=True
+    )
     db.session.add(game_haven)
     db.session.add(otaku_club)
     db.session.add(mma_warriors)
+    db.session.add(demos_server)
+    db.session.add(marnies_server)
+    db.session.add(bobbies_server)
+    db.session.add(alices_server)
+    db.session.add(bobs_server)
     db.session.commit()
 
 
