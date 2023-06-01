@@ -18,7 +18,7 @@ def seed_channels():
     )
     botw = Channel(
         channel_name='BOTW',
-        sever_id=1
+        server_id=1
     )
     ouran = Channel(
         channel_name='ouran-host-club',
