@@ -9,7 +9,6 @@ def seed_messages():
         {'message': 'Second message in Channel 1', 'user_id': 1, 'channel_id': 1},
         {'message': 'First message in Channel 3', 'user_id': 1, 'channel_id': 3},
         {'message': 'First message in Channel 5', 'user_id': 1, 'channel_id': 5},
-        {'message': 'First message in Channel 6', 'user_id': 1, 'channel_id': 6},
         {'message': 'First message in Channel 1 from User 2', 'user_id': 2, 'channel_id': 1},
         {'message': 'First message in Channel 2 from User 2', 'user_id': 2, 'channel_id': 2},
         {'message': 'First message in Channel 4 from User 2', 'user_id': 2, 'channel_id': 4},
@@ -18,7 +17,6 @@ def seed_messages():
         {'message': 'First message in Channel 4 from User 3', 'user_id': 3, 'channel_id': 4},
         {'message': 'First message in Channel 1 from User 4', 'user_id': 4, 'channel_id': 1},
         {'message': 'First message in Channel 5 from User 4', 'user_id': 4, 'channel_id': 5},
-        {'message': 'First message in Channel 6 from User 4', 'user_id': 4, 'channel_id': 6},
         {'message': 'First message in Channel 1 from User 5', 'user_id': 5, 'channel_id': 1},
         {'message': 'First message in Channel 2 from User 5', 'user_id': 5, 'channel_id': 2},
         {'message': 'First message in Channel 4 from User 5', 'user_id': 5, 'channel_id': 4}
