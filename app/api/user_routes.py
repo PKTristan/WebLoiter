@@ -1,6 +1,8 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import User
+from app.forms import SignUpForm
+from app import db
 
 user_routes = Blueprint('users', __name__)
 
@@ -23,3 +25,29 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/signup', methods=['POST'])
+def signup():
+    form = SignUpForm() #Instantiate the Signup form
+
+    data = request.get_json()
+
+    #Check if the form data is valid
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        email = form.email.data
+
+        #Check if username is available
+        existing_user = User.query.filter_by(username=username).first()
+        if existing_user:
+            return jsonify({'error': "Username already exists."}), 400
+        #Check is email is in use
+        existing_email = User.query.filter_by(email=email).first()
+        if existing_email:
+            return jsonify({'error': 'Email is already in use.'}), 400
+        
+        new_user = User(username=username, password=password, email=email)
+
+        db.session.add(new_user)
+        db.session.commit()
