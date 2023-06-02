@@ -5,53 +5,27 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-    username='Demo',
-    display_name='Demo User',
-    email='demo@aa.io',
-    profile_pic='https://i.imgur.com/ClsTg0d.jpg',
-    bio='Hello, I am a demo user.',
-    hashed_password='password'
+        username='Demo',
+        display_name='Demo User',
+        email='demo@aa.io',
+        hashed_password='password'
     )
     marnie = User(
-    username='marnie',
-    display_name='Marnie User',
-    email='marnie@aa.io',
-    profile_pic='https://i.imgur.com/VHycDBK.jpg',
-    bio='Nice to meet you! I am Marnie.',
-    hashed_password='password'
+        username='marnie',
+        display_name='Marnie User',
+        email='marnie@aa.io',
+        hashed_password='password'
     )
     bobbie = User(
-    username='bobbie',
-    display_name='Bobbie User',
-    email='bobbie@aa.io',
-    profile_pic='https://i.imgur.com/e7qOdel.jpg',
-    bio='Hey there! I am Bobbie.',
-    hashed_password='password'
-    )
-    alice = User(
-        username='alice',
-        display_name='Alice User',
-        email='alice@example.com',
-        profile_pic='https://i.imgur.com/ytGBVAF.jpg',
-        bio='Hi, I am Alice. Nice to connect with you!',
+        username='bobbie',
+        display_name='Bobbie User',
+        email='bobbie@aa.io',
         hashed_password='password'
     )
-    bob = User(
-        username='bob',
-        display_name='Bob User',
-        email='bob@example.com',
-        profile_pic='https://i.imgur.com/STnK2tv.jpg',
-        bio='Hello everyone! I am Bob.',
-        hashed_password='password'
-    )
-
-
 
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
-    db.session.add(alice)
-    db.session.add(bob)
     db.session.commit()
 
 
