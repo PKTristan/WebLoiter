@@ -5,6 +5,10 @@ from sqlalchemy.sql import text
 def seed_server_members():
     demo = ServerMembers(
         member_id = 1,
+        server_id = 4
+    )
+    demo = ServerMembers(
+        member_id = 1,
         server_id = 1
     )
     demo2 = ServerMembers(
@@ -21,6 +25,10 @@ def seed_server_members():
     )
     marnie = ServerMembers(
         member_id = 2,
+        server_id = 5
+    )
+    marnie = ServerMembers(
+        member_id = 2,
         server_id = 1
     )
     marnie2 = ServerMembers(
@@ -30,6 +38,10 @@ def seed_server_members():
     marnie3 = ServerMembers(
         member_id = 2,
         server_id = 4
+    )
+    bobbie = ServerMembers(
+        member_id = 3,
+        server_id = 6
     )
     bobbie = ServerMembers(
         member_id = 3,
@@ -45,6 +57,10 @@ def seed_server_members():
     )
     alice = ServerMembers(
         member_id = 4,
+        server_id = 7
+    )
+    alice = ServerMembers(
+        member_id = 4,
         server_id = 1
     )
     alice2 = ServerMembers(
@@ -54,6 +70,10 @@ def seed_server_members():
     alice3 = ServerMembers(
         member_id = 4,
         server_id = 6
+    )
+    bob = ServerMembers(
+        member_id = 5,
+        server_id = 8
     )
     bob = ServerMembers(
         member_id = 5,
