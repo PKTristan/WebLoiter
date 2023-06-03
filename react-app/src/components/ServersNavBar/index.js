@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {  useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import * as serverActions from "../../store/server";
 import './servernavbar.css'
 
-function ServerNavBar({}){
+function ServerNavBar(){
     const dispatch = useDispatch();
     const servers = useSelector(state => state.server.servers);
     const serverMembers = useSelector(state => state.server.serverMembers);
@@ -24,8 +25,19 @@ function ServerNavBar({}){
     return (
         <ul>
             {filteredServers.map((server) => (
-                <li>
-                    <img className='avatar' src={server.avatar} alt={server.server_name} title={server.server_name} style={{ width: "40px", height: "40px", borderRadius: "50%" }}></img>
+                <li key={server.id}>
+                    <NavLink to={`/servers/${server.id}`} >
+                        <img 
+                            className='avatar' 
+                            src={server.avatar} 
+                            alt={server.server_name} 
+                            title={server.server_name} 
+                            style={{ 
+                                width: "40px", 
+                                height: "40px", 
+                                borderRadius: "50%" }}>
+                                </img>
+                    </NavLink>
                 </li>
             ))}
         </ul>
