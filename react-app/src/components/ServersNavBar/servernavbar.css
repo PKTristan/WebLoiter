@@ -1,0 +1,3 @@
+.avatar:hover .alt-text {
+    opacity: 1; /* Show the alt text on hover */
+}
