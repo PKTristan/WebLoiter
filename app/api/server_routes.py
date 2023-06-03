@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import Server, ServerMembers, db
+from app.forms import ServerForm
 
 
 server_routes = Blueprint('servers', __name__)
@@ -30,7 +31,32 @@ def get_servers():
 @server_routes.route("/server_members")
 @login_required
 def get_server_members():
+    """
+    Retrieves all members of the server from the database, and returns
+    """
     members = ServerMembers.query.all()
     return jsonify([member.to_dict() for member in members])
 
 
+@server_routes.route("", methods=["GET", "POST"])
+@login_required
+def create_server():
+    """
+    Creates a server with the given name, owner ID, type, avatar, details, privacy settings, and direct message flag.
+    Returns a JSON response containing the dictionary representation of the created server.
+    """
+    form = ServerForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        server = Server(
+            server_name=form.data['server_name'],
+            server_type=form.data['server_type'],
+            avatar=form.data['avatar'],
+            server_details=form.data['server_details'],
+            private=form.data['private'],
+            direct_message=form.data['direct_message']
+        )
+        db.session.add(server)
+        db.session.commit()
+        return jsonify(server.to_dict())
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
