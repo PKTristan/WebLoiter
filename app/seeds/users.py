@@ -10,7 +10,7 @@ def seed_users():
     email='demo@aa.io',
     profile_pic='https://i.imgur.com/ClsTg0d.jpg',
     bio='Hello, I am a demo user.',
-    hashed_password='password'
+    password='password'
     )
     marnie = User(
     username='marnie',
@@ -18,7 +18,7 @@ def seed_users():
     email='marnie@aa.io',
     profile_pic='https://i.imgur.com/VHycDBK.jpg',
     bio='Nice to meet you! I am Marnie.',
-    hashed_password='password'
+    password='password'
     )
     bobbie = User(
     username='bobbie',
@@ -26,7 +26,7 @@ def seed_users():
     email='bobbie@aa.io',
     profile_pic='https://i.imgur.com/e7qOdel.jpg',
     bio='Hey there! I am Bobbie.',
-    hashed_password='password'
+    password='password'
     )
     alice = User(
         username='alice',
@@ -34,7 +34,7 @@ def seed_users():
         email='alice@example.com',
         profile_pic='https://i.imgur.com/ytGBVAF.jpg',
         bio='Hi, I am Alice. Nice to connect with you!',
-        hashed_password='password'
+        password='password'
     )
     bob = User(
         username='bob',
@@ -42,7 +42,7 @@ def seed_users():
         email='bob@example.com',
         profile_pic='https://i.imgur.com/STnK2tv.jpg',
         bio='Hello everyone! I am Bob.',
-        hashed_password='password'
+        password='password'
     )
 
 
