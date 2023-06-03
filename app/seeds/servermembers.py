@@ -7,7 +7,7 @@ def seed_server_members():
         member_id = 1,
         server_id = 4
     )
-    demo = ServerMembers(
+    demo3 = ServerMembers(
         member_id = 1,
         server_id = 1
     )
@@ -15,15 +15,7 @@ def seed_server_members():
         member_id = 1,
         server_id = 3
     )
-    demo3 = ServerMembers(
-        member_id = 1,
-        server_id = 5
-    )
-    demo4 = ServerMembers(
-        member_id = 1,
-        server_id = 6
-    )
-    marnie = ServerMembers(
+    marnie3 = ServerMembers(
         member_id = 2,
         server_id = 5
     )
@@ -35,11 +27,7 @@ def seed_server_members():
         member_id = 2,
         server_id = 2
     )
-    marnie3 = ServerMembers(
-        member_id = 2,
-        server_id = 4
-    )
-    bobbie = ServerMembers(
+    bobbie3 = ServerMembers(
         member_id = 3,
         server_id = 6
     )
@@ -51,11 +39,7 @@ def seed_server_members():
         member_id = 3,
         server_id = 3
     )
-    bobbie3 = ServerMembers(
-        member_id = 3,
-        server_id = 4
-    )
-    alice = ServerMembers(
+    alice2 = ServerMembers(
         member_id = 4,
         server_id = 7
     )
@@ -63,21 +47,13 @@ def seed_server_members():
         member_id = 4,
         server_id = 1
     )
-    alice2 = ServerMembers(
-        member_id = 4,
-        server_id = 5
-    )
     alice3 = ServerMembers(
         member_id = 4,
-        server_id = 6
-    )
+        server_id = 2
+    ) 
     bob = ServerMembers(
         member_id = 5,
         server_id = 8
-    )
-    bob = ServerMembers(
-        member_id = 5,
-        server_id = 1
     )
     bob2 = ServerMembers(
         member_id = 5,
@@ -85,13 +61,12 @@ def seed_server_members():
     )
     bob3 = ServerMembers(
         member_id = 5,
-        server_id = 4
+        server_id = 3
     )
 
     db.session.add(demo)
-    db.session.add(demo2)
     db.session.add(demo3)
-    db.session.add(demo4)
+    db.session.add(demo2)
     db.session.add(marnie)
     db.session.add(marnie2)
     db.session.add(marnie3)

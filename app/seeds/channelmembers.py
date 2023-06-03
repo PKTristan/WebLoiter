@@ -17,7 +17,7 @@ def seed_channel_members():
     )
     demo4 = ChannelMembers(
         member_id = 1,
-        channel_id = 6
+        channel_id = 5
     )
     marnie = ChannelMembers(
         member_id = 2,
@@ -53,7 +53,7 @@ def seed_channel_members():
     )
     alice3 = ChannelMembers(
         member_id = 4,
-        channel_id = 6
+        channel_id = 5
     )
     bob = ChannelMembers(
         member_id = 5,
@@ -94,4 +94,4 @@ def undo_channel_members():
     else:
         db.session.execute(text("DELETE FROM Channelmembers"))
 
-    db.session.commit() 
+    db.session.commit()
