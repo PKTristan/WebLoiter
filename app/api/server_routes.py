@@ -15,17 +15,17 @@ def validation_errors_to_error_messages(validation_errors):
             errorMessages.append(f'{field} : {error}')
     return errorMessages
 
-
-@server_routes.route("/")
-@login_required
-def get_servers():
-    servers = Server.query.all()
-    return jsonify([server.to_dict() for server in servers])
-@server_routes.route("/<int:id>")
+@server_routes.route("/<id>")
 @login_required
 def get_server(id):
     server = Server.query.get(id)
     return jsonify(server.to_dict())
+
+@server_routes.route("")
+@login_required
+def get_servers():
+    servers = Server.query.all()
+    return jsonify([server.to_dict() for server in servers])
 
 @server_routes.route("/server_members")
 @login_required

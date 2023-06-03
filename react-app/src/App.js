@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import ServersNavBar from "./components/ServersNavBar";
+import CurrentServerDetails from "./components/CurrentServerDetails";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 
@@ -18,6 +19,8 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
+        <>
+        <ServersNavBar />
         <Switch>
           <Route path="/login" >
             <LoginFormPage />
@@ -25,10 +28,11 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          < Route>
-            <ServersNavBar />
+          <Route exact path="/servers/:id">
+            <CurrentServerDetails />
           </Route>
         </Switch>
+        </>
       )}
     </>
   );
