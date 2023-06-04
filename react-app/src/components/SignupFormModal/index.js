@@ -69,7 +69,7 @@ function SignupFormModal() {
 				</label>
 				<label>
 					Bio
-					<input className="bio_txt"
+					<textarea className="bio_txt"
 						type="textarea"
 						value={bio}
 						onChange={(e) => setBio(e.target.value)}

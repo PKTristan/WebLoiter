@@ -22,7 +22,7 @@ h1 {
 }
 
 .bio_txt {
-    width: 100;
+    width: 100%;
     height: 100px;
     resize: vertical;
     overflow-wrap: break-word;
