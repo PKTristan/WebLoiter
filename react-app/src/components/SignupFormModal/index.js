@@ -34,7 +34,7 @@ function SignupFormModal() {
 
 	return (
 		<div>
-			<h1>Create an account</h1>
+			<h2>Create an account</h2>
 			<form className="signup-form" onSubmit={handleSubmit}>
 				<ul>
 					{errors.map((error, idx) => (
@@ -94,12 +94,14 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
-				<button type="submit">Continue</button>
+				<button className="signup-submit-btn" type="submit">Continue</button>
 			</form>
-			<button onClick={() => {closeModal()}}>
-				<Link to='/login'>Already have an account?</Link>
+			<button className="login-redirect-btn" onClick={() => {closeModal()}}>
+				<Link className="login-redirect-btn" to='/login'>Already have an account?</Link>
 			</button>
-
+			<div className="terms-div">
+				By registering, you agree to Webloiter's Terms of service and Privacy Policy
+			</div>
 		</div>
 	);
 }
