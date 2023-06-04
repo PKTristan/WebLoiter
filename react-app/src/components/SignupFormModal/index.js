@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { signUp } from "../../store/session";
@@ -8,6 +9,8 @@ function SignupFormModal() {
 	const dispatch = useDispatch();
 	const [email, setEmail] = useState("");
 	const [username, setUsername] = useState("");
+	const [profile_pic, setProfilePic] = useState("");
+	const [bio, setBio] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState([]);
@@ -30,9 +33,9 @@ function SignupFormModal() {
 	};
 
 	return (
-		<>
-			<h1>Sign Up</h1>
-			<form onSubmit={handleSubmit}>
+		<div>
+			<h1>Create an account</h1>
+			<form className="signup-form" onSubmit={handleSubmit}>
 				<ul>
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>
@@ -57,6 +60,23 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
+					Profile Pic
+					<input
+						type="url"
+						value={profile_pic}
+						onChange={(e) => setProfilePic(e.target.value)}
+					/>
+				</label>
+				<label>
+					Bio
+					<input className="bio_txt"
+						type="textarea"
+						value={bio}
+						onChange={(e) => setBio(e.target.value)}
+						required
+					/>
+				</label>
+				<label>
 					Password
 					<input
 						type="password"
@@ -74,9 +94,13 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
-				<button type="submit">Sign Up</button>
+				<button type="submit">Continue</button>
 			</form>
-		</>
+			<button onClick={() => {closeModal()}}>
+				<Link to='/login'>Already have an account?</Link>
+			</button>
+
+		</div>
 	);
 }
 
