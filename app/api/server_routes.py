@@ -50,6 +50,7 @@ def create_server():
     if form.validate_on_submit():
         server = Server(
             server_name=form.data['server_name'],
+            owner_id=current_user.id,
             server_type=form.data['server_type'],
             avatar=form.data['avatar'],
             server_details=form.data['server_details'],
