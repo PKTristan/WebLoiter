@@ -61,3 +61,30 @@ def create_server():
         db.session.commit()
         return jsonify(server.to_dict())
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@server_routes.route("/<id>", methods=["PUT", "GET"])
+@login_required
+def update_server(id):
+    form = ServerForm()
+
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        server = Server.query.get(id)
+        if not server:
+            return {'errors': 'Server does not exist'}, 404
+        
+        if server.owner_id != current_user.id:
+            return {'errors': 'You are not the owner of this server'}, 401
+        
+        server.server_name = form.data['server_name']
+        server.server_type = form.data['server_type']
+        server.avatar = form.data['avatar']
+        server.server_details = form.data['server_details']
+        server.private = form.data['private']
+        server.direct_message = form.data['direct_message']
+
+        db.session.commit()
+
+        return jsonify(server.to_dict())
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
