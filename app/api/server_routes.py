@@ -25,10 +25,10 @@ def get_server(id):
     server = Server.query.get(id)
     return jsonify(server.to_dict())
 
-@server_routes.route("")
+@server_routes.route("", methods=["GET"])
 @login_required
 def get_servers():
-    servers = Server.query.all()
+    servers = Server.query.order_by(Server.direct_message.desc()).all()
     return jsonify([server.to_dict() for server in servers])
 
 @server_routes.route("/server_members")
@@ -111,4 +111,4 @@ def delete_server(id):
     
     db.session.delete(server)
     db.session.commit()
-    return {'message': 'Server deleted'}
+    return {'message': 'Server deleted'} 
