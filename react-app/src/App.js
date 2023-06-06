@@ -22,12 +22,6 @@ function App() {
         <>
         <ServersNavBar />
         <Switch>
-          <Route path="/login" >
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
           <Route exact path="/servers/:id">
             <CurrentServerDetails />
           </Route>
