@@ -7,6 +7,7 @@ import ServersNavBar from "./components/ServersNavBar";
 import CurrentServerDetails from "./components/CurrentServerDetails";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import HomePage from "./components/Homepage";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,9 @@ function App() {
         <>
         <ServersNavBar />
         <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
           <Route path="/login" >
             <LoginFormPage />
           </Route>
