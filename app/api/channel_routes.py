@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, session, request
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import db, ChannelMembers, Channel, Server
 
-channel_routes = Blueprint('channels', __name__)
+channel_routes = Blueprint('channels', __name__, url_prefix='/channels')
 
 def validation_errors_to_error_messages(validation_errors):
     """
