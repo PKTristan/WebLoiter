@@ -1,3 +1,4 @@
 .flaskenv
 .env
 *.db
+/instance/dev.db
