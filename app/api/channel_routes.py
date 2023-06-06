@@ -15,9 +15,9 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-def is_owner(server_id):
+def is_owner(server_id) -> bool:
     server = Server.query.get(server_id)
-    if server_id is None:
+    if server is None:
         return jsonify({'server_error': 'No server found'}), 404
 
     owner_id = server.owner_id
@@ -57,21 +57,21 @@ def get_edit_delete_channel(id):
     if channel is None:
         return jsonify({'error': 'Channel not found'}), 404
 
-    if method is 'GET':
+    if method == 'GET':
         return jsonify(channel.to_dict())
 
-    server_id = Channel.server_id
+    server_id = channel.server_id
 
     if is_owner(server_id):
         message = None
-        if method is 'PUT':
+        if method == 'PUT':
             channel_name = request.json.get('channel_name')
             if channel_name is None:
                 return jsonify({'request_error': 'no channel_name is given'}), 400
 
             channel.channel_name = channel_name
             message = channel.to_dict()
-        elif method is 'DELETE':
+        elif method == 'DELETE':
             db.session.delete(channel)
             message = {'message': 'Channel deleted successfully'}
 
