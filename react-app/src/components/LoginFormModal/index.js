@@ -2,18 +2,22 @@ import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import SignupFormModal from "../SignupFormModal";
 import "./LoginForm.css";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [showLoginForm, setShowLoginForm] = useState(true)
+	const [showSignupForm, setShowSignupForm] = useState(false)
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password));
+    const data = await dispatch(login(email, password, username));
     if (data) {
       setErrors(data);
     } else {
@@ -21,23 +25,30 @@ function LoginFormModal() {
     }
   };
 
+  const openSignupForm = () => {
+		setShowLoginForm(false);
+		setShowSignupForm(true);
+	}
+
   return (
     <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
+      {showLoginForm && (
+        <div>
+        <h2>Log In</h2>
+      <form className="login-form" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
         <label>
-          Email
+          Email or Username
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-          />
+            />
         </label>
         <label>
           Password
@@ -46,10 +57,25 @@ function LoginFormModal() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-          />
+            />
         </label>
-        <button type="submit">Log In</button>
+        <button className="login-submit-btn" type="submit">Log In</button>
       </form>
+      <button className="signup-redirect-btn" onClick={openSignupForm}>
+				Don't have an account?
+			</button>
+			<div className="terms-div">
+				By logging in, you agree to Webloiter's Terms of service and Privacy Policy
+			</div>
+      </div>
+        )}
+
+      {showSignupForm && (
+        <div className="signup-form-modal-container">
+          <SignupFormModal />
+        </div>
+      )}
+      
     </>
   );
 }

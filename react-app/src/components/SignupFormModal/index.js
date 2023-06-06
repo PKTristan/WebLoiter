@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { signUp } from "../../store/session";
+import LoginFormModal from "../LoginFormModal";
 import "./SignupForm.css";
 
 function SignupFormModal() {
@@ -13,6 +14,8 @@ function SignupFormModal() {
 	const [bio, setBio] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
+	const [showLoginForm, setShowLoginForm] = useState(false)
+	const [showSignupForm, setShowSignupForm] = useState(true)
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 
@@ -32,14 +35,21 @@ function SignupFormModal() {
 		}
 	};
 
+	const openLoginForm = () => {
+		setShowLoginForm(true);
+		setShowSignupForm(false)
+	}
+
 	return (
 		<div>
-			<h2>Create an account</h2>
+			{showSignupForm && (
+				<div>
+				<h2>Create an account</h2>
 			<form className="signup-form" onSubmit={handleSubmit}>
 				<ul>
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>
-					))}
+						))}
 				</ul>
 				<label>
 					Email
@@ -48,7 +58,7 @@ function SignupFormModal() {
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						required
-					/>
+						/>
 				</label>
 				<label>
 					Username
@@ -57,7 +67,7 @@ function SignupFormModal() {
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 						required
-					/>
+						/>
 				</label>
 				<label>
 					Profile Pic
@@ -65,7 +75,7 @@ function SignupFormModal() {
 						type="url"
 						value={profile_pic}
 						onChange={(e) => setProfilePic(e.target.value)}
-					/>
+						/>
 				</label>
 				<label>
 					Bio
@@ -74,7 +84,7 @@ function SignupFormModal() {
 						value={bio}
 						onChange={(e) => setBio(e.target.value)}
 						required
-					/>
+						/>
 				</label>
 				<label>
 					Password
@@ -83,7 +93,7 @@ function SignupFormModal() {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						required
-					/>
+						/>
 				</label>
 				<label>
 					Confirm Password
@@ -92,17 +102,25 @@ function SignupFormModal() {
 						value={confirmPassword}
 						onChange={(e) => setConfirmPassword(e.target.value)}
 						required
-					/>
+						/>
 				</label>
 				<button className="signup-submit-btn" type="submit">Continue</button>
 			</form>
-			<button className="login-redirect-btn" onClick={() => {closeModal()}}>
+			<button className="login-redirect-btn" onClick={openLoginForm}>
 				<Link className="login-redirect-btn" to='/login'>Already have an account?</Link>
 			</button>
 			<div className="terms-div">
 				By registering, you agree to Webloiter's Terms of service and Privacy Policy
 			</div>
-		</div>
+				</div>
+				)}
+
+			{showLoginForm && (
+				<div className="login-form-modal-container">
+					<LoginFormModal />
+					</div>
+			)}
+			</div>
 	);
 }
 
