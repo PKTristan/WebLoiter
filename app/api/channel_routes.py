@@ -15,6 +15,19 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
+def is_owner(server_id):
+    server = Server.query.get(server_id)
+    if server_id is None:
+        return jsonify({'server_error': 'No server found'}), 404
+
+    owner_id = server.owner_id
+
+    if owner_id == current_user.id:
+        return jsonify({'auth_error': "Authorization failed. You don't have the permission to make this rerquest."}), 403
+
+    return True
+
+
 @channel_routes.route('/', methods=['POST'])
 @login_required
 def create_channel():
@@ -22,33 +35,47 @@ def create_channel():
     if server_id is None:
         return jsonify({'request_error': 'no server_id given'}), 400
 
-    server = Server.query.get(server_id)
-    if server_id is None:
-        return jsonify({'server_error': 'No server found'}), 404
-
-    owner_id = server.owner_id
-
-    if owner_id != current_user.id:
-        return jsonify({'auth_error': "Authorization failed. You don't have the permission to make this rerquest."}), 403
-
     channel_name = request.json.get('channel_name')
     if channel_name is None:
         return jsonify({'request_error': 'no channel_name is given'}), 400
 
-    new_channel = Channel(server_id=server_id, channel_name=channel_name)
+    if is_owner(server_id):
+        new_channel = Channel(server_id=server_id, channel_name=channel_name)
 
-    db.session.add(new_channel)
-    db.session.commit()
+        db.session.add(new_channel)
+        db.session.commit()
 
-    return jsonify(new_channel.to_dict()), 201
+        return jsonify(new_channel.to_dict()), 201
 
 
-@channel_routes.route("/<int:id>")
+@channel_routes.route("/<int:id>", methods=['GET', 'PUT', 'DELETE'])
 @login_required
 def get_channel(id):
     channel = Channel.query.get(id)
+    method = request.method
 
     if channel is None:
         return jsonify({'error': 'Channel not found'}), 404
 
-    return jsonify(channel.to_dict())
+    if method is 'GET':
+        return jsonify(channel.to_dict())
+
+    server_id = Channel.server_id
+
+    if is_owner(server_id):
+        message = None
+        if method is 'PUT':
+            channel_name = request.json.get('channel_name')
+            if channel_name is None:
+                return jsonify({'request_error': 'no channel_name is given'}), 400
+
+            channel.channel_name = channel_name
+            message = channel.to_dict()
+        elif method is 'DELETE':
+            db.session.delete(channel)
+            message = {'message': 'Channel deleted successfully'}
+
+
+        db.session.commit()
+
+        return jsonify(message), 200
