@@ -20,20 +20,25 @@ function ServerNavBar() {
     const filteredServers = Object.values(servers).filter(server => serverMembers.some(membership => 
         membership.server_id === server.id && membership.member_id === user.id));
 
-    const PlusButton = () => user && (
-        <li>
-            <button 
-                onClick={() => setShowModal(true)} 
-                style={{ width: "40px", height: "40px", borderRadius: "50%" }}
-            >
-                <img 
-                    src="https://i.imgur.com/iztujJc.png" 
-                    alt="Button Img" 
-                    style={{ width: "25px", height: "25px"}}
-                />
-            </button>
-        </li>
-    );
+    const handleModalOpen = (e) => {
+        e.preventDefault();
+        setShowModal(true)
+    }
+
+    // const PlusButton = () => user && (
+    //     <li>
+    //         <button 
+    //             onClick={() => setShowModal(true)} 
+    //             style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+    //         >
+    //             <img 
+    //                 src="https://i.imgur.com/iztujJc.png" 
+    //                 alt="Button Img" 
+    //                 style={{ width: "25px", height: "25px"}}
+    //             />
+    //         </button>
+    //     </li>
+    // );
 
     return (
         <ul>
@@ -54,7 +59,20 @@ function ServerNavBar() {
                     </NavLink>
                 </li>
             ))}
-            {PlusButton()}
+            {user && (
+                <li>
+                    <button 
+                            onClick={handleModalOpen}
+                            style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+                    >
+                    <img 
+                    src="https://i.imgur.com/iztujJc.png" 
+                    alt="Button Img" 
+                    style={{ width: "25px", height: "25px"}}
+                    />
+                    </button>
+                </li>
+            )}
             {showModal && <CreateServerModal hideForm={() => setShowModal(false)}/>}
         </ul>
     );

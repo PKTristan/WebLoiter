@@ -5,14 +5,14 @@ import { Modal } from "../../context/Modal";
 import CreateServerForm from "../CreateServerForm";
 
 const CreateServerModal = ({ hideForm }) => {
-    const [showModal, setShowModal] = useState(false);
+    const handleCloseModal = () => {
+        hideForm()
+    }
     return (
         <div>
-            {showModal && (
-                <Modal onClose={hideForm} show={showModal}>
-                    <CreateServerForm hideForm={hideForm}/>
-                </Modal>
-            )}
+            <Modal onClose={handleCloseModal}>
+                <CreateServerForm hideForm={hideForm}/>
+            </Modal>
         </div>
     )
 }
