@@ -47,6 +47,7 @@ function ProfileButton({ user }) {
           <>
             <li>{user.username}</li>
             <li>{user.email}</li>
+            <img src={user.profile_pic} alt="profile"></img>
             <li>
               <button onClick={handleLogout}>Log Out</button>
             </li>
