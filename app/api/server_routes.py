@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import Server, ServerMembers, db
+from app.models import Server, ServerMembers, Channel, db
 from app.forms import ServerForm
 
 
@@ -19,24 +19,19 @@ def validation_errors_to_error_messages(validation_errors):
 @server_routes.route("/<id>")
 @login_required
 def get_server(id):
-    """
-    Retrieves a server object with the given id 
-    """
     server = Server.query.get(id)
     return jsonify(server.to_dict())
 
 @server_routes.route("", methods=["GET"])
 @login_required
 def get_servers():
-    servers = Server.query.order_by(Server.direct_message.desc()).all()
-    return jsonify([server.to_dict() for server in servers])
+    servers = Server.query.order_by(Server.direct_message == True).all()
+    servers_dict = [server.to_dict() for server in servers]
+    return jsonify(servers_dict)
 
 @server_routes.route("/server_members")
 @login_required
 def get_server_members():
-    """
-    Retrieves all members of the server from the database, and returns
-    """
     members = ServerMembers.query.all()
     return jsonify([member.to_dict() for member in members])
 
@@ -44,9 +39,6 @@ def get_server_members():
 @server_routes.route("", methods=["GET", "POST"])
 @login_required
 def create_server():
-    """
-    Creates a server with the given name, owner ID, type, avatar, details, privacy settings, and direct message flag.
-    """
     form = ServerForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -68,10 +60,6 @@ def create_server():
 @server_routes.route("/<id>", methods=["PUT", "GET"])
 @login_required
 def update_server(id):
-    """
-    Updates a server's details with the given id.
-
-    """
 
     form = ServerForm()
 
@@ -100,9 +88,6 @@ def update_server(id):
 @server_routes.route("/<id>", methods=["DELETE"])
 @login_required
 def delete_server(id):
-    """
-    Deletes a server with the given id.
-    """
     server = Server.query.get(id)
     if not server:
         return {'errors': 'Server does not exist'}, 404
@@ -112,3 +97,23 @@ def delete_server(id):
     db.session.delete(server)
     db.session.commit()
     return {'message': 'Server deleted'} 
+
+
+
+@server_routes.route("/<id>/channels", methods=["GET"])
+@login_required
+def get_server_channels(id):
+    server = Server.query.get(id)
+    if not server:
+        return {'errors': 'Server does not exist'}, 404
+
+    channels = Channel.query.filter(Channel.server_id == id).all()
+    channel_list = [channel.to_dict() for channel in channels]
+
+    return jsonify({"Server": {
+        "id": server.id,
+        "server_name": server.server_name,
+        "owner_id": server.owner_id,
+        "server_type": server.server_type,
+        "Channels": channel_list
+    }})
