@@ -50,7 +50,7 @@ def create_channel():
 
 @channel_routes.route("/<int:id>", methods=['GET', 'PUT', 'DELETE'])
 @login_required
-def get_channel(id):
+def get_edit_delete_channel(id):
     channel = Channel.query.get(id)
     method = request.method
 
