@@ -36,8 +36,9 @@ function ServerNavBar(){
                             style={{ 
                                 width: "40px", 
                                 height: "40px", 
-                                borderRadius: "50%" }}>
-                                </img>
+                                borderRadius: "50%" }}
+                        >
+                        </img>
                     </NavLink>
                 </li>
             ))}
