@@ -29,7 +29,6 @@ def channel_messages(channel_id):
         data = request.get_json()
 
         user_id = current_user.id
-        print('this is my data -------', data)
         message = Message(
             message=data['message'],
             user_id=user_id,
