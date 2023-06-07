@@ -2,6 +2,8 @@ import React, {  useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import CreateServerModal from "../CreateServerModal";
+import CreateServerForm from "../CreateServerForm";
+import OpenModalButton from "../OpenModalButton";
 import * as serverActions from "../../store/server";
 import './servernavbar.css'
 
@@ -48,20 +50,11 @@ function ServerNavBar() {
                 </li>
             ))}
             {user && (
-                <li>
-                    <button
-                            onClick={handleModalOpen}
-                            style={{ width: "40px", height: "40px", borderRadius: "50%" }}
-                    >
-                    <img 
-                    src="https://i.imgur.com/iztujJc.png" 
-                    alt="Button Img" 
-                    style={{ width: "25px", height: "25px"}}
-                    />
-                    </button>
-                </li>
+                < OpenModalButton 
+                buttonText="+"
+                modalComponent={<CreateServerForm />}
+                />
             )}
-            {showForm && <CreateServerModal  hideForm={() => setShowForm(false)} showForm={showForm} />}
         </ul>
     );
 }
