@@ -10,8 +10,9 @@ function SignupFormModal() {
 	const dispatch = useDispatch();
 	const [email, setEmail] = useState("");
 	const [username, setUsername] = useState("");
-	const [profile_pic, setProfilePic] = useState(null);
-	const [bio, setBio] = useState(null);
+	const [displayname, setDisplayName] = useState('')
+	const [profile_pic, setProfilePic] = useState('');
+	const [bio, setBio] = useState('');
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [showLoginForm, setShowLoginForm] = useState(false)
@@ -27,7 +28,7 @@ function SignupFormModal() {
 			console.log('profile_pic' + profile_pic)
 			console.log('bio' + bio)
 			console.log('password' + password)
-			const data = await dispatch(signUp(username, email, password, profile_pic, bio));
+			const data = await dispatch(signUp(username, displayname, email, password, profile_pic, bio));
 			console.log(data)
 			if (data) {
 				setErrors(data);
