@@ -6,15 +6,15 @@ from app.models import Server
 
 
 class ServerForm(FlaskForm):
-    server_name = StringField('Server Name', validators=[DataRequired()])
-    server_type = SelectField('Server Type', choices=[
+    server_name = StringField('server_name', validators=[DataRequired()])
+    server_type = SelectField('server_type', choices=[
         ('gaming', 'Gaming'),
         ('sports', 'Sports'),
         ('anime', 'Anime'),
         ('art', 'Art'),
         ('studying', 'Studying'),
         ('misc', 'Miscellaneous')], validators=[DataRequired()])
-    avatar = StringField('Avatar')
-    server_details = TextAreaField('Server Details')
-    private = BooleanField('Private')
-    direct_message = BooleanField('DM')
+    avatar = StringField('avatar')
+    server_details = TextAreaField('server_details')
+    private = BooleanField('private')
+    direct_message = BooleanField('direct_message')

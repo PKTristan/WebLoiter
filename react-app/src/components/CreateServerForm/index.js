@@ -18,21 +18,15 @@ const CreateServerForm = ({ hideForm }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newServer = {
-            serverName,
-            serverType,
-            avatar,
-            serverDetails,
-            privateServer,
-            directMessage
+            server_name: serverName,
+            server_type: serverType,
+            avatar: avatar,
+            server_details: serverDetails,
+            private: privateServer,
+            direct_message: directMessage
         }
     
-        const data = await dispatch(serverActions.createServerAction( 
-            serverName,
-            serverType,
-            avatar,
-            serverDetails,
-            privateServer,
-            directMessage));
+        const data = await dispatch(serverActions.createServerAction(newServer));
             console.log('this is my currr data', newServer)
         // if (data) {
         //     setErrors(data)

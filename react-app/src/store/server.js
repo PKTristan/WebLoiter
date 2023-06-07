@@ -61,7 +61,16 @@ export const createServerAction = (server) => async (dispatch) => {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(server),
+        body: JSON.stringify(
+            {
+                "server_name": server.server_name,
+                "server_type": server.server_type,
+                "avatar": server.avatar,
+                "server_details": server.server_details,
+                "private": server.private,
+                "direct_message": server.direct_message,
+            }
+        ),
     });
     console.log('----------res', response)
     if (response.ok) {
