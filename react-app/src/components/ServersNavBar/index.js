@@ -10,7 +10,7 @@ function ServerNavBar() {
     const servers = useSelector(state => state.server.servers);
     const serverMembers = useSelector(state => state.server.serverMembers);
     const user = useSelector(state => state.session.user);
-    const [showModal, setShowModal] = useState(false);
+    const [showForm, setShowForm] = useState(false);
 
     useEffect(() => {
         dispatch(serverActions.fetchServers());
@@ -22,23 +22,11 @@ function ServerNavBar() {
 
     const handleModalOpen = (e) => {
         e.preventDefault();
-        setShowModal(true)
+        setShowForm(true)
+        console.log('modal open button', showForm);
     }
 
-    // const PlusButton = () => user && (
-    //     <li>
-    //         <button 
-    //             onClick={() => setShowModal(true)} 
-    //             style={{ width: "40px", height: "40px", borderRadius: "50%" }}
-    //         >
-    //             <img 
-    //                 src="https://i.imgur.com/iztujJc.png" 
-    //                 alt="Button Img" 
-    //                 style={{ width: "25px", height: "25px"}}
-    //             />
-    //         </button>
-    //     </li>
-    // );
+    
 
     return (
         <ul>
@@ -61,7 +49,7 @@ function ServerNavBar() {
             ))}
             {user && (
                 <li>
-                    <button 
+                    <button
                             onClick={handleModalOpen}
                             style={{ width: "40px", height: "40px", borderRadius: "50%" }}
                     >
@@ -73,7 +61,7 @@ function ServerNavBar() {
                     </button>
                 </li>
             )}
-            {showModal && <CreateServerModal hideForm={() => setShowModal(false)}/>}
+            {showForm && <CreateServerModal  hideForm={() => setShowForm(false)} showForm={showForm} />}
         </ul>
     );
 }

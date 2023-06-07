@@ -1,17 +1,15 @@
-import React, {  useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import * as serverActions from "../../store/server";
+import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
 import CreateServerForm from "../CreateServerForm";
 
-const CreateServerModal = ({ hideForm }) => {
-    const handleCloseModal = () => {
-        hideForm()
-    }
+const CreateServerModal = () => {
+    const [showModal, setShowModal] = useState(false);
+    console.log('this is my create server modal')
+
     return (
         <div>
-            <Modal onClose={handleCloseModal}>
-                <CreateServerForm hideForm={hideForm}/>
+            <Modal onClose={() => setShowModal(false)} showModal={showModal} >
+                <CreateServerForm onClose={() => setShowModal(false)}/>
             </Modal>
         </div>
     )

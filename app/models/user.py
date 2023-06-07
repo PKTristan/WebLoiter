@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     profile_pic = db.Column(db.String(255), nullable=True)
     bio = db.Column(db.String(1000), nullable=True)
-    password = db.Column(db.String(255), nullable=False)
+    hashed_password = db.Column(db.String(255), nullable=False)
 
     servers = db.relationship('Server', back_populates='owner')
     s_memberships = db.relationship('ServerMembers', back_populates='user')

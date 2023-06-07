@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as serverActions from "../../store/server";
 
 
-const CreateServerForm = () => {
+const CreateServerForm = ({ hideForm }) => {
     return (
         <div>
             <h1>Create Server</h1>
