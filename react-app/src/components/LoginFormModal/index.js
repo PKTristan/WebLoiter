@@ -8,7 +8,6 @@ import "./LoginForm.css";
 function LoginFormModal() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const [showLoginForm, setShowLoginForm] = useState(true)
@@ -17,7 +16,7 @@ function LoginFormModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password, username));
+    const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
     } else {
@@ -42,7 +41,7 @@ function LoginFormModal() {
           ))}
         </ul>
         <label>
-          Email or Username
+          Email
           <input
             type="text"
             value={email}
@@ -55,7 +54,8 @@ function LoginFormModal() {
           <input
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value)}}
             required
             />
         </label>
