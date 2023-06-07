@@ -10,8 +10,8 @@ function SignupFormModal() {
 	const dispatch = useDispatch();
 	const [email, setEmail] = useState("");
 	const [username, setUsername] = useState("");
-	const [profile_pic, setProfilePic] = useState("");
-	const [bio, setBio] = useState("");
+	const [profile_pic, setProfilePic] = useState(null);
+	const [bio, setBio] = useState(null);
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [showLoginForm, setShowLoginForm] = useState(false)
@@ -22,7 +22,13 @@ function SignupFormModal() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (password === confirmPassword) {
-			const data = await dispatch(signUp(username, email, password));
+			console.log('username' + username)
+			console.log('email' + email)
+			console.log('profile_pic' + profile_pic)
+			console.log('bio' + bio)
+			console.log('password' + password)
+			const data = await dispatch(signUp(username, email, password, profile_pic, bio));
+			console.log(data)
 			if (data) {
 				setErrors(data);
 			} else {
@@ -83,7 +89,6 @@ function SignupFormModal() {
 						type="textarea"
 						value={bio}
 						onChange={(e) => setBio(e.target.value)}
-						required
 						/>
 				</label>
 				<label>

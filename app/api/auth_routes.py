@@ -73,7 +73,6 @@ def sign_up():
         )
         db.session.add(user)
         db.session.commit()
-        user.username = f"{user.display_name}_{user.id}"
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
