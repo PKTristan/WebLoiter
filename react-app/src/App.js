@@ -25,6 +25,7 @@ function App() {
         <Switch>
           <Route path='/servers'>
             <ServersNavBar />
+            </Route>
           <Route path="/servers/:id">
             <CurrentServerDetails />
           </Route>
