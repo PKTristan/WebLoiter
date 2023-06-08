@@ -22,8 +22,12 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <>
-        <ServersNavBar />
         <Switch>
+          <Route path='/servers'>
+            <ServersNavBar />
+          <Route path="/servers/:id">
+            <CurrentServerDetails />
+          </Route>
           <Route exact path="/">
             <HomePage />
           </Route>

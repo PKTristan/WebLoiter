@@ -59,6 +59,12 @@ export const editChannel = (channel, id) => async (dispatch) => {
 
 }
 
+
+export const selChannels = (state) => state.channels.channels;
+export const selChannel = (state) => state.channels.channel;
+export const selNewId = (state) => state.channels.newId;
+
+
 const initialState = {channels: null, channel: null, newId: null}
 
 const channelsReducer = (state = initialState, action) => {

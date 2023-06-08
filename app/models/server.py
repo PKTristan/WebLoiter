@@ -39,6 +39,6 @@ class Server(db.Model):
         }
 
 
-def validate_url_format(url) -> bool:
+def validate_url_format(url='https://i.imgur.com/YnEnRlg.jpg') -> bool:
     url_pattern = re.compile(r'^https?://[\w\-]+(\.[\w\-]+){1,2}\.[\w\-]{2,3}[/#?]?.*$')
     return bool(url_pattern.match(url))
