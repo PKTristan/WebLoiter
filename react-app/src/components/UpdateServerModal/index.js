@@ -42,6 +42,7 @@ function UpdateServerModal() {
             direct_message: directMessage
         }
         dispatch(serverActions.updateServerThunk(updatedServer))
+        dispatch(serverActions.fetchCurrentServer(updatedServer.id))
         window.location.reload()
         closeModal();
     }

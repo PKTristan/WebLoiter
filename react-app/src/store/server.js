@@ -105,6 +105,7 @@ export const updateServerThunk = (server) => async (dispatch) => {
             }
         ),
     });
+    console.log('this is my response', response)
     if (response.ok) {
         const data = await response.json();
         dispatch(updateServer(data));
