@@ -10,10 +10,10 @@ const loadChannels = (channels) => ({
     channels
 });
 
-const loadChannelById = (channel) => {
+const loadChannelById = (channel) => ({
     type: LOAD_CHANNEL_BY_ID,
     channel
-}
+})
 
 const loadNewId = (id) => ({
     type: LOAD_NEW_ID,
