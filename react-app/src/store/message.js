@@ -103,7 +103,7 @@ export const deleteMessageChannel = (channelId, messageId) => async (dispatch) =
     }
 }
 
-const initialState = {messages: null, message: null}
+const initialState = {messages: [], message: null}
 
 export default function messageReducer(state = initialState, action) {
     let newState = Object.assign(state)

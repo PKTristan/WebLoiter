@@ -8,6 +8,7 @@ import CurrentServerDetails from "./components/CurrentServerDetails";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import HomePage from "./components/Homepage";
+import Messages from "./components/Messages"
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +26,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <HomePage />
+          </Route>
+          <Route path='/channels/:channelId/messages'>
+            <Messages />
           </Route>
           <Route exact path="/servers/:id">
             <CurrentServerDetails />
