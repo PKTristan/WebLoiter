@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { useParams } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import * as serverActions from "../../store/server";
+import "./Confirm.css";
 
 
 function ConfirmServerDeleteModal() {
@@ -17,11 +18,13 @@ function ConfirmServerDeleteModal() {
         closeModal();
     }
     return (
-        <div>
+        <div className="confirm-server-delete">
             <form onSubmit={handleSubmit}>
             <h1>Are you sure you want to delete {currServer.server_name}?</h1>
+            <div className="button-container">
             <button type="submit">Delete</button>
             <button onClick={closeModal}>Cancel</button>
+            </div>
             </form>
         </div>
     )

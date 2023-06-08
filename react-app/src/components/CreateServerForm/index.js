@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { useDispatch } from "react-redux";
 import * as serverActions from "../../store/server";
 import { useModal } from "../../context/Modal";
-
+import './ServerForm.css';
 
 const CreateServerForm = ({ hideForm }) => {
     const dispatch = useDispatch();
@@ -33,8 +33,8 @@ const CreateServerForm = ({ hideForm }) => {
     
     }
     return (
-        <div>
-            <h1>Create Server</h1>
+        <div className="server-form">
+            <h2>Create Server</h2>
             <form onSubmit={handleSubmit}>
                 <label>
                     Server Name:
@@ -98,7 +98,7 @@ const CreateServerForm = ({ hideForm }) => {
                     />
                 </label>
                 <br/>
-                <button type="submit">Create Server</button>
+                <button className="server-submit-btn" type="submit">Create Server</button>
             </form>
         </div>
 

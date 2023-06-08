@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
 import * as serverActions from "../../store/server";
+import './Update.css'
 
 
 function UpdateServerModal() {
@@ -47,8 +48,8 @@ function UpdateServerModal() {
 
     return (
         <div>
-            <h1>Update {currServer.server_name}</h1>
-            <form onSubmit={handleSubmit}>
+            <h2>Update {currServer.server_name}</h2>
+            <form onSubmit={handleSubmit} className="update-form">
                 <label>
                     Server Name:
                     <input
@@ -113,7 +114,7 @@ function UpdateServerModal() {
                     />
                 </label>
                 <br/>
-                <button type="submit">Update Server</button>
+                <button type="submit" className="update-submit-btn">Update Server</button>
             </form>
         </div>
     )
