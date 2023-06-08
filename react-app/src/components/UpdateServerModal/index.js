@@ -1,13 +1,16 @@
-import React, {useState} from "react";
-import { useDispatch } from "react-redux";
-import * as serverActions from "../../store/server";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { useModal } from "../../context/Modal";
-import './ServerForm.css';
+import { useHistory } from "react-router-dom";
+import * as serverActions from "../../store/server";
+import './Update.css'
 
-const CreateServerForm = ({ hideForm }) => {
+
+function UpdateServerModal() {
     const dispatch = useDispatch();
-    // const sessionUser = useSelector((state) => state.session.user);
-    // const [errors, setErrors] = useState([]);
+    const currServer = useSelector(state => state.server.currentServer);
+    const user = useSelector(state => state.session.user);
     const [serverName, setServerName] = useState("");
     const [serverType, setServerType] = useState("");
     const [avatar, setAvatar] = useState("");
@@ -15,10 +18,22 @@ const CreateServerForm = ({ hideForm }) => {
     const [privateServer, setPrivateServer] = useState(false);
     const [directMessage, setDirectMessage] = useState(false);
     const { closeModal } = useModal();
+    const { id } = useParams()
+    const history = useHistory();
+
+    useEffect(() => {
+        setServerName(currServer.server_name)
+        setServerType(currServer.server_type)
+        setAvatar(currServer.avatar)
+        setServerDetails(currServer.server_details)
+        setPrivateServer(currServer.private)
+        setDirectMessage(currServer.direct_message)
+    }, [currServer]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newServer = {
+        const updatedServer = {
+            id: currServer.id,
             server_name: serverName,
             server_type: serverType,
             avatar: avatar,
@@ -26,16 +41,15 @@ const CreateServerForm = ({ hideForm }) => {
             private: privateServer,
             direct_message: directMessage
         }
-    
-        const data = await dispatch(serverActions.createServerAction(newServer));
-        dispatch(serverActions.fetchServers());
+        dispatch(serverActions.updateServerThunk(updatedServer))
+        window.location.reload()
         closeModal();
-    
     }
+
     return (
-        <div className="server-form">
-            <h2>Create Server</h2>
-            <form onSubmit={handleSubmit}>
+        <div>
+            <h2>Update {currServer.server_name}</h2>
+            <form onSubmit={handleSubmit} className="update-form">
                 <label>
                     Server Name:
                     <input
@@ -68,15 +82,17 @@ const CreateServerForm = ({ hideForm }) => {
                         type="text"
                         value={avatar}
                         onChange={(e) => setAvatar(e.target.value)}
+                        required
                     />
                 </label>
                 <br/>
                 <label>
                     Server Details:
-                    <textarea
+                    <input
                         type="text"
                         value={serverDetails}
                         onChange={(e) => setServerDetails(e.target.value)}
+                        required
                     />
                 </label>
                 <br/>
@@ -90,7 +106,7 @@ const CreateServerForm = ({ hideForm }) => {
                 </label>
                 <br/>
                 <label>
-                    DM:
+                    Direct Message:
                     <input
                         type="checkbox"
                         checked={directMessage}
@@ -98,11 +114,10 @@ const CreateServerForm = ({ hideForm }) => {
                     />
                 </label>
                 <br/>
-                <button className="server-submit-btn" type="submit">Create Server</button>
+                <button type="submit" className="update-submit-btn">Update Server</button>
             </form>
         </div>
-
     )
 }
 
-export default CreateServerForm
+export default UpdateServerModal
