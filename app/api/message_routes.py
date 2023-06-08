@@ -10,7 +10,6 @@ def channel_messages(channel_id):
     if request.method == 'GET':
         #Get all messages in the channel
         channel_messages = Message.query.filter_by(channel_id=channel_id).all()
-
         all_messages = [
             {
                 'id': message.id,
@@ -21,12 +20,13 @@ def channel_messages(channel_id):
             for message in channel_messages
         ]
 
-        return jsonify({"Messages": all_messages}), 200
+        return jsonify(all_messages), 200
     
     
     elif request.method == "POST":
         #Create a new message in the channel
         data = request.get_json()
+        print('this is data ', data)
 
         user_id = current_user.id
         message = Message(
@@ -35,6 +35,7 @@ def channel_messages(channel_id):
             channel_id=channel_id
         )
         #Save the new message to db
+        print('this is message ', message)
         db.session.add(message)
         db.session.commit()
 

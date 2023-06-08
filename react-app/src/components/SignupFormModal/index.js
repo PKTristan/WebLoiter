@@ -24,7 +24,6 @@ function SignupFormModal() {
 		e.preventDefault();
 		if (password === confirmPassword) {
 			const data = await dispatch(signUp(username, displayname, email, password, profile_pic, bio));
-			console.log(data)
 			if (data) {
 				setErrors(data);
 			} else {

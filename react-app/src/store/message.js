@@ -25,17 +25,15 @@ const deleteMessage = (message) => ({
 
 export const loadMessagesByChannel = (channelId) => async (dispatch) => {
     const response = await fetch(`/api/channels/${channelId}/messages`);
-
     if (response.ok) {
         const messages = await response.json();
         dispatch(loadMessages(messages));
     }
-
     return response
 }
 
 export const newMessageChannel = (message, channelId) => async (dispatch) => {
-    const response = await fetch(`/api/channels/${channelId}/messages`, {
+    const response = await fetch(`/api/channels/${channelId}/messages/`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
