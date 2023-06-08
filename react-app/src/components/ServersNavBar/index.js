@@ -1,7 +1,6 @@
-import React, {  useEffect, useState } from "react";
+import React, {  useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import CreateServerModal from "../CreateServerModal";
 import CreateServerForm from "../CreateServerForm";
 import OpenModalButton from "../OpenModalButton";
 import * as serverActions from "../../store/server";
@@ -12,7 +11,6 @@ function ServerNavBar() {
     const servers = useSelector(state => state.server.servers);
     const serverMembers = useSelector(state => state.server.serverMembers);
     const user = useSelector(state => state.session.user);
-    const [showForm, setShowForm] = useState(false);
 
     useEffect(() => {
         dispatch(serverActions.fetchServers());
@@ -22,14 +20,7 @@ function ServerNavBar() {
     const filteredServers = Object.values(servers).filter(server => server.owner_id === user.id || serverMembers.some(membership => 
         membership.server_id === server.id && membership.member_id === user.id));
 
-    const handleModalOpen = (e) => {
-        e.preventDefault();
-        setShowForm(true)
-        console.log('modal open button', showForm);
-    }
-    console.log('filtered servers----------', filteredServers)
     
-
     return (
         <ul>
             {filteredServers.map(server => (
