@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as serverActions from "../../store/server";
 import { Redirect } from "react-router-dom";
+import { useModal } from "../../context/Modal";
 
 
 const CreateServerForm = ({ hideForm }) => {
@@ -14,6 +15,7 @@ const CreateServerForm = ({ hideForm }) => {
     const [serverDetails, setServerDetails] = useState("");
     const [privateServer, setPrivateServer] = useState(false);
     const [directMessage, setDirectMessage] = useState(false);
+    const { closeModal } = useModal();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,12 +29,10 @@ const CreateServerForm = ({ hideForm }) => {
         }
     
         const data = await dispatch(serverActions.createServerAction(newServer));
-            console.log('this is my currr data', newServer)
-        // if (data) {
-        //     setErrors(data)
-        // } else {
-        //     hideForm();
-        // }
+        dispatch(serverActions.fetchServers());
+        Redirect("/servers")
+        closeModal();
+    
     }
     return (
         <div>

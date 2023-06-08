@@ -19,7 +19,7 @@ function ServerNavBar() {
         dispatch(serverActions.fetchServerMembers());
     }, [dispatch]);
 
-    const filteredServers = Object.values(servers).filter(server => serverMembers.some(membership => 
+    const filteredServers = Object.values(servers).filter(server => server.owner_id === user.id || serverMembers.some(membership => 
         membership.server_id === server.id && membership.member_id === user.id));
 
     const handleModalOpen = (e) => {
@@ -27,7 +27,7 @@ function ServerNavBar() {
         setShowForm(true)
         console.log('modal open button', showForm);
     }
-
+    console.log('filtered servers----------', filteredServers)
     
 
     return (
