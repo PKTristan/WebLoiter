@@ -34,7 +34,7 @@ function Channels() {
             {
                 channels.length &&
                 channels.map((channel) => (
-                    <button key={channel.id} className="channel-button" onClick={handleClick(e, channel)}>{`# ${channel.name}`}</button>
+                    <button key={channel.id} className="channel-button" onClick={(e) => handleClick(e, channel)}>{`# ${channel.name}`}</button>
                 ))
             }
 
@@ -42,3 +42,5 @@ function Channels() {
         </section>
     )
 }
+
+export default Channels
