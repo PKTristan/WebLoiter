@@ -1,31 +1,38 @@
-import React, {  useEffect } from "react";
+import React, {  useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import CreateServerModal from "../CreateServerModal";
+import CreateServerForm from "../CreateServerForm";
 import OpenModalButton from "../OpenModalButton";
 import * as serverActions from "../../store/server";
 import './servernavbar.css'
 
-function ServerNavBar(){
+function ServerNavBar() {
     const dispatch = useDispatch();
     const servers = useSelector(state => state.server.servers);
     const serverMembers = useSelector(state => state.server.serverMembers);
     const user = useSelector(state => state.session.user);
+    const [showForm, setShowForm] = useState(false);
 
     useEffect(() => {
-        dispatch(serverActions.fetchServers())
-        dispatch(serverActions.fetchServerMembers())
+        dispatch(serverActions.fetchServers());
+        dispatch(serverActions.fetchServerMembers());
     }, [dispatch]);
-    const filteredServers = []
-    Object.values(servers).forEach(server => {
-        serverMembers.forEach(membership => {
-            if (membership.server_id === server.id && membership.member_id === user.id) {
-                filteredServers.push(server)
-            }
-        })
-    })
+
+    const filteredServers = Object.values(servers).filter(server => server.owner_id === user.id || serverMembers.some(membership => 
+        membership.server_id === server.id && membership.member_id === user.id));
+
+    const handleModalOpen = (e) => {
+        e.preventDefault();
+        setShowForm(true)
+        console.log('modal open button', showForm);
+    }
+    console.log('filtered servers----------', filteredServers)
+    
+
     return (
         <ul>
-            {filteredServers.map((server) => (
+            {filteredServers.map(server => (
                 <li key={server.id}>
                     <NavLink to={`/servers/${server.id}`} >
                         <img 
@@ -36,20 +43,20 @@ function ServerNavBar(){
                             style={{ 
                                 width: "40px", 
                                 height: "40px", 
-                                borderRadius: "50%" }}
-                        >
-                        </img>
+                                borderRadius: "50%" 
+                            }}
+                        />
                     </NavLink>
                 </li>
             ))}
-                <li>
-                    <button onclick="openModal()" style={{ width: "40px", height: "40px", borderRadius: "50%" }}>
-                    <img src="https://i.imgur.com/iztujJc.png" alt="Button Img" style={{ width: "25px", height: "25px"}}/>
-                    </button>
-                </li>
-
+            {user && (
+                < OpenModalButton 
+                buttonText="+"
+                modalComponent={<CreateServerForm />}
+                />
+            )}
         </ul>
-    )
+    );
 }
 
 
