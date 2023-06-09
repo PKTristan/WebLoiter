@@ -46,7 +46,10 @@ export const createChannel = (channel) => async (dispatch) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(channel)
+        body: JSON.stringify({
+            "server_id": channel.server_id,
+            "channel_name": channel.channel_name
+        })
     });
 
     if (response.ok) {
@@ -56,8 +59,22 @@ export const createChannel = (channel) => async (dispatch) => {
 }
 
 export const editChannel = (channel, id) => async (dispatch) => {
+    const response = await fetch(`/api/channels/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(channel)
+    });
 
+    if (response.ok) {
+        dispatch(getChannelsByServer(channel.server_id));
+    }
+
+    return response;
 }
+
+
 
 
 export const selChannels = (state) => state.channels.channels;

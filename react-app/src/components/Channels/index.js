@@ -1,17 +1,18 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { selChannels, createChannel, getChannelsByServer } from '../../store/channel';
+import { selChannels, createChannel, getChannelsByServer, editChannel } from '../../store/channel';
 import { useHistory, useParams } from 'react-router-dom';
 import CustomerContextMenu from './CustomContextMenu';
 
 function Channels() {
     const serverChannels = useSelector(selChannels);
+    const user = useSelector(state => state.session.user);
+    const currServer = useSelector(state => state.server.currentServer)
     const dispatch = useDispatch();
+    const [isOwner, setIsOwner] = useState(false);
     const [channels, setChannels] = useState([]);
     const [newChan, setNewChan] = useState('');
     const [createMode, setCreateMode] = useState(false);
-    const [updateMode, setUpdateMode] = useState([false, -1]);
-    const [newName, setNewName] = useState('');
     const [contextMenu, setContextMenu] = useState({
         visible: false,
         channel: null
@@ -53,10 +54,7 @@ function Channels() {
                 server_id: id
             }
 
-
-            console.log(body);
-
-        //dispatch(createChannel());
+            dispatch(createChannel(body));
 
         }
         setNewChan('');
@@ -73,19 +71,30 @@ function Channels() {
     const handleRightClick = (e, channel) => {
         e.preventDefault();
 
-        setContextMenu({
-            visible: true,
-            channel: channel,
-            position: {
-                x: e.clientX,
-                y: e.clientY
-            }
-        });
+        if (isOwner)
+            setContextMenu({
+                visible: true,
+                channel: channel,
+                position: {
+                    x: e.clientX,
+                    y: e.clientY
+                }
+            });
     }
+
+    const updateChannel = (channel, id) => {
+        dispatch(editChannel(channel, id));
+    };
+
+    useEffect(() => {
+        if (currServer && user) {
+            setIsOwner(currServer.owner_id === user.id);
+        }
+    }, [currServer, user]);
 
     useEffect(() => {
 
-    }, [createMode]);
+    }, [createMode, isOwner]);
 
     return (
         <section className="channels">
@@ -102,6 +111,7 @@ function Channels() {
                     channel={contextMenu.channel}
                     position={contextMenu.position}
                     close={() => setContextMenu({ visible: false, channel: null })}
+                    updateChannel={updateChannel}
                 />
             }
 
@@ -113,7 +123,9 @@ function Channels() {
                 </div>
             }
 
-            <button className="new-channel-button" onClick={newChannel}>+ Create Channel</button>
+            {isOwner &&
+                <button className="new-channel-button" onClick={newChannel}>+ Create Channel</button>
+            }
         </section>
     )
 }
