@@ -57,8 +57,11 @@ function ChannelMessages() {
         };
 
     const handleDeleteMessage = (messageId) => {
-        dispatch(deleteMessageChannel(channelId, messageId))
-        window.location.reload()
+        const confirmDelete = window.confirm('Are you sure you want to delete this message?')
+        if (confirmDelete){
+        dispatch(deleteMessageChannel(channelId, messageId));
+        window.location.reload();
+    }
     }
 
     return (
