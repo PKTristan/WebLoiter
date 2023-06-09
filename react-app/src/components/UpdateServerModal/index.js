@@ -17,6 +17,7 @@ function UpdateServerModal() {
     const [serverDetails, setServerDetails] = useState("");
     const [privateServer, setPrivateServer] = useState(false);
     const [directMessage, setDirectMessage] = useState(false);
+    const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
     const { id } = useParams()
     const history = useHistory();
@@ -41,16 +42,23 @@ function UpdateServerModal() {
             private: privateServer,
             direct_message: directMessage
         }
-        dispatch(serverActions.updateServerThunk(updatedServer))
+        const data = await dispatch(serverActions.updateServerThunk(updatedServer))
         dispatch(serverActions.fetchCurrentServer(updatedServer.id))
         window.location.reload()
-        closeModal();
+        if (data) {
+            setErrors(data);
+            } else {
+                closeModal()
+            }
     }
 
     return (
-        <div>
+        <div className="update-form">
             <h2>Update {currServer.server_name}</h2>
-            <form onSubmit={handleSubmit} className="update-form">
+            {errors.map((error, idx) => (
+                <div key={idx}>{error}</div>
+            ))}
+            <form onSubmit={handleSubmit}>
                 <label>
                     Server Name:
                     <input
@@ -89,7 +97,7 @@ function UpdateServerModal() {
                 <br/>
                 <label>
                     Server Details:
-                    <input
+                    <textarea
                         type="text"
                         value={serverDetails}
                         onChange={(e) => setServerDetails(e.target.value)}
@@ -106,16 +114,10 @@ function UpdateServerModal() {
                     />
                 </label>
                 <br/>
-                <label>
-                    Direct Message:
-                    <input
-                        type="checkbox"
-                        checked={directMessage}
-                        onChange={(e) => setDirectMessage(e.target.checked)}
-                    />
-                </label>
-                <br/>
+                <div className="update-buttons">
                 <button type="submit" className="update-submit-btn">Update Server</button>
+                <button onClick={closeModal} className="update-cancel-btn">Cancel</button>
+                </div>
             </form>
         </div>
     )

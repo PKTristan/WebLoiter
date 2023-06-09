@@ -7,7 +7,7 @@ import './ServerForm.css';
 const CreateServerForm = ({ hideForm }) => {
     const dispatch = useDispatch();
     // const sessionUser = useSelector((state) => state.session.user);
-    // const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState([]);
     const [serverName, setServerName] = useState("");
     const [serverType, setServerType] = useState("");
     const [avatar, setAvatar] = useState("");
@@ -29,12 +29,19 @@ const CreateServerForm = ({ hideForm }) => {
     
         const data = await dispatch(serverActions.createServerAction(newServer));
         dispatch(serverActions.fetchServers());
-        closeModal();
+        if (data) {
+            setErrors(data);
+            } else {
+                closeModal()
+            }
     
     }
     return (
         <div className="server-form">
             <h2>Create Server</h2>
+            {errors.map((error, idx) => (
+                <div key={idx}>{error}</div>
+            ))}
             <form onSubmit={handleSubmit}>
                 <label>
                     Server Name:
@@ -88,17 +95,12 @@ const CreateServerForm = ({ hideForm }) => {
                         onChange={(e) => setPrivateServer(e.target.checked)}
                     />
                 </label>
-                <br/>
-                <label>
-                    DM:
-                    <input
-                        type="checkbox"
-                        checked={directMessage}
-                        onChange={(e) => setDirectMessage(e.target.checked)}
-                    />
-                </label>
+                <div className="server-submit-buttons">
                 <br/>
                 <button className="server-submit-btn" type="submit">Create Server</button>
+                <br/>
+                <button className="server-cancel-btn" onClick={closeModal}>Cancel</button>
+                </div>
             </form>
         </div>
 
