@@ -1,3 +1,62 @@
 .avatar:hover .alt-text {
     opacity: 1; /* Show the alt text on hover */
 }
+
+.server-navbar {
+    display: flex;
+    background-color: #9cadce;
+    padding: 8px;
+    border-right: 1px solid #202225;
+}
+
+.server-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.server-item {
+    margin-bottom: 8px;
+}
+
+.server-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #ffffff;
+    padding: 6px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.server-link:hover {
+    background-color: #dfb2f4;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.server-navbar button {
+    background-color: #fdffb6;
+    padding: 6px;
+    margin-left: 8px;
+    border: none;
+    color: #a0c4ff;
+    font-weight: bold;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.server-navbar button:hover {
+    background-color: #ffc6ff;
+}

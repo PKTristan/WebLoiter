@@ -22,20 +22,17 @@ function ServerNavBar() {
 
     
     return (
-        <ul>
+        <div className="server-navbar">
+
+        <ul className="server-list">
             {filteredServers.map(server => (
-                <li key={server.id}>
-                    <NavLink to={`/servers/${server.id}`} >
+                <li className="server-item" key={server.id}>
+                    <NavLink to={`/servers/${server.id}`} className="server-link">
                         <img 
                             className='avatar' 
                             src={server.avatar} 
                             alt={server.server_name} 
                             title={server.server_name} 
-                            style={{ 
-                                width: "40px", 
-                                height: "40px", 
-                                borderRadius: "50%" 
-                            }}
                         />
                     </NavLink>
                 </li>
@@ -44,9 +41,11 @@ function ServerNavBar() {
                 < OpenModalButton 
                 buttonText="+"
                 modalComponent={<CreateServerForm />}
+                className="open-modal-button"
                 />
             )}
         </ul>
+        </div>
     );
 }
 

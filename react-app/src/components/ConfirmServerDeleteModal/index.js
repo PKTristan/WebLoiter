@@ -20,7 +20,7 @@ function ConfirmServerDeleteModal() {
     return (
         <div className="confirm-server-delete">
             <form onSubmit={handleSubmit}>
-            <h1>Are you sure you want to delete {currServer.server_name}?</h1>
+            <h2>Are you sure you want to delete {currServer.server_name}?</h2>
             <div className="button-container">
             <button type="submit">Delete</button>
             <button onClick={closeModal}>Cancel</button>
