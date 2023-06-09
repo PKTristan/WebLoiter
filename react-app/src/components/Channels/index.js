@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { selChannels, createChannel, getChannelsByServer, editChannel } from '../../store/channel';
+import { selChannels, createChannel, getChannelsByServer, editChannel, deleteChannel} from '../../store/channel';
 import { useHistory, useParams } from 'react-router-dom';
 import CustomerContextMenu from './CustomContextMenu';
 
@@ -86,6 +86,10 @@ function Channels() {
         dispatch(editChannel(channel, id));
     };
 
+    const delChannel = (channelId, server_id) => {
+        dispatch(deleteChannel(channelId, server_id));
+    }
+
     useEffect(() => {
         if (currServer && user) {
             setIsOwner(currServer.owner_id === user.id);
@@ -112,6 +116,7 @@ function Channels() {
                     position={contextMenu.position}
                     close={() => setContextMenu({ visible: false, channel: null })}
                     updateChannel={updateChannel}
+                    delChannel={delChannel}
                 />
             }
 

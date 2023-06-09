@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 
-function CustomerContextMenu({ channel, position, close, updateChannel }) {
+function CustomerContextMenu({ channel, position, close, updateChannel, delChannel }) {
     const [name, setName] = useState('');
     const [updateMode, setUpdateMode] = useState(false);
     const [deleteMode, setDeleteMode] = useState(false);
@@ -51,9 +51,18 @@ function CustomerContextMenu({ channel, position, close, updateChannel }) {
 
             updateChannel(body, channel.id);
 
+            close();
         }
         else if (value === 'Cancel') {
             setUpdateMode(false);
+            setDeleteMode(false);
+        }
+        else if (value === 'Confirm') {
+            setDeleteMode(false);
+
+            delChannel(channel.id, channel.server_id);
+
+            close();
         }
     }
 
@@ -66,18 +75,26 @@ function CustomerContextMenu({ channel, position, close, updateChannel }) {
             className="custom-context-menu"
             style={{ top: position.y, left: position.x }}
         >
-            { !updateMode && !deleteMode &&
+            {!updateMode && !deleteMode &&
                 <>
-                <div>{name}</div>
-                <button className="edit-channel-button" value='Edit' onClick={handleClick}>Edit</button>
-                <button className='delete-channel-button' value='Delete' onClick={handleClick} >Delete</button>
+                    <div>{name}</div>
+                    <button className="edit-channel-button" value='Edit' onClick={handleClick}>Edit</button>
+                    <button className='delete-channel-button' value='Delete' onClick={handleClick} >Delete</button>
                 </>
             }
 
-            {   updateMode &&
+            {updateMode &&
                 <>
-                <input className='channel-name' type='text' value={name} onChange={(e) => setName(e.target.value)} />
-                <button className='save-channel-button' value='Save' onClick={handleClick} >Save</button>
+                    <input className='channel-name' type='text' value={name} onChange={(e) => setName(e.target.value)} />
+                    <button className='save-channel-button' value='Save' onClick={handleClick} >Save</button>
+                    <button className='cancel-button' value='Cancel' onClick={handleClick} >Cancel</button>
+                </>
+            }
+
+            {deleteMode &&
+                <>
+                    <label className='delete-label'>Are you sure you want to delete?</label>
+                <button className='save-channel-button' value='Confirm' onClick={handleClick} >Confirm</button>
                 <button className='cancel-button' value='Cancel' onClick={handleClick} >Cancel</button>
                 </>
             }
