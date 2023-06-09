@@ -24,8 +24,8 @@ export const getChannelsByServer = (serverId) => async (dispatch) => {
     const response = await fetch(`/api/servers/${serverId}/channels`);
 
     if (response.ok) {
-        const channels = await response.json();
-        dispatch(loadChannels(channels));
+        const data = await response.json();
+        dispatch(loadChannels(data.Server.Channels));
     }
 
     return response;

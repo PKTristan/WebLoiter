@@ -8,6 +8,7 @@ import CurrentServerDetails from "./components/CurrentServerDetails";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import HomePage from "./components/Homepage";
+import Channels from "./components/Channels";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,9 +28,17 @@ function App() {
             </Route>
             <Route path='/servers'>
               <ServersNavBar />
+
               <Route path="/servers/:id">
                 <CurrentServerDetails />
+                <Route exact path='/servers/:id/channels'>
+                  <Channels />
+                </Route>
+                <Route exact path='/servers/:id/channels/:channelId'>
+                  <Channels />
+                </Route>
               </Route>
+
             </Route>
           </Switch>
         </>
