@@ -38,7 +38,7 @@ function Channels() {
                 ))
             }
 
-            <button className="new-channel-button" onClick={newChannel(e)}>+</button>
+            <button className="new-channel-button" onClick={newChannel(e)}>+ NEW CHANNEL</button>
         </section>
     )
 }
