@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {loadMessagesByChannel, newMessageChannel} from '../../store/message';
 
-function NewMessage() {
+function NewMessage({ initialValue }) {
     const dispatch = useDispatch();
     const currentUserId = useSelector((state) => state.session.user.id);
     const {channelId} = useParams()
-    const [message, setMessage] = useState('')
+    const [message, setMessage] = useState(initialValue || '')
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = async (e) => {
@@ -38,7 +38,7 @@ function NewMessage() {
     }
 
     return (
-        <div>
+        <form onSubmit={handleSubmit}>
             <textarea
                 type='text' 
                 placeholder='Send a message' 
@@ -46,7 +46,7 @@ function NewMessage() {
                 onChange={handleChange} 
                 onKeyDown={handleKeyDown}
                 />
-        </div>
+        </form>
     );
 }
 
