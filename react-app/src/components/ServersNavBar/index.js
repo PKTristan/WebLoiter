@@ -21,7 +21,7 @@ function ServerNavBar() {
         membership.server_id === server.id && membership.member_id === user.id));
 
     
-    return (
+    return user && filteredServers.length ? (
         <div className="server-navbar">
             <ul className="server-list">
       {/* Render servers with direct messages */}
@@ -66,7 +66,7 @@ function ServerNavBar() {
     </ul>
         
         </div>
-    );
+    ) : null;
 }
 
 
