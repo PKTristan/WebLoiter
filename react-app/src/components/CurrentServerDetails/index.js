@@ -5,6 +5,7 @@ import OpenModalButton from "../OpenModalButton";
 import * as serverActions from "../../store/server";
 import UpdateServerModal from "../UpdateServerModal";
 import ConfirmServerDeleteModal from "../ConfirmServerDeleteModal";
+import "./CurrServer.css"
 
 function CurrServer(){
     const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function CurrServer(){
                 <OpenModalButton 
                 buttonText="Update"
                 modalComponent={<UpdateServerModal />}
+                className="button-1"
                 />
             )
         }
@@ -39,10 +41,12 @@ function CurrServer(){
     }, [dispatch, id]);
 
     return (
-        <div>
-            <h1>{currServer.server_name}</h1>
-            {update_server_button()}
-            {delete_server_button()}
+        <div className="curr-server">
+            <h1 className="server-name">{currServer.server_name}</h1>
+            <div className="buttons-container">
+                <div className="button-1">{update_server_button()}</div>
+                <div className="button-2">{delete_server_button()}</div>
+            </div>
         </div>
     )
 }
