@@ -29,8 +29,8 @@ const CreateServerForm = ({ hideForm }) => {
     
         const data = await dispatch(serverActions.createServerAction(newServer));
         dispatch(serverActions.fetchServers());
-        if (data) {
-            setErrors(data);
+        if (data.errors) {
+            setErrors(data.errors);
             } else {
                 closeModal()
             }
@@ -40,7 +40,7 @@ const CreateServerForm = ({ hideForm }) => {
         <div className="server-form">
             <h2>Create Server</h2>
             {errors.map((error, idx) => (
-                <div key={idx}>{error}</div>
+                <div key={idx} className="errors-create">{error}</div>
             ))}
             <form onSubmit={handleSubmit}>
                 <label>
@@ -66,6 +66,8 @@ const CreateServerForm = ({ hideForm }) => {
                         <option value="art">Art</option>
                         <option value="studying">Studying</option>
                         <option value="misc">Miscellaneous</option>
+                        {/* error test purposes below */}
+                        <option value="random">Random</option>
                     </select>
                 </label>
                 <br/>
@@ -97,7 +99,7 @@ const CreateServerForm = ({ hideForm }) => {
                 </label>
                 <div className="server-submit-buttons">
                 <br/>
-                <button className="server-submit-btn" type="submit">Create Server</button>
+                <button className="server-submit-btn" type="submit">Create</button>
                 <br/>
                 <button className="server-cancel-btn" onClick={closeModal}>Cancel</button>
                 </div>

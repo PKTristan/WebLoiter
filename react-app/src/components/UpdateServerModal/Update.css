@@ -9,6 +9,14 @@
     border-radius: 10px;
 }
 
+.errors-update {
+    color: red;
+    display: flex;
+    font-weight: bold;
+    font-family: cursive;
+    justify-content: center;
+    align-items: center;
+}
 .update-form label {
     display: flex;
     flex-direction: column;

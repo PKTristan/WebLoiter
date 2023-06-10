@@ -1,8 +1,8 @@
 """create-db
 
-Revision ID: 446adb187bbe
+Revision ID: 6c72b3322be4
 Revises: 
-Create Date: 2023-06-06 18:12:13.432448
+Create Date: 2023-06-10 09:40:02.843767
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '446adb187bbe'
+revision = '6c72b3322be4'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -32,10 +32,10 @@ def upgrade():
     )
     op.create_table('servers',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('server_name', sa.String(), nullable=False),
+    sa.Column('server_name', sa.String(length=25), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=True),
     sa.Column('server_type', sa.String(), nullable=False),
-    sa.Column('avatar', sa.String(), nullable=True),
+    sa.Column('avatar', sa.String(length=40), nullable=True),
     sa.Column('server_details', sa.String(length=100), nullable=True),
     sa.Column('private', sa.Boolean(), nullable=True),
     sa.Column('direct_message', sa.Boolean(), nullable=True),
