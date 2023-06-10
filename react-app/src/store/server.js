@@ -85,6 +85,10 @@ export const createServerAction = (server) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(createServer(data));
+        return data
+    } else {
+        const errData = await response.json()
+        return errData
     }
 }
 
@@ -105,10 +109,13 @@ export const updateServerThunk = (server) => async (dispatch) => {
             }
         ),
     });
-    console.log('this is my response', response)
     if (response.ok) {
         const data = await response.json();
         dispatch(updateServer(data));
+        return data
+    } else {
+        const errorData = await response.json();
+        return errorData
     }
 }
 

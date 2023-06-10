@@ -23,10 +23,15 @@ function UpdateServerModal() {
     const history = useHistory();
 
     useEffect(() => {
+        console.log(currServer)
         setServerName(currServer.server_name)
         setServerType(currServer.server_type)
         setAvatar(currServer.avatar)
-        setServerDetails(currServer.server_details)
+        if (!currServer.server_details) {
+            setServerDetails("")
+        } else {
+            setServerDetails(currServer.server_details)
+        }
         setPrivateServer(currServer.private)
         setDirectMessage(currServer.direct_message)
     }, [currServer]);
@@ -43,10 +48,9 @@ function UpdateServerModal() {
             direct_message: directMessage
         }
         const data = await dispatch(serverActions.updateServerThunk(updatedServer))
-        dispatch(serverActions.fetchCurrentServer(updatedServer.id))
-        window.location.reload()
-        if (data) {
-            setErrors(data);
+        dispatch(serverActions.fetchCurrentServer(currServer.id))
+        if (data.errors) {
+            setErrors(data.errors);
             } else {
                 closeModal()
             }
@@ -56,7 +60,7 @@ function UpdateServerModal() {
         <div className="update-form">
             <h2>Update {currServer.server_name}</h2>
             {errors.map((error, idx) => (
-                <div key={idx}>{error}</div>
+                <div key={idx} className="errors-update">{error}</div>
             ))}
             <form onSubmit={handleSubmit}>
                 <label>
@@ -82,6 +86,9 @@ function UpdateServerModal() {
                         <option value="art">Art</option>
                         <option value="studying">Studying</option>
                         <option value="misc">Miscellaneous</option>
+                        <option value="direct message">Direct Message</option>
+                        {/* error test purposes below */}
+                        <option value="random">Random</option>
                     </select>
                 </label>
                 <br/>
@@ -101,7 +108,6 @@ function UpdateServerModal() {
                         type="text"
                         value={serverDetails}
                         onChange={(e) => setServerDetails(e.target.value)}
-                        required
                     />
                 </label>
                 <br/>

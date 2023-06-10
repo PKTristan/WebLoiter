@@ -13,6 +13,7 @@ class ServerForm(FlaskForm):
         ('anime', 'Anime'),
         ('art', 'Art'),
         ('studying', 'Studying'),
+        ('direct message', 'Direct Message'),
         ('misc', 'Miscellaneous')], validators=[DataRequired()])
     avatar = StringField('avatar')
     server_details = TextAreaField('server_details')

@@ -21,7 +21,9 @@ function App() {
     <Navigation isLoaded={isLoaded} />
     {isLoaded && (
       <div className="content-container">
-        <ServersNavBar />
+        <Route path="/servers">
+          <ServersNavBar />
+        </Route>
         <div className="main-content">
           <Switch>
             <Route path="/servers/:id">

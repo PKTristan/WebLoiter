@@ -40,7 +40,7 @@ function CurrServer(){
         dispatch(serverActions.fetchCurrentServer(id))
     }, [dispatch, id]);
 
-    return (
+    return user && currServer ? (
         <div className="curr-server">
             <h1 className="server-name">{currServer.server_name}</h1>
             <div className="buttons-container">
@@ -48,7 +48,7 @@ function CurrServer(){
                 <div className="button-2">{delete_server_button()}</div>
             </div>
         </div>
-    )
+    ) : null
 }
 
 
