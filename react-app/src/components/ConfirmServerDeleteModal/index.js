@@ -17,8 +17,8 @@ function ConfirmServerDeleteModal() {
         e.preventDefault();
         const data = await dispatch(serverActions.deleteServerThunk(currServer))
         dispatch(serverActions.fetchServers());
+        history.push("/servers");
         closeModal();
-        history.push('/api/servers');
     }
     return (
         <div className="confirm-server-delete">
