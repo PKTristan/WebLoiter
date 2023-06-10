@@ -8,6 +8,7 @@ import CurrentServerDetails from "./components/CurrentServerDetails";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import HomePage from "./components/Homepage";
+import Messages from "./components/Messages"
 
 function App() {
   const dispatch = useDispatch();

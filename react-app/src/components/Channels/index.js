@@ -34,13 +34,11 @@ function Channels() {
             {
                 channels.length &&
                 channels.map((channel) => (
-                    <button key={channel.id} className="channel-button" onClick={(e) => handleClick(e, channel)}>{`# ${channel.name}`}</button>
+                    <button key={channel.id} className="channel-button" onClick={handleClick(e, channel)}>{`# ${channel.name}`}</button>
                 ))
             }
 
-            <button className="new-channel-button" onClick={newChannel(e)}>+</button>
+            <button className="new-channel-button" onClick={newChannel(e)}>+ Create Channel</button>
         </section>
     )
 }
-
-export default Channels
