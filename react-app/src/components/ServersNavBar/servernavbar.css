@@ -1,3 +1,79 @@
-.avatar:hover .alt-text {
+.avatar:hover + .alt-text {
     opacity: 1; /* Show the alt text on hover */
+}
+
+.alt-text {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: #dfb2f4;
+    color: #fff; /* Set text color */
+    padding: 4px 8px; /* Add padding */
+    border-radius: 4px; /* Add border radius */
+    font-size: 12px; /* Set font size */
+    opacity: 0; /* Initially hide the name tag */
+    transition: opacity 0.3s ease-in-out; 
+}
+
+
+.server-navbar {
+    display: flex;
+    background-color: #a7bed3;
+    padding: 8px;
+    border-right: 1px solid #202225;
+}
+
+.server-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.server-item {
+    margin-bottom: 8px;
+}
+
+.server-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #ffffff;
+    padding: 6px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.server-link:hover {
+    background-color: #dfb2f4;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+}
+
+.server-navbar button {
+    background-color: #fdffb6;
+    padding: 6px;
+    margin-left: 8px;
+    border: none;
+    color: #a0c4ff;
+    font-weight: bold;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.server-navbar button:hover {
+    background-color: #ffc6ff;
 }

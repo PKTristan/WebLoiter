@@ -34,8 +34,8 @@ def seed_servers():
         server_name='demoserver',
         owner_id=1,
         server_type='Direct Message',
-        avatar='https://i.imgur.com/4d2kR0m.jpg',
-        server_details=None,
+        avatar='https://i.imgur.com/YnEnRlg.jpg',
+        server_details='this is demos server',
         private=True,
         direct_message=True
     )
@@ -43,8 +43,8 @@ def seed_servers():
         server_name='marniesserver',
         owner_id=2,
         server_type='Direct Message',
-        avatar='https://i.imgur.com/4d2kR0m.jpg',
-        server_details=None,
+        avatar='https://i.imgur.com/YnEnRlg.jpg',
+        server_details='this is marnies server',
         private=True,
         direct_message=True
     )
@@ -52,8 +52,8 @@ def seed_servers():
         server_name='bobbysserver',
         owner_id=3,
         server_type='Direct Message',
-        avatar='https://i.imgur.com/4d2kR0m.jpg',
-        server_details=None,
+        avatar='https://i.imgur.com/YnEnRlg.jpg',
+        server_details='this is bobbysserver',
         private=True,
         direct_message=True
     )
@@ -61,8 +61,8 @@ def seed_servers():
         server_name='aliceserver',
         owner_id=4,
         server_type='Direct Message',
-        avatar='https://i.imgur.com/4d2kR0m.jpg',
-        server_details=None,
+        avatar='https://i.imgur.com/YnEnRlg.jpg',
+        server_details='this is aliceserver',
         private=True,
         direct_message=True
     )
@@ -70,8 +70,8 @@ def seed_servers():
         server_name='bobsserver',
         owner_id=5,
         server_type='Direct Message',
-        avatar='https://i.imgur.com/4d2kR0m.jpg',
-        server_details=None,
+        avatar='https://i.imgur.com/YnEnRlg.jpg',
+        server_details='this is bobsserver',
         private=True,
         direct_message=True
     )

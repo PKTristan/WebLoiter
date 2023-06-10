@@ -17,15 +17,21 @@ function UpdateServerModal() {
     const [serverDetails, setServerDetails] = useState("");
     const [privateServer, setPrivateServer] = useState(false);
     const [directMessage, setDirectMessage] = useState(false);
+    const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
     const { id } = useParams()
     const history = useHistory();
 
     useEffect(() => {
+        console.log(currServer)
         setServerName(currServer.server_name)
         setServerType(currServer.server_type)
         setAvatar(currServer.avatar)
-        setServerDetails(currServer.server_details)
+        if (!currServer.server_details) {
+            setServerDetails("")
+        } else {
+            setServerDetails(currServer.server_details)
+        }
         setPrivateServer(currServer.private)
         setDirectMessage(currServer.direct_message)
     }, [currServer]);
@@ -41,15 +47,22 @@ function UpdateServerModal() {
             private: privateServer,
             direct_message: directMessage
         }
-        dispatch(serverActions.updateServerThunk(updatedServer))
-        window.location.reload()
-        closeModal();
+        const data = await dispatch(serverActions.updateServerThunk(updatedServer))
+        dispatch(serverActions.fetchCurrentServer(currServer.id))
+        if (data.errors) {
+            setErrors(data.errors);
+            } else {
+                closeModal()
+            }
     }
 
     return (
-        <div>
+        <div className="update-form">
             <h2>Update {currServer.server_name}</h2>
-            <form onSubmit={handleSubmit} className="update-form">
+            {errors.map((error, idx) => (
+                <div key={idx} className="errors-update">{error}</div>
+            ))}
+            <form onSubmit={handleSubmit}>
                 <label>
                     Server Name:
                     <input
@@ -73,6 +86,9 @@ function UpdateServerModal() {
                         <option value="art">Art</option>
                         <option value="studying">Studying</option>
                         <option value="misc">Miscellaneous</option>
+                        <option value="direct message">Direct Message</option>
+                        {/* error test purposes below */}
+                        <option value="random">Random</option>
                     </select>
                 </label>
                 <br/>
@@ -88,11 +104,10 @@ function UpdateServerModal() {
                 <br/>
                 <label>
                     Server Details:
-                    <input
+                    <textarea
                         type="text"
                         value={serverDetails}
                         onChange={(e) => setServerDetails(e.target.value)}
-                        required
                     />
                 </label>
                 <br/>
@@ -105,16 +120,10 @@ function UpdateServerModal() {
                     />
                 </label>
                 <br/>
-                <label>
-                    Direct Message:
-                    <input
-                        type="checkbox"
-                        checked={directMessage}
-                        onChange={(e) => setDirectMessage(e.target.checked)}
-                    />
-                </label>
-                <br/>
-                <button type="submit" className="update-submit-btn">Update Server</button>
+                <div className="update-buttons">
+                <button type="submit" className="update-submit-btn">Update</button>
+                <button onClick={closeModal} className="update-cancel-btn">Cancel</button>
+                </div>
             </form>
         </div>
     )

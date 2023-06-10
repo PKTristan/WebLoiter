@@ -9,10 +9,10 @@ class Server(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    server_name = db.Column(db.String, nullable=False)
+    server_name = db.Column(db.String(25), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), name='fk_servers_owner_id_users', ondelete='CASCADE'))
     server_type = db.Column(db.String, nullable=False)
-    avatar = db.Column(db.String, nullable=True, default='https://i.imgur.com/YnEnRlg.jpg')
+    avatar = db.Column(db.String(40), nullable=True, default='https://i.imgur.com/YnEnRlg.jpg')
     server_details = db.Column(db.String(100), nullable=True)
     private = db.Column(db.Boolean, nullable=True, default=False)
     direct_message = db.Column(db.Boolean, nullable=True, default=False)

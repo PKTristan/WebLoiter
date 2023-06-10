@@ -1,0 +1,36 @@
+.curr-server {
+    display: flex;
+    align-items: flex-start;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.server-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-family: cursive;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button-1 button {
+    margin-left: 10px;
+    border-radius: 4px;
+    background-color: #caffbf;
+}
+
+.button-2 button {
+    border-radius: 4px;
+    margin-left: 10px;
+    background-color: #fdffb6;
+}
+  /* Example styles for the trash icon using FontAwesome */
+.fa-trash {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}

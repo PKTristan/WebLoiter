@@ -41,7 +41,6 @@ def get_server_members():
 def create_server():
     form = ServerForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('``````', form.data)
     if form.validate_on_submit():
         server = Server(
             server_name=form.data['server_name'],
@@ -55,7 +54,8 @@ def create_server():
         db.session.add(server)
         db.session.commit()
         return jsonify(server.to_dict())
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @server_routes.route("/<id>", methods=["PUT", "GET"])
@@ -83,7 +83,8 @@ def update_server(id):
         db.session.commit()
 
         return jsonify(server.to_dict())
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @server_routes.route("/<id>", methods=["DELETE"])
