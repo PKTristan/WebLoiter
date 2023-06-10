@@ -32,7 +32,7 @@ function Channels() {
     }, [id, dispatch]);
 
     useEffect(() => {
-        if (serverChannels && serverChannels.length) {
+        if (serverChannels) {
             setChannels(serverChannels);
         }
     }, [serverChannels]);
@@ -134,7 +134,7 @@ function Channels() {
     return (
         <section className="channels">
             {
-                channels.length &&
+                (channels.length > 0) &&
                 channels.map((channel) => (
                     <button key={channel.id} className="channel-button" onContextMenu={e => handleRightClick(e, channel)} onClick={e => handleClick(e, channel)}>{`# ${channel.channel_name}`}</button>
                 ))
