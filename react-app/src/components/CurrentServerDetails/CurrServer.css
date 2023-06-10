@@ -1,9 +1,9 @@
 .curr-server {
     display: flex;
-    align-items: flex-start;
     align-items: center;
     justify-content: space-between;
-    padding: 20px;
+    padding: 10px;
+    margin: auto;
 }
 
 .server-name {
@@ -16,6 +16,7 @@
 .buttons-container {
     display: flex;
     justify-content: flex-end;
+    justify-items: center;
 }
 
 .button-1 button {
@@ -28,6 +29,12 @@
     border-radius: 4px;
     margin-left: 10px;
     background-color: #fdffb6;
+}
+
+.channels-container {
+    display: flex;
+    margin-top: 20px;
+    align-items: flex-start;
 }
   /* Example styles for the trash icon using FontAwesome */
 .fa-trash {

@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { selChannels, createChannel, getChannelsByServer, editChannel, deleteChannel} from '../../store/channel';
 import { useHistory, useParams } from 'react-router-dom';
+import './Channels.css';
 import CustomerContextMenu from './CustomContextMenu';
 
 function Channels() {
