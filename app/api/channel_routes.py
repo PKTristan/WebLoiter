@@ -29,10 +29,11 @@ def is_owner(server_id) -> bool:
     return True
 
 
-@channel_routes.route('/', methods=['POST'])
+@channel_routes.route('', methods=['POST'])
 # @login_required
 def create_channel():
     form = CreateChannelForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     print('------', form.data)
     if form.validate_on_submit():
         server_id = form.server_id.data
@@ -48,6 +49,7 @@ def create_channel():
         else:
             return jsonify({'request_error': 'User is not the owner of the server'}), 403
     else:
+        print(form.errors)
         return jsonify({'request_error': form.errors}), 400
 
 

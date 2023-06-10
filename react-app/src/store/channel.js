@@ -51,7 +51,7 @@ export const createChannel = (channel) => async (dispatch) => {
             "channel_name": channel.channel_name
         })
     });
-
+    console.log('response in thunkkkk',response)
     if (response.ok) {
         const newChannel = await response.json();
         dispatch(loadNewId(newChannel.id));

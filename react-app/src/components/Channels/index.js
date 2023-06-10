@@ -44,7 +44,7 @@ function Channels() {
         setCreateMode(true);
     }
 
-    const createChan = (e) => {
+    const createChan = async (e) => {
         e.preventDefault();
         setCreateMode(false);
 
@@ -54,8 +54,8 @@ function Channels() {
                 server_id: id
             }
 
-            dispatch(createChannel(body));
-
+            const data = await dispatch(createChannel(body));
+            console.log('------this is my data in component',data)
         }
         setNewChan('');
 
