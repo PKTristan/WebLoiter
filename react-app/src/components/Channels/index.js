@@ -19,9 +19,16 @@ function Channels() {
     });
     const { id } = useParams();
     const history = useHistory();
+    const [errors, setErrors] = useState([]);
 
     useEffect(() => {
-        dispatch(getChannelsByServer(id))
+        dispatch(getChannelsByServer(id)).catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) {
+                const err = Object.values(data.errors);
+                setErrors(err);
+            }
+        });
     }, [id]);
 
     useEffect(() => {
@@ -54,8 +61,13 @@ function Channels() {
                 server_id: id
             }
 
-            const data = await dispatch(createChannel(body));
-            console.log('------this is my data in component',data)
+            await dispatch(createChannel(body)).catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) {
+                    const err = Object.values(data.errors);
+                    setErrors(err);
+                }
+            });
         }
         setNewChan('');
 
@@ -83,11 +95,23 @@ function Channels() {
     }
 
     const updateChannel = (channel, id) => {
-        dispatch(editChannel(channel, id));
+        dispatch(editChannel(channel, id)).catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) {
+                const err = Object.values(data.errors);
+                setErrors(err);
+            }
+        });
     };
 
     const delChannel = (channelId, server_id) => {
-        dispatch(deleteChannel(channelId, server_id));
+        dispatch(deleteChannel(channelId, server_id)).catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) {
+                const err = Object.values(data.errors);
+                setErrors(err);
+            }
+        });
     }
 
     useEffect(() => {
@@ -99,6 +123,13 @@ function Channels() {
     useEffect(() => {
 
     }, [createMode, isOwner]);
+
+    useEffect(() => {
+        if (errors.length > 0) {
+            const errorMessage = "Errors: " + errors.join(", ");
+            alert(errorMessage);
+        }
+    }, [errors]);
 
     return (
         <section className="channels">

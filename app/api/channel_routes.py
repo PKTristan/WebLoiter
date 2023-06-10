@@ -30,7 +30,7 @@ def is_owner(server_id) -> bool:
 
 
 @channel_routes.route('', methods=['POST'])
-# @login_required
+@login_required
 def create_channel():
     form = CreateChannelForm()
     form['csrf_token'].data = request.cookies['csrf_token']
