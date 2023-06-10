@@ -53,6 +53,13 @@ def create_server():
         )
         db.session.add(server)
         db.session.commit()
+
+        channel = Channel(
+            server_id=server.id,
+            channel_name='general'
+        )
+        db.session.add(channel)
+        db.session.commit()
         return jsonify(server.to_dict())
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -69,10 +76,10 @@ def update_server(id):
         server = Server.query.get(id)
         if not server:
             return {'errors': 'Server does not exist'}, 404
-        
+
         if server.owner_id != current_user.id:
             return {'errors': 'You are not the owner of this server'}, 401
-        
+
         server.server_name = form.data['server_name']
         server.server_type = form.data['server_type']
         server.avatar = form.data['avatar']
@@ -95,10 +102,10 @@ def delete_server(id):
         return {'errors': 'Server does not exist'}, 404
     if server.owner_id != current_user.id:
         return {'errors': 'You are not the owner of this server'}, 401
-    
+
     db.session.delete(server)
     db.session.commit()
-    return {'message': 'Server deleted'} 
+    return {'message': 'Server deleted'}
 
 
 
