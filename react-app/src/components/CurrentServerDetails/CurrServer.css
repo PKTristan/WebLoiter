@@ -9,14 +9,17 @@
 .server-name {
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-family: cursive;
+    margin-right: 300px;
 }
 
 .buttons-container {
     display: flex;
     justify-content: flex-end;
     justify-items: center;
+    margin-top: 10px;
+    margin-left: 300px;
 }
 
 .button-1 button {
