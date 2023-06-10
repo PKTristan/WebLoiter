@@ -29,7 +29,7 @@ function Channels() {
                 setErrors(err);
             }
         });
-    }, [id]);
+    }, [id, dispatch]);
 
     useEffect(() => {
         if (serverChannels && serverChannels.length) {
