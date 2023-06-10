@@ -97,7 +97,7 @@ const CreateServerForm = ({ hideForm }) => {
                 </label>
                 <div className="server-submit-buttons">
                 <br/>
-                <button className="server-submit-btn" type="submit">Create Server</button>
+                <button className="server-submit-btn" type="submit">Create</button>
                 <br/>
                 <button className="server-cancel-btn" onClick={closeModal}>Cancel</button>
                 </div>

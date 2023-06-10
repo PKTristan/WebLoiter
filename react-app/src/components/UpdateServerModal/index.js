@@ -115,7 +115,7 @@ function UpdateServerModal() {
                 </label>
                 <br/>
                 <div className="update-buttons">
-                <button type="submit" className="update-submit-btn">Update Server</button>
+                <button type="submit" className="update-submit-btn">Update</button>
                 <button onClick={closeModal} className="update-cancel-btn">Cancel</button>
                 </div>
             </form>
