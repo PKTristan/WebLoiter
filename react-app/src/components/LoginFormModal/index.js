@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import SignupFormModal from "../SignupFormModal";
+import { useHistory } from "react-router-dom";
 import "./LoginForm.css";
 
 function LoginFormModal() {
@@ -9,7 +11,11 @@ function LoginFormModal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [showLoginForm, setShowLoginForm] = useState(true)
+	const [showSignupForm, setShowSignupForm] = useState(false)
   const { closeModal } = useModal();
+  const history = useHistory();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,13 +24,21 @@ function LoginFormModal() {
       setErrors(data);
     } else {
         closeModal()
+        history.push("/servers");
     }
   };
 
+  const openSignupForm = () => {
+		setShowLoginForm(false);
+		setShowSignupForm(true);
+	}
+
   return (
     <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
+      {showLoginForm && (
+        <div>
+        <h2>Log In</h2>
+      <form className="login-form" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
@@ -37,19 +51,35 @@ function LoginFormModal() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-          />
+            />
         </label>
         <label>
           Password
           <input
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value)}}
             required
-          />
+            />
         </label>
-        <button type="submit">Log In</button>
+        <button className="login-submit-btn" type="submit">Log In</button>
       </form>
+      <button className="signup-redirect-btn" onClick={openSignupForm}>
+				Don't have an account?
+			</button>
+			<div className="terms-div">
+				By logging in, you agree to Webloiter's Terms of service and Privacy Policy
+			</div>
+      </div>
+        )}
+
+      {showSignupForm && (
+        <div className="signup-form-modal-container">
+          <SignupFormModal />
+        </div>
+      )}
+      
     </>
   );
 }

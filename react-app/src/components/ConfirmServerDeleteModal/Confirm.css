@@ -1,0 +1,30 @@
+.confirm-server-delete {
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+    align-items: center;
+    background-color: #9cadce;
+    border-radius: 10px;
+}
+
+.confirm-server-delete button {
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 10px 10px 10px 10px; 
+    font-size: 12pt;
+    font-family: cursive;
+    background-color: #cdb4db;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.confirm-server-delete h2 {
+    margin-bottom: 20px;
+    font-size: 14pt;
+    font-family: cursive;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
