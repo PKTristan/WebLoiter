@@ -1,1 +1,18 @@
 /* TODO Add site wide styles */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .content-container {
+    flex: 1;
+    display: flex;
+  }
+  
+  .main-content {
+    flex: 1;
+    background-color: #f0f2f5;
+    padding: 20px;
+    overflow-y: auto;
+  }
