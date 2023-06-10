@@ -5,6 +5,7 @@ import OpenModalButton from "../OpenModalButton";
 import * as serverActions from "../../store/server";
 import UpdateServerModal from "../UpdateServerModal";
 import ConfirmServerDeleteModal from "../ConfirmServerDeleteModal";
+import Channels from "../Channels";
 import "./CurrServer.css"
 
 function CurrServer(){
@@ -16,7 +17,7 @@ function CurrServer(){
     const update_server_button = () => {
         if (user.id === currServer.owner_id) {
             return (
-                <OpenModalButton 
+                <OpenModalButton
                 buttonText="Update"
                 modalComponent={<UpdateServerModal />}
                 className="button-1"
@@ -28,7 +29,7 @@ function CurrServer(){
     const delete_server_button = () => {
         if (user.id === currServer.owner_id) {
             return (
-                <OpenModalButton 
+                <OpenModalButton
                 buttonText="Delete"
                 modalComponent={<ConfirmServerDeleteModal />}
                 />
@@ -42,6 +43,7 @@ function CurrServer(){
 
     return user && currServer ? (
         <div className="curr-server">
+            <Channels />
             <h1 className="server-name">{currServer.server_name}</h1>
             <div className="buttons-container">
                 <div className="button-1">{update_server_button()}</div>
