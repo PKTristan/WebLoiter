@@ -3,7 +3,6 @@
 
 const LOAD_CHANNELS = "channels/LOAD_CHANNELS";
 const LOAD_CHANNEL_BY_ID = "channels/LOAD_CHANNEL_BY_ID";
-const LOAD_NEW_ID = "channels/LOAD_NEW_ID";
 
 const loadChannels = (channels) => ({
     type: LOAD_CHANNELS,
@@ -15,17 +14,13 @@ const loadChannelById = (channel) => ({
     channel
 })
 
-const loadNewId = (id) => ({
-    type: LOAD_NEW_ID,
-    id
-})
 
 export const getChannelsByServer = (serverId) => async (dispatch) => {
     const response = await fetch(`/api/servers/${serverId}/channels`);
 
     if (response.ok) {
-        const channels = await response.json();
-        dispatch(loadChannels(channels));
+        const data = await response.json();
+        dispatch(loadChannels(data.Server.Channels));
     }
 
     return response;
@@ -46,26 +41,54 @@ export const createChannel = (channel) => async (dispatch) => {
         headers: {
             'Content-Type': 'application/json'
         },
+        body: JSON.stringify({
+            "server_id": channel.server_id,
+            "channel_name": channel.channel_name
+        })
+    });
+
+    if (response.ok) {
+        dispatch(getChannelsByServer(channel.server_id));
+    }
+
+    return response;
+}
+
+export const editChannel = (channel, id) => async (dispatch) => {
+    const response = await fetch(`/api/channels/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(channel)
     });
 
     if (response.ok) {
-        const newChannel = await response.json();
-        dispatch(loadNewId(newChannel.id));
+        dispatch(getChannelsByServer(channel.server_id));
     }
+
+    return response;
 }
 
-export const editChannel = (channel, id) => async (dispatch) => {
+export const deleteChannel = (id, serverId) => async (dispatch) => {
+    const response = await fetch(`/api/channels/${id}`, {
+        method: 'DELETE'
+    });
 
+    if (response.ok) {
+        dispatch(getChannelsByServer(serverId));
+    }
+
+    return response;
 }
+
 
 
 export const selChannels = (state) => state.channels.channels;
 export const selChannel = (state) => state.channels.channel;
-export const selNewId = (state) => state.channels.newId;
 
 
-const initialState = {channels: null, channel: null, newId: null}
+const initialState = {channels: null, channel: null}
 
 const channelsReducer = (state = initialState, action) => {
     let mutState = Object.assign(state);
@@ -78,10 +101,6 @@ const channelsReducer = (state = initialState, action) => {
         case LOAD_CHANNEL_BY_ID:
 
             return {...mutState, channel: action.channel}
-
-        case LOAD_NEW_ID:
-
-            return {...mutState, newId: action.id}
 
         default:
             return state;
