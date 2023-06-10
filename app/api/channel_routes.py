@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import db, ChannelMembers, Channel, Server
+from app.forms.channel_form import CreateChannelForm
 
 channel_routes = Blueprint('channels', __name__, url_prefix='/channels')
 
@@ -22,30 +23,32 @@ def is_owner(server_id) -> bool:
 
     owner_id = server.owner_id
 
-    if owner_id == current_user.id:
+    if owner_id != current_user.id:
         return jsonify({'auth_error': "Authorization failed. You don't have the permission to make this rerquest."}), 403
 
     return True
 
 
 @channel_routes.route('/', methods=['POST'])
-@login_required
+# @login_required
 def create_channel():
-    server_id = request.json.get('server_id')
-    if server_id is None:
-        return jsonify({'request_error': 'no server_id given'}), 400
+    form = CreateChannelForm()
+    print('------', form.data)
+    if form.validate_on_submit():
+        server_id = form.server_id.data
+        channel_name = form.channel_name.data
 
-    channel_name = request.json.get('channel_name')
-    if channel_name is None:
-        return jsonify({'request_error': 'no channel_name is given'}), 400
+        if is_owner(server_id):
+            new_channel = Channel(server_id=server_id, channel_name=channel_name)
 
-    if is_owner(server_id):
-        new_channel = Channel(server_id=server_id, channel_name=channel_name)
+            db.session.add(new_channel)
+            db.session.commit()
 
-        db.session.add(new_channel)
-        db.session.commit()
-
-        return jsonify(new_channel.to_dict()), 201
+            return jsonify(new_channel.to_dict()), 201
+        else:
+            return jsonify({'request_error': 'User is not the owner of the server'}), 403
+    else:
+        return jsonify({'request_error': form.errors}), 400
 
 
 @channel_routes.route("/<int:id>", methods=['GET', 'PUT', 'DELETE'])
