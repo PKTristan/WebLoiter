@@ -45,7 +45,7 @@ function CurrServer(){
         <div>
         <div className="curr-server">
             <div className="server-name">
-            <h2>{currServer.server_name}</h2>
+            <h3>{currServer.server_name}</h3>
             </div>
             <div className="buttons-container">
                 <div className="button-1">{update_server_button()}</div>
