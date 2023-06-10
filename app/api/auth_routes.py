@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, db, Server
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -73,6 +73,21 @@ def sign_up():
             bio=form.data['bio']
         )
         db.session.add(user)
+        db.session.commit()
+
+        server_name = f"{form.data['username']}'s server"
+        server_details = f"This is {form.data['username']}'s server"
+
+        usersDMServer = Server(
+            server_name= server_name,
+            owner_id=user.id,
+            server_type='Direct Message',
+            avatar='https://i.imgur.com/YnEnRlg.jpg',
+            server_details=server_details,
+            private=True,
+            direct_message=True
+        )
+        db.session.add(usersDMServer)
         db.session.commit()
         login_user(user)
         return user.to_dict()
