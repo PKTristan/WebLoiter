@@ -42,14 +42,22 @@ function CurrServer(){
     }, [dispatch, id]);
 
     return user && currServer ? (
+        <div>
         <div className="curr-server">
-            <Channels />
-            <h1 className="server-name">{currServer.server_name}</h1>
+            <div className="server-name">
+            <h2>{currServer.server_name}</h2>
+            </div>
             <div className="buttons-container">
                 <div className="button-1">{update_server_button()}</div>
                 <div className="button-2">{delete_server_button()}</div>
             </div>
+            <br/>
         </div>
+        <div className="channels-container">
+            <Channels />
+        </div>
+        </div>
+            
     ) : null
 }
 
