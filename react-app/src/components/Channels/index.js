@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { selChannels, createChannel, getChannelsByServer, editChannel, deleteChannel} from '../../store/channel';
 import { useHistory, useParams } from 'react-router-dom';
 import './Channels.css';
+import ChannelMessages from '../Messages';
 import CustomerContextMenu from './CustomContextMenu';
 
 function Channels() {
@@ -14,6 +15,7 @@ function Channels() {
     const [channels, setChannels] = useState([]);
     const [newChan, setNewChan] = useState('');
     const [createMode, setCreateMode] = useState(false);
+    const [selectedChannelId, setSelectedChannelId] = useState(null)
     const [contextMenu, setContextMenu] = useState({
         visible: false,
         channel: null
@@ -38,9 +40,11 @@ function Channels() {
         }
     }, [serverChannels]);
 
-    const handleClick = (e, channel) => () => {
+    const handleClick = (e, channel) => {
+        console.log('this is channelId', channel.id)
         e.preventDefault();
         summonPage(channel.id)
+        setSelectedChannelId(channel.id)
     }
 
     const summonPage = (id) => {
@@ -133,22 +137,24 @@ function Channels() {
     }, [errors]);
 
     return (
+        <div>
+
         <section className="channels">
             {
                 (channels.length > 0) &&
                 channels.map((channel) => (
                     <button key={channel.id} className="channel-button" onContextMenu={e => handleRightClick(e, channel)} onClick={e => handleClick(e, channel)}>{`# ${channel.channel_name}`}</button>
-                ))
-            }
+                    ))
+                }
 
             {
                 contextMenu.visible &&
                 <CustomerContextMenu
-                    channel={contextMenu.channel}
-                    position={contextMenu.position}
-                    close={() => setContextMenu({ visible: false, channel: null })}
-                    updateChannel={updateChannel}
-                    delChannel={delChannel}
+                channel={contextMenu.channel}
+                position={contextMenu.position}
+                close={() => setContextMenu({ visible: false, channel: null })}
+                updateChannel={updateChannel}
+                delChannel={delChannel}
                 />
             }
 
@@ -164,6 +170,10 @@ function Channels() {
                 <button className="new-channel-button" onClick={newChannel}>+ Create Channel</button>
             }
         </section>
+            {/* adding the messages for channels */}
+            {selectedChannelId && <ChannelMessages channelId={selectedChannelId}/> }
+
+            </div>
     )
 }
 
