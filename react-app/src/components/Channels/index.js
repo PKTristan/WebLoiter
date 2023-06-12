@@ -173,13 +173,13 @@ function Channels({allUsers}) {
 
             {
                 createMode &&
-                <div>
+                <div className="new-channel">
                 {currServer.direct_message === true && (
                     <ul className='users-list'>
                     {allUsers.map((user) => {
                         if (user.id !== currUser.id) {
                             return <li key={user.id} className='user'>
-                                <button onClick={(e) => createChannelWithUser(user)}>{user.username}</button>
+                                <button  className='create-dm-button' onClick={(e) => createChannelWithUser(user)}>{user.username}</button>
                                 </li>;
                         }
                             return null;

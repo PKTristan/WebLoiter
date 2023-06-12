@@ -4,9 +4,35 @@
     background-color: transparent;
     border-right: 1px solid black;
     padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-channel {
+    margin: 10px;
+}
+
+.new-channel input {
+    margin: 5px;
 }
 
 .channel-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 16px;
+    border-bottom: 4px solid #677bc4;
+    padding: 20px;
+}
+
+.channel-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.channel-item {
     background-color: transparent;
     color: #202225;
     border: none;
@@ -15,10 +41,16 @@
     margin-bottom: 10px;
     cursor: pointer;
     border-radius: 4px;
-    transition: background-color  0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
 }
-
-.channel-button:hover {
+.new-channel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.channel-item:hover {
     background-color: #ebebeb;
 }
 
@@ -26,10 +58,71 @@
     background-color: #677bc4;
     color: #202225;
     border: none;
-    padding: 8px 12px;
+    padding: 15px;
     font-size: 16px;
+    margin-top: 10px;
     margin-bottom: 10px;
     cursor: pointer;
     border-radius: 4px;
-    transition: background-color  0.3s ease-in-out;
+}
+
+.create-channel-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.users-list {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+}
+
+.user {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5px;
+}
+
+.create-dm-button {
+    background-color: #677bc4;
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.create-dm-button:hover {
+    background-color: #506a9d;
+}
+
+.channel-input {
+    margin-top: 10px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.create-channel-button {
+    background-color: #677bc4;
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.create-channel-button:hover {
+    background-color: #506a9d;
 }

@@ -12,8 +12,12 @@ function HowTo() {
                     Once you have selected the channel, you can start chatting with your friends.
                 </p>
             </div>
-            <img src={placeholder} alt="product" />
-            <img src={placeholder} alt="logo" />
+            <div>
+                <img src={placeholder} alt="product" />
+            </div>
+            <div>
+                <img src={placeholder} alt="logo" />
+            </div>
         </section>
     )
 }
