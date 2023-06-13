@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {loadMessagesByChannel, newMessageChannel} from '../../store/message';
 
-function NewMessage({ initialValue }) {
+function NewMessage({ initialValue, channelId }) {
     const dispatch = useDispatch();
     const currentUserId = useSelector((state) => state.session.user.id);
-    const {channelId} = useParams()
     const [message, setMessage] = useState(initialValue || '')
     const [errors, setErrors] = useState([]);
 
@@ -23,7 +22,8 @@ function NewMessage({ initialValue }) {
                 "Can not send blank message"
             ]);
         }
-        window.location.reload()
+        setMessage('')
+        await dispatch(loadMessagesByChannel(channelId))
     };
 
     const handleKeyDown = (e) => {

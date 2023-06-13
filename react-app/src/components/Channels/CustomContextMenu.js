@@ -66,6 +66,13 @@ function CustomerContextMenu({ channel, position, close, updateChannel, delChann
         }
     }
 
+    const setNameVal = (e) => {
+        e.preventDefault();
+        const val = e.target.value.replace(' ', '-');
+
+        setName(val);
+    }
+
     useEffect(() => {
 
     }, [updateMode, deleteMode])
@@ -85,7 +92,7 @@ function CustomerContextMenu({ channel, position, close, updateChannel, delChann
 
             {updateMode &&
                 <>
-                    <input className='channel-name' type='text' value={name} onChange={(e) => setName(e.target.value)} />
+                    <input className='channel-name' type='text' value={name} onChange={setNameVal} />
                     <button className='save-channel-button' value='Save' onClick={handleClick} >Save</button>
                     <button className='cancel-button' value='Cancel' onClick={handleClick} >Cancel</button>
                 </>

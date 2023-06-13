@@ -4,17 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import * as serverActions from "../../store/server";
 import "./Confirm.css";
+import { useHistory } from "react-router-dom";
 
 
 function ConfirmServerDeleteModal() {
     const dispatch = useDispatch();
     const currServer = useSelector(state => state.server.currentServer);
     const { closeModal } = useModal();
+    const history = useHistory();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = await dispatch(serverActions.deleteServerThunk(currServer))
         dispatch(serverActions.fetchServers());
+        history.push("/servers");
         closeModal();
     }
     return (
