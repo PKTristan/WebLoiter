@@ -11,7 +11,7 @@ def channel_messages(channel_id):
         #Get all messages in the channel
         channel_messages = Message.query.filter_by(channel_id=channel_id).all()
         if not channel_messages:
-            return {"Error" : "Channel does not have messages"}, 404
+            return jsonify([])
         all_messages = [
             {
                 'id': message.id,
