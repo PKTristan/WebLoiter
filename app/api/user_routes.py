@@ -35,6 +35,7 @@ def signup():
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
+        display_name = form.display_name.data
         email = form.email.data
 
         #Check if username is available
@@ -45,8 +46,8 @@ def signup():
         existing_email = User.query.filter_by(email=email).first()
         if existing_email:
             return jsonify({'error': 'Email is already in use.'}), 400
-        
-        new_user = User(username=username, password=password, email=email)
+
+        new_user = User(username=username, password=password, display_name=display_name, email=email)
 
         db.session.add(new_user)
         db.session.commit()
