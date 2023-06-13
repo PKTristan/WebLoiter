@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { selChannels, createChannel, getChannelsByServer, editChannel, deleteChannel, getChannelById } from '../../store/channel';
-import { loadMessagesByChannel } from '../../store/message';
 import { useHistory, useParams } from 'react-router-dom';
 import './Channels.css';
 import ChannelMessages from '../Messages';
@@ -247,10 +246,12 @@ function Channels() {
                 }
             </section>
             {/* adding the messages for channels */}
-            <div className='messages-wrapper'>
-            {<ChannelMessages channelId={channelId} />}
-            </div>
-            {!channelId && members && <ServerMembers  members={members} />}
+            {channelId &&
+                <div className='messages-wrapper'>
+                    <ChannelMessages channelId={channelId} />
+                </div>
+            }
+            {!channelId && members && <ServerMembers members={members} />}
 
         </div>
     )
