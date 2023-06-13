@@ -5,19 +5,17 @@ import {loadMessagesByChannel, editMessageChannel, deleteMessageChannel} from '.
 import NewMessage from './post';
 import './Messages.css'
 
-function ChannelMessages() {
+function ChannelMessages({channelId}) {
     const dispatch = useDispatch();
     const currentUserId = useSelector((state) => state.session.user.id) || null
-    const {channelId} = useParams()
     const [hoveredMessage, setHoveredMessage] = useState(null)
     const [editMessage, setEditMessage] = useState({id: null, text:''});
 
     const history = useHistory();
     
-    console.log('current user', currentUserId)
     useEffect(() => {
-        if (currentUserId) {
-            dispatch(loadMessagesByChannel(channelId))
+        if (channelId) {
+                dispatch(loadMessagesByChannel(channelId))
         }else {
             history.push('/');
         }
@@ -64,8 +62,8 @@ function ChannelMessages() {
     }
     }
 
-    return (
-        <div>
+    return channelId && (
+        <div className='messages-container'>
             {messages && (
                 <div>
                     {Object.values(messages).map((message) => (
@@ -76,7 +74,7 @@ function ChannelMessages() {
                             className ="message-container"
                             >
                                 {editMessage && editMessage.id === message.id ? (
-                                    <textarea
+                                    <textarea className='textarea-container'
                                     value={editMessage.text}
                                     onChange={(e) => setEditMessage({ ...editMessage, text: e.target.value })}
                                     onKeyDown={handleKeyDown}
@@ -100,7 +98,7 @@ function ChannelMessages() {
                 </div>
             )}
             <div>
-                <NewMessage initalValue={editMessage} />
+                <NewMessage initalValue={editMessage} channelId = {channelId}/>
             </div>
         </div>
     )

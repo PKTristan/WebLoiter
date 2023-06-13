@@ -1,8 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { selChannels, createChannel, getChannelsByServer, editChannel, deleteChannel} from '../../store/channel';
+import { selChannels, createChannel, getChannelsByServer, editChannel, deleteChannel, getChannelById} from '../../store/channel';
 import { useHistory, useParams } from 'react-router-dom';
 import './Channels.css';
+import ChannelMessages from '../Messages';
 import CustomerContextMenu from './CustomContextMenu';
 
 function Channels({allUsers}) {
@@ -14,6 +15,7 @@ function Channels({allUsers}) {
     const [channels, setChannels] = useState([]);
     const [newChan, setNewChan] = useState('');
     const [createMode, setCreateMode] = useState(false);
+    const [selectedChannelId, setSelectedChannelId] = useState(null)
     const [contextMenu, setContextMenu] = useState({
         visible: false,
         channel: null
@@ -39,14 +41,18 @@ function Channels({allUsers}) {
         }
     }, [serverChannels]);
 
-    const handleClick = (e, channel) => () => {
-        e.preventDefault();
-        summonPage(channel.id)
+    const handleClick = (e, channel) => {
+        e.preventDefault()
+        const serverId = currServer.id
+        const channelId = channel.id
+        history.push(`/servers/${serverId}/channels/${channelId}`)
+        setSelectedChannelId(channelId)
+        dispatch(getChannelById(channelId))
     }
 
-    const summonPage = (id) => {
-        history.push(`/channels/${id}`);
-    }
+    // const summonPage = (id) => {
+    //     history.push(`servers/${currServer.id}/channels/${id}`);
+    // }
 
     const newChannel = (e) => {
         e.preventDefault();
@@ -152,22 +158,24 @@ function Channels({allUsers}) {
     }
 
     return (
+        <div>
+
         <section className="channels">
             {
                 (channels.length > 0) &&
                 channels.map((channel) => (
-                    <button key={channel.id} className="channel-button" onContextMenu={e => handleRightClick(e, channel)} onClick={e => handleClick(e, channel)}>{`# ${channel.channel_name}`}</button>
-                ))
-            }
+                    <button key={channel.id} className="channel-button" onContextMenu={e => handleRightClick(e, channel)} onClick={(e) => handleClick(e, channel)}>{`# ${channel.channel_name}`}</button>
+                    ))
+                }
 
             {
                 contextMenu.visible &&
                 <CustomerContextMenu
-                    channel={contextMenu.channel}
-                    position={contextMenu.position}
-                    close={() => setContextMenu({ visible: false, channel: null })}
-                    updateChannel={updateChannel}
-                    delChannel={delChannel}
+                channel={contextMenu.channel}
+                position={contextMenu.position}
+                close={() => setContextMenu({ visible: false, channel: null })}
+                updateChannel={updateChannel}
+                delChannel={delChannel}
                 />
             }
 
@@ -195,6 +203,10 @@ function Channels({allUsers}) {
                 <button className="new-channel-button" onClick={newChannel}>+ Create Channel</button>
             }
         </section>
+            {/* adding the messages for channels */}
+            {selectedChannelId && <ChannelMessages channelId={selectedChannelId}/> }
+
+            </div>
     )
 }
 
