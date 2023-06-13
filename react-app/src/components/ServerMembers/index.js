@@ -1,4 +1,4 @@
-
+import './ServerMembers.css'
 
 function ServerMembers({members}) {
 

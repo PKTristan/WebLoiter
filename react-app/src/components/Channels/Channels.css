@@ -1,3 +1,8 @@
+.pages {
+    display: flex;
+    flex-direction: row;
+}
+
 .channels {
     display: flex;
     flex-direction: column;

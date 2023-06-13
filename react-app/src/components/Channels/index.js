@@ -196,7 +196,7 @@ function Channels() {
     }
 
     return (
-        <div>
+        <div className='pages'>
 
             <section className="channels">
                 {
