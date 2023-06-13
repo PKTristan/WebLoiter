@@ -233,7 +233,7 @@ function Channels() {
                         )}
                         {currServer.direct_message === false && (<>
                             <input type="text" value={newChan} onChange={setNewChannel} />
-                            <button className='create-channel' onClick={createChan}>Create</button>
+                            <button className='create-channel' onClick={createChan} disabled={newChan.length < 3}>Create</button>
                         </>
                         )
                         }
