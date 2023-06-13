@@ -4,8 +4,9 @@
     gap: 1rem;
     margin: 0 auto;
     max-width: 600px;
+    color: #444444;
     padding: 1rem;
-    background-color: #9cadce;
+    background-color: #a1c3d1;
     border-radius: 10px;
 }
 
@@ -22,7 +23,7 @@
     flex-direction: column;
     margin-left: 15px;
     margin-right: 15px;
-    color: #2c2f33;
+    color: #444444;
     font-weight: bold;
     font-family: cursive;
     font-size: 16px;
@@ -34,7 +35,7 @@
     padding: 0.5rem;
     border: 1px solid #ddd;
     font-size: 14px;
-    background-color: #fdffb6;
+    background-color: #f0ebf4;
     border-radius: 5px;
     box-sizing: border-box;
     width: 100%;
@@ -53,7 +54,7 @@
     margin-bottom: 15px;
     margin-top: 15px;
     padding: 0.5rem;
-    background-color: #dfb2f4;
+    background-color: #f172a1;
     border: none;
     border-radius: 5px;
     font-size: 16px;
