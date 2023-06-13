@@ -82,14 +82,12 @@ export const createServerAction = (server) => async (dispatch) => {
             }
         ),
     });
-    console.log('this is my response', response.statusText)
     if (response.ok) {
         const data = await response.json();
         dispatch(createServer(data));
         return data
     } else {
         const errData = await response.json()
-        console.log(errData)
         return errData
     }
 }
@@ -125,7 +123,6 @@ export const deleteServerThunk = (server) => async (dispatch) => {
     const response = await fetch(`/api/servers/${server.id}`, {
         method: "DELETE",
     });
-    console.log('this is my response', response)
     if (response.ok) {
         const data = await response.json();
         dispatch(deleteServer(data));
