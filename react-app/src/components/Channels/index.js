@@ -27,7 +27,6 @@ function Channels({allUsers}) {
     const [errors, setErrors] = useState([]);
 
     useEffect(() => {
-        console.log('----- this is currChannel in channels', currChannel)
         dispatch(getChannelsByServer(id)).catch(async (res) => {
             const data = await res.json();
             if (data && data.errors) {
@@ -35,13 +34,11 @@ function Channels({allUsers}) {
                 setErrors(err);
             }
         });
-        if(currChannel === null) dispatch(loadMessagesByChannel(id))
-        else {dispatch(loadMessagesByChannel(currChannel.id))}
-        // dispatch(getChannelById(id))
         
     }, [id, dispatch, currChannel]);
 
     useEffect(() => {
+        
         if (serverChannels) {
             setChannels(serverChannels);
         }
@@ -163,7 +160,7 @@ function Channels({allUsers}) {
         })
     }
 
-    return (
+    return selectedChannelId && (
         <div>
 
         <section className="channels">
