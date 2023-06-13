@@ -9,6 +9,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import HomePage from "./components/Homepage";
 import Messages from "./components/Messages"
+import Channels from "./components/Channels";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,7 +28,10 @@ function App() {
         </Route>
         <div className="main-content">
           <Switch>
-            <Route path="/servers/:id">
+            <Route exact path="/servers/:serverId">
+              <CurrentServerDetails />
+            </Route>
+            <Route exact path="/servers/:serverId/channels/:channelId">
               <CurrentServerDetails />
             </Route>
             <Route exact path="/">
