@@ -6,9 +6,9 @@ import './Channels.css';
 import ChannelMessages from '../Messages';
 import CustomerContextMenu from './CustomContextMenu';
 
-function Channels() {
+function Channels({allUsers}) {
     const serverChannels = useSelector(selChannels);
-    const user = useSelector(state => state.session.user);
+    const currUser = useSelector(state => state.session.user);
     const currServer = useSelector(state => state.server.currentServer)
     const dispatch = useDispatch();
     const [isOwner, setIsOwner] = useState(false);
@@ -25,6 +25,7 @@ function Channels() {
     const [errors, setErrors] = useState([]);
 
     useEffect(() => {
+        console.log('-----', allUsers)
         dispatch(getChannelsByServer(id)).catch(async (res) => {
             const data = await res.json();
             if (data && data.errors) {
@@ -120,10 +121,10 @@ function Channels() {
     }
 
     useEffect(() => {
-        if (currServer && user) {
-            setIsOwner(currServer.owner_id === user.id);
+        if (currServer && currUser) {
+            setIsOwner(currServer.owner_id === currUser.id);
         }
-    }, [currServer, user]);
+    }, [currServer, currUser]);
 
     useEffect(() => {
 
@@ -135,6 +136,24 @@ function Channels() {
             alert(errorMessage);
         }
     }, [errors]);
+
+    const createChannelWithUser = (user) => {
+        const channelName = `private-${currUser.username} & ${user.username}`;
+        const privateDm = {
+            channel_name: channelName,
+            server_id: currServer.id,
+        }
+
+        dispatch(createChannel(privateDm)).catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) {
+                const err = Object.values(data.errors);
+                setErrors(err);
+            }
+            setCreateMode(false);
+            setNewChan('');
+        })
+    }
 
     return (
         <div>
@@ -160,7 +179,19 @@ function Channels() {
 
             {
                 createMode &&
-                <div>
+                <div className="new-channel">
+                {currServer.direct_message === true && (
+                    <ul className='users-list'>
+                    {allUsers.map((user) => {
+                        if (user.id !== currUser.id) {
+                            return <li key={user.id} className='user'>
+                                <button  className='create-dm-button' onClick={(e) => createChannelWithUser(user)}>{user.username}</button>
+                                </li>;
+                        }
+                            return null;
+                        })}
+                    </ul>
+                )}
                     <input type="text" value={newChan} onChange={setNewChannel} />
                     <button className='create-channel' onClick={createChan}>Create</button>
                 </div>

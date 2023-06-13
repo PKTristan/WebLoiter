@@ -6,7 +6,7 @@ function Founders() {
     return (
         <div className="founders-cards">
             <div className="alfonso">
-                <img src='https://i.imgur.com/5T32dlj.jpg' alt="alfonso" style={{borderRadius: '50%', height: '500px', width: '400px'}}/>
+                <img src='https://i.imgur.com/5T32dlj.jpg' alt="alfonso"/>
                 <h4>Alfonso</h4>
                 <p>
                     Literal founder right here, Top G.
