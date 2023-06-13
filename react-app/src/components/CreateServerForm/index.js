@@ -43,7 +43,7 @@ const CreateServerForm = ({ hideForm }) => {
     }
     return (
         <div className="server-form">
-            <h2>Create Server</h2>
+            <h2>New Hangout</h2>
             {errors.map((error, idx) => (
                 <div key={idx} className="errors-create">{error}</div>
             ))}
