@@ -231,7 +231,9 @@ function Channels({ allUsers }) {
                 }
             </section>
             {/* adding the messages for channels */}
+            <div className='messages-wrapper'>
             {selectedChannelId && <ChannelMessages channelId={selectedChannelId} />}
+            </div>
 
         </div>
     )

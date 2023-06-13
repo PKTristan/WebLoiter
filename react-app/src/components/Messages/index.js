@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { loadMessagesByChannel, editMessageChannel, deleteMessageChannel } from '../../store/message';
+import { fetchAllUsers } from '../../store/session';
 import NewMessage from './post';
 import './Messages.css'
 
@@ -9,13 +10,18 @@ function ChannelMessages() {
     const dispatch = useDispatch();
     const currChannel = useSelector((state) => state.channels.channel)
     const currentUserId = useSelector((state) => state.session.user.id) || null
+    const users = useSelector((state) => state.session.allUsers);
     const [hoveredMessage, setHoveredMessage] = useState(null)
     const [editMessage, setEditMessage] = useState({ id: null, text: '' });
-    const {channelId} = useParams();
+    const { channelId } = useParams();
 
     const history = useHistory();
     const messages = useSelector((state) => state.messages.messages);
 
+    useEffect(() => {
+        dispatch(fetchAllUsers())
+
+    }, [dispatch])
     useEffect(() => {
         // console.log('params', params);
         if (currChannel) {
@@ -23,9 +29,9 @@ function ChannelMessages() {
         }
 
         return () => {
-            if (currChannel){
-            dispatch(loadMessagesByChannel(currChannel.id))
-        }
+            if (currChannel) {
+                dispatch(loadMessagesByChannel(currChannel.id))
+            }
         }
     }, [dispatch, currentUserId, history, currChannel]);
 
@@ -34,7 +40,7 @@ function ChannelMessages() {
             dispatch(loadMessagesByChannel(channelId))
         }
         return () => {
-            if(channelId){
+            if (channelId) {
                 dispatch(loadMessagesByChannel(channelId));
             }
         }
@@ -59,7 +65,7 @@ function ChannelMessages() {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
             dispatch(editMessageChannel(updatedMessage, currChannel.id, messageId));
-            setEditMessage({id: null, text: ''});
+            setEditMessage({ id: null, text: '' });
         }
     };
 
@@ -83,41 +89,49 @@ function ChannelMessages() {
         <div className='messages-container'>
             {messages && Object.values(messages).length > 0 ? (
                 <div>
-                    {Object.values(messages).map((message) => (
-                        <div
-                            key={message.id}
-                            onMouseEnter={() => handleMessageHover(message.id)}
-                            onMouseLeave={handleMessageleave}
-                            className="message-container"
-                        >
-                            {editMessage && editMessage.id === message.id ? (
-                                <textarea className='textarea-container'
-                                    value={editMessage.text}
-                                    onChange={(e) => setEditMessage({ ...editMessage, text: e.target.value })}
-                                    onKeyDown={handleKeyDown}
-                                    onKeyUp={(e) => handleKeyUp(e, message.id, e.target.value)}
-                                />
-                            ) : (
-                                <div>{message.message}</div>
-                            )}
-                            {hoveredMessage === message.id && currentUserId === message.user_id && (
-                                <div className='button-container'>
-                                    {editMessage !== message.id && (
-                                        <button onClick={() => handleEditMessage(message.id)}>Edit</button>
-                                    )}
-                                    <button onClick={() => handleDeleteMessage(message.id)}>Delete</button>
-                                </div>
-                            )}
-                        </div>
+                    {Object.values(messages).map((message) => {
+                        const user = users.find((user) => user.id === message.user_id)
+                        return (
+                            <div
+                                key={message.id}
+                                onMouseEnter={() => handleMessageHover(message.id)}
+                                onMouseLeave={handleMessageleave}
+                                className="message-container"
+                            >
+                                {editMessage && editMessage.id === message.id ? (
+                                    <textarea className='textarea-container edit-message'
+                                        value={editMessage.text}
+                                        onChange={(e) => setEditMessage({ ...editMessage, text: e.target.value })}
+                                        onKeyDown={handleKeyDown}
+                                        onKeyUp={(e) => handleKeyUp(e, message.id, e.target.value)}
+                                    />
+                                ) : (
+                                    <div className='message-content'>{message.message}</div>
+                                )}
+                                {hoveredMessage === message.id && currentUserId === message.user_id && (
+                                    <div className='button-container'>
+                                        {editMessage !== message.id && (
+                                            <button className='edit-button' onClick={() => handleEditMessage(message.id)}>Edit</button>
+                                        )}
+                                        <button className='delete-button' onClick={() => handleDeleteMessage(message.id)}>Delete</button>
+                                    </div>
+                                )}
+                                {user && (
+                                    <div className="user-info">
+                                        <img className="user-avatar" src={user.profile_pic} alt={user.displayname} />
+                                        <div className="user-displayname">{user.displayname}</div>
+                                    </div>
+                                )}
+                            </div>
 
-                    )
-                    )}
+                        )
+                    })}
                 </div>
             ) : (
-                <div>No messages in this channel</div>
+                <div className='no-message'>No messages in this channel</div>
             )}
             <div>
-                <NewMessage initalValue={editMessage} channelId = {currChannel.id}/>
+                <NewMessage initalValue={editMessage} channelId={currChannel.id} />
             </div>
         </div>
     ) : null;
