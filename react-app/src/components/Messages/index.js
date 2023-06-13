@@ -14,7 +14,7 @@ function ChannelMessages({channelId}) {
     const history = useHistory();
     
     useEffect(() => {
-        if (currentUserId || channelId) {
+        if (channelId) {
                 dispatch(loadMessagesByChannel(channelId))
         }else {
             history.push('/');
@@ -62,7 +62,7 @@ function ChannelMessages({channelId}) {
     }
     }
 
-    return (
+    return channelId && (
         <div className='messages-container'>
             {messages && (
                 <div>
@@ -98,7 +98,7 @@ function ChannelMessages({channelId}) {
                 </div>
             )}
             <div>
-                <NewMessage initalValue={editMessage} />
+                <NewMessage initalValue={editMessage} channelId = {channelId}/>
             </div>
         </div>
     )

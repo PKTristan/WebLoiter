@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { selChannels, createChannel, getChannelsByServer, editChannel, deleteChannel} from '../../store/channel';
+import { selChannels, createChannel, getChannelsByServer, editChannel, deleteChannel, getChannelById} from '../../store/channel';
 import { useHistory, useParams } from 'react-router-dom';
 import './Channels.css';
 import ChannelMessages from '../Messages';
@@ -47,6 +47,7 @@ function Channels({allUsers}) {
         const channelId = channel.id
         history.push(`/servers/${serverId}/channels/${channelId}`)
         setSelectedChannelId(channelId)
+        dispatch(getChannelById(channelId))
     }
 
     // const summonPage = (id) => {
