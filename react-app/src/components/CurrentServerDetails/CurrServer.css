@@ -9,10 +9,12 @@
 }
 
 .server-name {
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 30px;
     margin-bottom: 10px;
-    font-family: cursive;
+    font-family: 'Tilt Prism', cursive;;
+    color: #f0ebf4;
+    border: 2px solid black;
+    padding: 10px;
     margin-right: 350px;
 }
 

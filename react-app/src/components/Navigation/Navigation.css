@@ -1,28 +1,97 @@
+.profile-container button, i, ul {
+  position: relative;
+  list-style: none;
+  padding: 10px;
+}
+
+.profile-container button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  margin: 10px 10px 20px 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.profile-container button i {
+  color: #202225;
+  font-size: 40px;
+  list-style: none;
+}
+
+/* Profile Dropdown */
 .profile-dropdown {
   position: absolute;
   border-radius: 4px;
   border: 2px solid #202225;
   display: flex;
-  margin-left: 50px;
   flex-direction: column;
-  right: 20px;
-  top: 70px;
-  list-style: none;
   align-items: flex-start;
-  background-color: beige;
+  background-color: #f172a1;
+  font-family: 'Bagel Fat One', cursive;
+  padding: 10px;
+  top: 90px;
+  right: 0;
+  z-index: 1;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48;
+  font-size: 50px;
+  color: #f0ebf4;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 .profile-dropdown li {
-  display: flex;
-  justify-content: flex-start;
   margin: 10px;
-  align-items: flex-start;
   padding: 5px;
+  font-size: 20px;
 }
+
 .profile-pic {
   width: 100px;
   height: 100px;
   border-radius: 50%;
+  border: 2px solid #f0ebf4;
+  object-fit: cover;
 }
+
+.profile-dropdown button {
+  background-color: #e8dff5;
+  margin: 20px;
+  color: #f8f8f8;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-dropdown button {
+  background-color: #b39bc8;
+  color: #f0ebf4;
+  border: 3px solid #f0ebf4;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
 
 .hidden {
   display: none;
@@ -31,7 +100,7 @@
 .navigation-container {
   display: flex;
   justify-content: space-between;
-  background-color:  #e8dff5;
+  background-color:  #f172a1;
   padding: 10px;
   list-style: none;
 }
