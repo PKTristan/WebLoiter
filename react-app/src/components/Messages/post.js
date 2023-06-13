@@ -22,6 +22,7 @@ function NewMessage({ initialValue, channelId }) {
                 "Can not send blank message"
             ]);
         }
+        setMessage('')
         await dispatch(loadMessagesByChannel(channelId))
     };
 

@@ -7,6 +7,8 @@ import './Messages.css'
 
 function ChannelMessages({channelId}) {
     const dispatch = useDispatch();
+    // const channelId = useSelector((state) )
+    const currChannel = useSelector((state) => state.channels.channel)
     const currentUserId = useSelector((state) => state.session.user.id) || null
     const [hoveredMessage, setHoveredMessage] = useState(null)
     const [editMessage, setEditMessage] = useState({id: null, text:''});
@@ -14,12 +16,11 @@ function ChannelMessages({channelId}) {
     const history = useHistory();
     
     useEffect(() => {
-        if (channelId) {
-                dispatch(loadMessagesByChannel(channelId))
-        }else {
-            history.push('/');
+        console.log('this is channel in messages', currChannel)
+        if (currChannel) {
+                dispatch(loadMessagesByChannel(currChannel.id))
         }
-    }, [dispatch, channelId, currentUserId, history]);
+    }, [dispatch, channelId, currentUserId, history, currChannel]);
 
     const messages = useSelector((state) => state.messages.messages);
 
@@ -42,7 +43,6 @@ function ChannelMessages({channelId}) {
           e.preventDefault();
           dispatch(editMessageChannel(updatedMessage, channelId, messageId));
           setEditMessage('');
-          window.location.reload();
         }
       };
 
@@ -58,7 +58,7 @@ function ChannelMessages({channelId}) {
         const confirmDelete = window.confirm('Are you sure you want to delete this message?')
         if (confirmDelete){
         dispatch(deleteMessageChannel(channelId, messageId));
-        window.location.reload();
+        dispatch(loadMessagesByChannel(channelId))
     }
     }
 

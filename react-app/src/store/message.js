@@ -67,10 +67,11 @@ export const editMessageChannel = (message, channelId, messageId) => async (disp
             message
         })
     });
-
+    
     if (response.ok) {
         const data = await response.json();
         dispatch(editMessage(data));
+        dispatch(loadMessagesByChannel(channelId))
         return null;
     } else if (response.status < 500) {
         const data = await response.json();
@@ -90,6 +91,7 @@ export const deleteMessageChannel = (channelId, messageId) => async (dispatch) =
     if (response.ok) {
         const data = await response.json();
         dispatch(deleteMessage(data));
+        dispatch(loadMessagesByChannel(channelId))
         return null;
     } else if (response.status < 500) {
         const data = await response.json();
