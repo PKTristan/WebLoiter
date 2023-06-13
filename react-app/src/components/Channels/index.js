@@ -30,8 +30,8 @@ function Channels() {
     const [errors, setErrors] = useState([]);
 
     useEffect(() => {
+        setCreateMode(false);
         dispatch(getChannelsByServer(serverId)).catch(async (res) => {
-            setCreateMode(false);
             const data = await res.json();
             if (data && data.errors) {
                 const err = Object.values(data.errors);
@@ -106,7 +106,6 @@ function Channels() {
             });
         }
         setNewChan('');
-
     }
 
     const setNewChannel = (e) => {
