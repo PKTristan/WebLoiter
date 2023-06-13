@@ -44,7 +44,7 @@ function SignupFormModal() {
 	}
 
 	return (
-		<div>
+		<div className="signup-container">
 			{showSignupForm && (
 				<div>
 					<div className="signup-header">
