@@ -19,7 +19,8 @@ function Channels({ allUsers }) {
     const [channels, setChannels] = useState([]);
     const [newChan, setNewChan] = useState('');
     const [createMode, setCreateMode] = useState(false);
-    const [selectedChannelId, setSelectedChannelId] = useState(id)
+    const { serverId, channelId } = useParams();
+    const [selectedChannelId, setSelectedChannelId] = useState(channelId)
     const [contextMenu, setContextMenu] = useState({
         visible: false,
         channel: null
@@ -28,19 +29,16 @@ function Channels({ allUsers }) {
 
     useEffect(() => {
         console.log('----- this is currChannel in channels', currChannel)
+        dispatch(getChannelsByServer(serverId)).catch(async (res) => {
         setCreateMode(false);
-        dispatch(getChannelsByServer(id)).catch(async (res) => {
             const data = await res.json();
             if (data && data.errors) {
                 const err = Object.values(data.errors);
                 setErrors(err);
             }
         });
-        if (currChannel === null) dispatch(loadMessagesByChannel(id))
-        else { dispatch(loadMessagesByChannel(currChannel.id)) }
-        // dispatch(getChannelById(id))
+    }, [serverId, dispatch, currChannel]);
 
-    }, [id, dispatch, currChannel]);
 
     useEffect(() => {
         if (serverChannels) {
@@ -53,9 +51,16 @@ function Channels({ allUsers }) {
         const serverId = currServer.id
         const channelId = channel.id
         history.push(`/servers/${serverId}/channels/${channelId}`)
-        setSelectedChannelId(channelId)
-        dispatch(getChannelById(channelId))
+        // setSelectedChannelId(channelId)
+        // dispatch(getChannelById(channelId))
     }
+
+    useEffect(() => {
+        if (channelId) {
+            setSelectedChannelId(channelId)
+            dispatch(getChannelById(channelId))
+        }
+    }, [channelId]);
 
     // const summonPage = (id) => {
     //     history.push(`servers/${currServer.id}/channels/${id}`);
@@ -73,7 +78,7 @@ function Channels({ allUsers }) {
         if (newChan.length > 0) {
             const body = {
                 channel_name: newChan,
-                server_id: id
+                server_id: serverId
             }
 
             await dispatch(createChannel(body)).catch(async (res) => {
