@@ -11,19 +11,19 @@ function ChannelMessages() {
     const currChannel = useSelector((state) => state.channels.channel)
     const currentUserId = useSelector((state) => state.session.user.id) || null
     const users = useSelector((state) => state.session.allUsers);
+    const messages = useSelector((state) => state.messages.messages);
     const [hoveredMessage, setHoveredMessage] = useState(null)
     const [editMessage, setEditMessage] = useState({ id: null, text: '' });
     const { channelId } = useParams();
 
     const history = useHistory();
-    const messages = useSelector((state) => state.messages.messages);
-
     useEffect(() => {
         dispatch(fetchAllUsers())
 
     }, [dispatch])
     useEffect(() => {
         // console.log('params', params);
+        console.log('this is messages', Object.values(messages).length)
         if (currChannel) {
             dispatch(loadMessagesByChannel(currChannel.id))
         }
@@ -87,7 +87,7 @@ function ChannelMessages() {
 
     return currChannel ? (
         <div className='messages-container'>
-            {messages && Object.values(messages).length > 0 ? (
+            {messages && users && Object.values(messages).length > 0 ? (
                 <div>
                     {Object.values(messages).map((message) => {
                         const user = users.find((user) => user.id === message.user_id)
