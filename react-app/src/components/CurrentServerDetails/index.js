@@ -14,7 +14,6 @@ function CurrServer() {
     const dispatch = useDispatch();
     const currServer = useSelector(state => state.server.currentServer);
     const user = useSelector(state => state.session.user);
-    const allUsers = useSelector(state => state.session.allUsers);
     const {serverId, channelId} = useParams();
 
     const update_server_button = () => {
@@ -41,13 +40,9 @@ function CurrServer() {
     }
 
     useEffect(() => {
-        if (currServer.direct_message === true) {
-            console.log('-------', currServer)
-            dispatch(sessionActions.fetchAllUsers());
-
-        }
+        dispatch(sessionActions.fetchAllUsers());
         dispatch(serverActions.fetchCurrentServer(serverId))
-    }, [dispatch, serverId, currServer.direct_message]);
+    }, [dispatch, serverId]);
 
     useEffect (() => {
         dispatch(clearChannel())
@@ -66,7 +61,7 @@ function CurrServer() {
                 <br />
             </div>
             <div className="channels-container">
-                <Channels allUsers={allUsers} />
+                <Channels />
             </div>
         </div>
 
