@@ -3,6 +3,7 @@
 
 const LOAD_CHANNELS = "channels/LOAD_CHANNELS";
 const LOAD_CHANNEL_BY_ID = "channels/LOAD_CHANNEL_BY_ID";
+const CLEAR_CHANNEL = "channels/CLEAR_CHANNEL";
 
 const loadChannels = (channels) => ({
     type: LOAD_CHANNELS,
@@ -12,6 +13,10 @@ const loadChannels = (channels) => ({
 const loadChannelById = (channel) => ({
     type: LOAD_CHANNEL_BY_ID,
     channel
+});
+
+export const clearChannel = () => ({
+    type: CLEAR_CHANNEL
 })
 
 
@@ -101,6 +106,10 @@ const channelsReducer = (state = initialState, action) => {
         case LOAD_CHANNEL_BY_ID:
 
             return {...mutState, channel: action.channel}
+
+        case CLEAR_CHANNEL:
+
+        return {...mutState, channel: null}
 
         default:
             return state;
