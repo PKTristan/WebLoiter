@@ -41,7 +41,7 @@ function UpdateServerModal() {
         const updatedServer = {
             id: currServer.id,
             server_name: serverName,
-            server_type: serverType,
+            server_type: serverType.toLowerCase(),
             avatar: avatar,
             server_details: serverDetails,
             private: privateServer,
@@ -79,6 +79,7 @@ function UpdateServerModal() {
                         value={serverType}
                         onChange={(e) => setServerType(e.target.value)}
                         required
+                        defaultValue={serverType}
                     >
                         <option value="gaming">Gaming</option>
                         <option value="sports">Sports</option>

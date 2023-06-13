@@ -19,11 +19,3 @@ class ServerForm(FlaskForm):
     server_details = TextAreaField('server_details')
     private = BooleanField('private')
     direct_message = BooleanField('direct_message')
-
-    def validate_avatar(self, field):
-        if field.data and not validate_url_format(field.data):
-            raise ValidationError('Invalid URL format for avatar')
-        
-def validate_url_format(url='https://i.imgur.com/YnEnRlg.jpg') -> bool:
-    url_pattern = re.compile(r'^https?://[\w\-]+(\.[\w\-]+){1,2}\.[\w\-]{2,3}[/#?]?.*$')
-    return bool(url_pattern.match(url))
