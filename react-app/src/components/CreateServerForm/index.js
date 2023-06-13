@@ -28,13 +28,11 @@ const CreateServerForm = ({ hideForm }) => {
         }
     
         const data = await dispatch(serverActions.createServerAction(newServer));
-        console.log(data);
+        console.log(data, avatar);
         dispatch(serverActions.fetchServers());
         if (data.errors) {
-            setErrors(data.errors);
+
             console.log(errors)
-            } else if(data.message){
-                setErrors([data.message]);
             } else {
                 closeModal()
 

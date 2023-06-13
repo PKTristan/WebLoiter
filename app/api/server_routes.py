@@ -41,7 +41,9 @@ def get_server_members():
 @login_required
 def create_server():
     form = ServerForm()
+
     form['csrf_token'].data = request.cookies['csrf_token']
+    print('=======',form.data)
     if form.validate_on_submit():
         server = Server(
             server_name=form.data['server_name'],
@@ -62,14 +64,8 @@ def create_server():
         db.session.add(channel)
         db.session.commit()
         return jsonify(server.to_dict())
-    else:
-        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-        error_messages = validation_errors_to_error_messages(form.errors)
-        # Check if there is a specific error for the avatar field
-        # if 'avatar' in form.errors:
-        #     avatar_error = form.errors['avatar'][0]  # Get the first error message
-        #     error_messages.append(f"Avatar: {avatar_error}")
-        # return jsonify(errors=error_messages), 401
+    
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @server_routes.route("/<id>", methods=["PUT", "GET"])
@@ -79,6 +75,7 @@ def update_server(id):
     form = ServerForm()
 
     form['csrf_token'].data = request.cookies['csrf_token']
+    
     if form.validate_on_submit():
         server = Server.query.get(id)
         if not server:
