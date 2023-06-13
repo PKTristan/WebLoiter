@@ -130,7 +130,10 @@ function ChannelMessages() {
                     })}
                 </div>
             ) : (
-                <div className='no-message'>No messages in this channel</div>
+                <div className='no-message'>
+                    <img src='http://www.clipartbest.com/cliparts/aiq/e9o/aiqe9o7kT.jpeg' alt='No messages' className='no-message-img'/>
+                   <span>Be the first to send a message in this channel!</span> 
+                    </div>
             )}
             <div>
                 <NewMessage initalValue={editMessage} channelId={currChannel.id} />

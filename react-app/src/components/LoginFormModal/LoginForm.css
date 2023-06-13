@@ -40,3 +40,17 @@ h2 {
     cursor: pointer;
     margin-left: 15px;
 }
+
+.sign-in-box {
+    background-color: #A1c3D1;
+}
+
+#modal-content {
+    background-color: #A1c3D1;
+}
+
+.no-message-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}

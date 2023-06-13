@@ -48,8 +48,8 @@ function LoginFormModal() {
   return (
     <>
       {showLoginForm && (
-        <div>
-        <h2>Log In</h2>
+        <div className="sign-in-box">
+        <h2>Welcome Back</h2>
       <form className="login-form" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
