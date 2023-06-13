@@ -10,7 +10,7 @@ import CustomerContextMenu from './CustomContextMenu';
 function Channels({ allUsers }) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { id } = useParams();
+    const { serverId, channelId } = useParams();
     const serverChannels = useSelector(selChannels);
     const currUser = useSelector(state => state.session.user);
     const currServer = useSelector(state => state.server.currentServer)
@@ -19,7 +19,6 @@ function Channels({ allUsers }) {
     const [channels, setChannels] = useState([]);
     const [newChan, setNewChan] = useState('');
     const [createMode, setCreateMode] = useState(false);
-    const { serverId, channelId } = useParams();
     const [selectedChannelId, setSelectedChannelId] = useState(channelId)
     const [contextMenu, setContextMenu] = useState({
         visible: false,
@@ -42,7 +41,7 @@ function Channels({ allUsers }) {
 
 
     useEffect(() => {
-        
+
         if (serverChannels) {
             setChannels(serverChannels);
         }
@@ -62,7 +61,7 @@ function Channels({ allUsers }) {
             setSelectedChannelId(channelId)
             dispatch(getChannelById(channelId))
         }
-    }, [channelId]);
+    }, [channelId, dispatch]);
 
     // const summonPage = (id) => {
     //     history.push(`servers/${currServer.id}/channels/${id}`);
