@@ -5,6 +5,7 @@ import OpenModalButton from "../OpenModalButton";
 import * as serverActions from "../../store/server";
 import UpdateServerModal from "../UpdateServerModal";
 import ConfirmServerDeleteModal from "../ConfirmServerDeleteModal";
+import * as sessionActions from "../../store/session";
 import Channels from "../Channels";
 import "./CurrServer.css"
 
@@ -12,6 +13,7 @@ function CurrServer(){
     const dispatch = useDispatch();
     const currServer = useSelector(state => state.server.currentServer);
     const user = useSelector(state => state.session.user);
+    const allUsers = useSelector(state => state.session.allUsers);
     const { id } = useParams()
 
     const update_server_button = () => {
@@ -38,8 +40,13 @@ function CurrServer(){
     }
 
     useEffect(() => {
+        if (currServer.direct_message === true) {
+            console.log('-------', currServer)
+            dispatch(sessionActions.fetchAllUsers());
+
+        }
         dispatch(serverActions.fetchCurrentServer(id))
-    }, [dispatch, id]);
+    }, [dispatch, id, currServer.direct_message]);
 
     return user && currServer ? (
         <div>
@@ -54,7 +61,7 @@ function CurrServer(){
             <br/>
         </div>
         <div className="channels-container">
-            <Channels />
+            <Channels allUsers={allUsers} currServer={currServer}/>
         </div>
         </div>
             

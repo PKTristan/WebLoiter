@@ -36,6 +36,42 @@
   list-style: none;
 }
 
+.navigation-container img {
+  background-color: transparent;
+}
+
+.navigation-container h1 {
+  font-family: 'Moirai One', cursive;
+  font-weight: bolder;
+  font-size: 48px;
+}
 i {
   list-style: none;
+}
+
+.how-prod-works-wrapper {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.how-prod-works-wrapper p {
+  font-size: 18px;
+}
+
+.how-prod-works-wrapper h2 {
+  font-family: 'Moirai One', cursive;
+  font-weight: bolder;
+  font-size: 48px;
+}
+
+.how-prod-works-wrapper img {
+  width: 80%;
+  margin-left: 150px;
+  margin-right: 150px;
+}
+.how-prod-works-wrapper div {
+  justify-content: center;
+  margin: 20px;
+  padding: 30px;
 }

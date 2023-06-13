@@ -60,6 +60,7 @@ const CreateServerForm = ({ hideForm }) => {
                         onChange={(e) => setServerType(e.target.value)}
                         required
                     >
+                        <option value="" disabled>please make a selection....</option>
                         <option value="gaming">Gaming</option>
                         <option value="sports">Sports</option>
                         <option value="anime">Anime</option>
