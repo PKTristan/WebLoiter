@@ -6,11 +6,14 @@ import { useHistory, useParams } from 'react-router-dom';
 import './Channels.css';
 import ChannelMessages from '../Messages';
 import CustomerContextMenu from './CustomContextMenu';
+import ServerMembers from '../ServerMembers';
 
-function Channels({ allUsers }) {
+function Channels() {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { id } = useParams();
+    const { serverId, channelId } = useParams();
+    const serverMembersJoin = useSelector(state => state.server.serverMembers);
+    const users = useSelector(state => state.session.allUsers);
     const serverChannels = useSelector(selChannels);
     const currUser = useSelector(state => state.session.user);
     const currServer = useSelector(state => state.server.currentServer)
@@ -19,18 +22,17 @@ function Channels({ allUsers }) {
     const [channels, setChannels] = useState([]);
     const [newChan, setNewChan] = useState('');
     const [createMode, setCreateMode] = useState(false);
-    const { serverId, channelId } = useParams();
-    const [selectedChannelId, setSelectedChannelId] = useState(channelId)
     const [contextMenu, setContextMenu] = useState({
         visible: false,
         channel: null
     });
+    const [members, setMembers] = useState([]);
+    const [allUsers, setAllUsers] = useState([]);
     const [errors, setErrors] = useState([]);
 
     useEffect(() => {
-        console.log('----- this is currChannel in channels', currChannel)
         dispatch(getChannelsByServer(serverId)).catch(async (res) => {
-        setCreateMode(false);
+            setCreateMode(false);
             const data = await res.json();
             if (data && data.errors) {
                 const err = Object.values(data.errors);
@@ -40,13 +42,27 @@ function Channels({ allUsers }) {
 
     }, [serverId, dispatch, currChannel]);
 
+    useEffect(() => {
+        if (users) {
+            setAllUsers(users);
+        }
+    }, [users]);
 
     useEffect(() => {
-        
         if (serverChannels) {
             setChannels(serverChannels);
         }
     }, [serverChannels]);
+
+    useEffect(() => {
+        if (serverMembersJoin && allUsers && serverId) {
+            const serverMembersList = serverMembersJoin.filter(member => member.server_id == serverId);
+            const serverMembersIds = serverMembersList.map(member => member.member_id);
+            const serverMembers = allUsers.filter(user => serverMembersIds.includes(user.id));
+
+            setMembers(serverMembers);
+        }
+    }, [serverMembersJoin, allUsers, serverId]);
 
     const handleClick = (e, channel) => {
         e.preventDefault()
@@ -59,10 +75,9 @@ function Channels({ allUsers }) {
 
     useEffect(() => {
         if (channelId) {
-            setSelectedChannelId(channelId)
             dispatch(getChannelById(channelId))
         }
-    }, [channelId]);
+    }, [channelId, dispatch]);
 
     // const summonPage = (id) => {
     //     history.push(`servers/${currServer.id}/channels/${id}`);
@@ -181,7 +196,7 @@ function Channels({ allUsers }) {
     }
 
     return (
-        <div>
+        <div className='pages'>
 
             <section className="channels">
                 {
@@ -232,7 +247,8 @@ function Channels({ allUsers }) {
                 }
             </section>
             {/* adding the messages for channels */}
-            {selectedChannelId && <ChannelMessages channelId={selectedChannelId} />}
+            {channelId && <ChannelMessages />}
+            {!channelId && members && <ServerMembers  members={members} />}
 
         </div>
     )
