@@ -2,7 +2,6 @@ from flask import Blueprint, jsonify, session, request
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import Server, ServerMembers, Channel, db
 from app.forms import ServerForm
-import re
 
 
 server_routes = Blueprint('servers', __name__)
@@ -79,6 +78,7 @@ def update_server(id):
     form = ServerForm()
 
     form['csrf_token'].data = request.cookies['csrf_token']
+    print('==========',form.data)
     if form.validate_on_submit():
         server = Server.query.get(id)
         if not server:
