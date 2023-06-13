@@ -42,15 +42,16 @@ function Channels({allUsers}) {
     }, [serverChannels]);
 
     const handleClick = (e, channel) => {
-        console.log('this is channelId', channel.id)
-        e.preventDefault();
-        summonPage(channel.id)
-        setSelectedChannelId(channel.id)
+        e.preventDefault()
+        const serverId = currServer.id
+        const channelId = channel.id
+        history.push(`/servers/${serverId}/channels/${channelId}`)
+        setSelectedChannelId(channelId)
     }
 
-    const summonPage = (id) => {
-        history.push(`/channels/${id}`);
-    }
+    // const summonPage = (id) => {
+    //     history.push(`servers/${currServer.id}/channels/${id}`);
+    // }
 
     const newChannel = (e) => {
         e.preventDefault();
@@ -162,7 +163,7 @@ function Channels({allUsers}) {
             {
                 (channels.length > 0) &&
                 channels.map((channel) => (
-                    <button key={channel.id} className="channel-button" onContextMenu={e => handleRightClick(e, channel)} onClick={e => handleClick(e, channel)}>{`# ${channel.channel_name}`}</button>
+                    <button key={channel.id} className="channel-button" onContextMenu={e => handleRightClick(e, channel)} onClick={(e) => handleClick(e, channel)}>{`# ${channel.channel_name}`}</button>
                     ))
                 }
 
