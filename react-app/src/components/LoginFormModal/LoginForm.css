@@ -66,7 +66,8 @@ h2 {
 .login-img{
     width: 250px;
     height: 250px;
-    border-radius: 50%;
+    margin-top: 20px;
+    margin-right: 20px;
     align-items: flex-end;
 }
 
@@ -77,7 +78,7 @@ h2 {
 }
 
 .h2-text {
-    
+
 }
 
 .arrow-down {

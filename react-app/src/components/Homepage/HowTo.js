@@ -1,5 +1,6 @@
 import placeholder from "../../assets/placeholder.png";
 import webloiterExample from "../../assets/webloiter-example.png";
+import bottomRight from "../../assets/bottom-right.PNG";
 
 function HowTo() {
 
@@ -17,7 +18,7 @@ function HowTo() {
                 <img src={webloiterExample} alt="product" className='webloiter-example' />
             </div>
             <div>
-                <img src={placeholder} alt="logo" />
+                <img src={bottomRight} alt="logo" />
             </div>
         </section>
     )
