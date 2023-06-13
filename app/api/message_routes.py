@@ -10,6 +10,8 @@ def channel_messages(channel_id):
     if request.method == 'GET':
         #Get all messages in the channel
         channel_messages = Message.query.filter_by(channel_id=channel_id).all()
+        if not channel_messages:
+            return {"Error" : "Channel does not have messages"}, 404
         all_messages = [
             {
                 'id': message.id,

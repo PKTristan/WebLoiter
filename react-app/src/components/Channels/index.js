@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { selChannels, createChannel, getChannelsByServer, editChannel, deleteChannel, getChannelById} from '../../store/channel';
+import { loadMessagesByChannel } from '../../store/message';
 import { useHistory, useParams } from 'react-router-dom';
 import './Channels.css';
 import ChannelMessages from '../Messages';
@@ -10,22 +11,23 @@ function Channels({allUsers}) {
     const serverChannels = useSelector(selChannels);
     const currUser = useSelector(state => state.session.user);
     const currServer = useSelector(state => state.server.currentServer)
+    const currChannel = useSelector((state) => state.channels.channel)
     const dispatch = useDispatch();
     const [isOwner, setIsOwner] = useState(false);
     const [channels, setChannels] = useState([]);
     const [newChan, setNewChan] = useState('');
     const [createMode, setCreateMode] = useState(false);
-    const [selectedChannelId, setSelectedChannelId] = useState(null)
+    const { id } = useParams();
+    const [selectedChannelId, setSelectedChannelId] = useState(id)
     const [contextMenu, setContextMenu] = useState({
         visible: false,
         channel: null
     });
-    const { id } = useParams();
     const history = useHistory();
     const [errors, setErrors] = useState([]);
 
     useEffect(() => {
-        console.log('-----', allUsers)
+        console.log('----- this is currChannel in channels', currChannel)
         dispatch(getChannelsByServer(id)).catch(async (res) => {
             const data = await res.json();
             if (data && data.errors) {
@@ -33,7 +35,11 @@ function Channels({allUsers}) {
                 setErrors(err);
             }
         });
-    }, [id, dispatch]);
+        if(currChannel === null) dispatch(loadMessagesByChannel(id))
+        else {dispatch(loadMessagesByChannel(currChannel.id))}
+        // dispatch(getChannelById(id))
+        
+    }, [id, dispatch, currChannel]);
 
     useEffect(() => {
         if (serverChannels) {
@@ -204,7 +210,7 @@ function Channels({allUsers}) {
             }
         </section>
             {/* adding the messages for channels */}
-            {selectedChannelId && <ChannelMessages channelId={selectedChannelId}/> }
+            {selectedChannelId &&  <ChannelMessages channelId={selectedChannelId}/> }
 
             </div>
     )
