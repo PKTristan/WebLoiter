@@ -64,7 +64,7 @@ function ChannelMessages({channelId}) {
 
     return channelId && (
         <div className='messages-container'>
-            {messages && (
+            {messages && Object.values(messages).length > 0 ? (
                 <div>
                     {Object.values(messages).map((message) => (
                         <div
@@ -96,7 +96,9 @@ function ChannelMessages({channelId}) {
                     )
                     )}
                 </div>
-            )}
+            ) : (
+                <div>No messages in this channel yet</div>
+        )}
             <div>
                 <NewMessage initalValue={editMessage} channelId = {channelId}/>
             </div>
