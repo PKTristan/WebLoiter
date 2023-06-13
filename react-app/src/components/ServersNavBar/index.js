@@ -1,4 +1,4 @@
-import React, {  useEffect } from "react";
+import React, {  useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import CreateServerForm from "../CreateServerForm";
@@ -11,6 +11,7 @@ function ServerNavBar() {
     const servers = useSelector(state => state.server.servers);
     const serverMembers = useSelector(state => state.server.serverMembers);
     const user = useSelector(state => state.session.user);
+  
 
     useEffect(() => {
         dispatch(serverActions.fetchServers());
@@ -57,11 +58,15 @@ function ServerNavBar() {
           </li>
         ))}
       {user && (
-        <OpenModalButton
-          buttonText="+"
-          modalComponent={<CreateServerForm />}
-          className="open-modal-button"
-        />
+        <div className="open-modal-button">
+          <OpenModalButton
+            buttonText="+"
+            modalComponent={<CreateServerForm />}
+            title="create new server"
+            className="create-server-button"
+          />
+          <span className="alt-text">create new server </span>
+        </div>
       )}
     </ul>
         

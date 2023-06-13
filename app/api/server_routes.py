@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, session, request
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import Server, ServerMembers, Channel, db
 from app.forms import ServerForm
+import re
 
 
 server_routes = Blueprint('servers', __name__)
@@ -63,6 +64,12 @@ def create_server():
         return jsonify(server.to_dict())
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+        error_messages = validation_errors_to_error_messages(form.errors)
+        # Check if there is a specific error for the avatar field
+        # if 'avatar' in form.errors:
+        #     avatar_error = form.errors['avatar'][0]  # Get the first error message
+        #     error_messages.append(f"Avatar: {avatar_error}")
+        # return jsonify(errors=error_messages), 401
 
 
 @server_routes.route("/<id>", methods=["PUT", "GET"])
@@ -91,6 +98,7 @@ def update_server(id):
 
         return jsonify(server.to_dict())
     else:
+        print('======',form.errors)
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
