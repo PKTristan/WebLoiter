@@ -11,18 +11,35 @@ function ChannelMessages() {
     const currentUserId = useSelector((state) => state.session.user.id) || null
     const [hoveredMessage, setHoveredMessage] = useState(null)
     const [editMessage, setEditMessage] = useState({ id: null, text: '' });
-    const params = useParams();
+    const {channelId} = useParams();
 
     const history = useHistory();
+    const messages = useSelector((state) => state.messages.messages);
 
     useEffect(() => {
-        console.log('params', params);
+        // console.log('params', params);
         if (currChannel) {
             dispatch(loadMessagesByChannel(currChannel.id))
         }
+
+        return () => {
+            if (currChannel){
+            dispatch(loadMessagesByChannel(currChannel.id))
+        }
+        }
     }, [dispatch, currentUserId, history, currChannel]);
 
-    const messages = useSelector((state) => state.messages.messages);
+    useEffect(() => {
+        if (channelId) {
+            dispatch(loadMessagesByChannel(channelId))
+        }
+        return () => {
+            if(channelId){
+                dispatch(loadMessagesByChannel(channelId));
+            }
+        }
+    }, [dispatch, channelId])
+
 
     const handleMessageHover = (messageId) => {
         setHoveredMessage(messageId);
@@ -42,7 +59,7 @@ function ChannelMessages() {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
             dispatch(editMessageChannel(updatedMessage, currChannel.id, messageId));
-            setEditMessage('');
+            setEditMessage({id: null, text: ''});
         }
     };
 
@@ -62,9 +79,9 @@ function ChannelMessages() {
         }
     }
 
-    return currChannel && (
+    return currChannel ? (
         <div className='messages-container'>
-            {messages && currChannel && (
+            {messages && Object.values(messages).length > 0 ? (
                 <div>
                     {Object.values(messages).map((message) => (
                         <div
@@ -96,12 +113,14 @@ function ChannelMessages() {
                     )
                     )}
                 </div>
+            ) : (
+                <div>No messages in this channel</div>
             )}
             <div>
-                <NewMessage initalValue={editMessage} channelId = {channelId}/>
+                <NewMessage initalValue={editMessage} channelId = {currChannel.id}/>
             </div>
         </div>
-    )
+    ) : null;
 
 }
 

@@ -23,7 +23,6 @@ function NewMessage({ initialValue, channelId }) {
             ]);
         }
         setMessage('')
-        await dispatch(loadMessagesByChannel(channelId))
     };
 
     const handleKeyDown = (e) => {
