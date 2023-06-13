@@ -6,7 +6,7 @@ import topLeftLogo from "../../assets/top-left-webloiter-homepage.png"
 function About() {
     return (
         <section className="about-founders-wrapper">
-            <img src={topLeftLogo || placeholder} alt="logo" className="logo-img"></img>
+            <img src={topLeftLogo || placeholder} alt="logo" className="logo-img" />
             <div className="about">
                 <h1>Welcome to Webloiter</h1>
                 <p>
