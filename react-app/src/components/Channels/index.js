@@ -1,18 +1,20 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { selChannels, createChannel, getChannelsByServer, editChannel, deleteChannel, getChannelById} from '../../store/channel';
+import { selChannels, createChannel, getChannelsByServer, editChannel, deleteChannel, getChannelById } from '../../store/channel';
 import { loadMessagesByChannel } from '../../store/message';
 import { useHistory, useParams } from 'react-router-dom';
 import './Channels.css';
 import ChannelMessages from '../Messages';
 import CustomerContextMenu from './CustomContextMenu';
 
-function Channels({allUsers}) {
+function Channels({ allUsers }) {
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const { id } = useParams();
     const serverChannels = useSelector(selChannels);
     const currUser = useSelector(state => state.session.user);
     const currServer = useSelector(state => state.server.currentServer)
     const currChannel = useSelector((state) => state.channels.channel)
-    const dispatch = useDispatch();
     const [isOwner, setIsOwner] = useState(false);
     const [channels, setChannels] = useState([]);
     const [newChan, setNewChan] = useState('');
@@ -23,12 +25,12 @@ function Channels({allUsers}) {
         visible: false,
         channel: null
     });
-    const history = useHistory();
     const [errors, setErrors] = useState([]);
 
     useEffect(() => {
         console.log('----- this is currChannel in channels', currChannel)
         dispatch(getChannelsByServer(serverId)).catch(async (res) => {
+        setCreateMode(false);
             const data = await res.json();
             if (data && data.errors) {
                 const err = Object.values(data.errors);
@@ -36,6 +38,7 @@ function Channels({allUsers}) {
             }
         });
     }, [serverId, dispatch, currChannel]);
+
 
     useEffect(() => {
         if (serverChannels) {
@@ -148,7 +151,8 @@ function Channels({allUsers}) {
         }
     }, [errors]);
 
-    const createChannelWithUser = (user) => {
+    const createChannelWithUser = (e, user) => {
+        e.preventDefault();
         const channelName = `private-${currUser.username} & ${user.username}`;
         const privateDm = {
             channel_name: channelName,
@@ -166,56 +170,68 @@ function Channels({allUsers}) {
         })
     }
 
+    const cancelCreate = (e) => {
+        e.preventDefault();
+
+        setNewChan('');
+        setCreateMode(false);
+    }
+
     return (
         <div>
 
-        <section className="channels">
-            {
-                (channels.length > 0) &&
-                channels.map((channel) => (
-                    <button key={channel.id} className="channel-button" onContextMenu={e => handleRightClick(e, channel)} onClick={(e) => handleClick(e, channel)}>{`# ${channel.channel_name}`}</button>
+            <section className="channels">
+                {
+                    (channels.length > 0) &&
+                    channels.map((channel) => (
+                        <button key={channel.id} className="channel-button" onContextMenu={e => handleRightClick(e, channel)} onClick={(e) => handleClick(e, channel)}>{`# ${channel.channel_name}`}</button>
                     ))
                 }
 
-            {
-                contextMenu.visible &&
-                <CustomerContextMenu
-                channel={contextMenu.channel}
-                position={contextMenu.position}
-                close={() => setContextMenu({ visible: false, channel: null })}
-                updateChannel={updateChannel}
-                delChannel={delChannel}
-                />
-            }
+                {
+                    contextMenu.visible &&
+                    <CustomerContextMenu
+                        channel={contextMenu.channel}
+                        position={contextMenu.position}
+                        close={() => setContextMenu({ visible: false, channel: null })}
+                        updateChannel={updateChannel}
+                        delChannel={delChannel}
+                    />
+                }
 
-            {
-                createMode &&
-                <div className="new-channel">
-                {currServer.direct_message === true && (
-                    <ul className='users-list'>
-                    {allUsers.map((user) => {
-                        if (user.id !== currUser.id) {
-                            return <li key={user.id} className='user'>
-                                <button  className='create-dm-button' onClick={(e) => createChannelWithUser(user)}>{user.username}</button>
-                                </li>;
+                {
+                    createMode &&
+                    <div className="new-channel">
+                        {currServer.direct_message === true && (
+                            <ul className='users-list'>
+                                {allUsers.map((user) => {
+                                    if (user.id !== currUser.id) {
+                                        return <li key={user.id} className='user'>
+                                            <button className='create-dm-button' onClick={(e) => createChannelWithUser(e, user)}>{user.username}</button>
+                                        </li>;
+                                    }
+                                    return null;
+                                })}
+                            </ul>
+                        )}
+                        {currServer.direct_message === false && (<>
+                            <input type="text" value={newChan} onChange={setNewChannel} />
+                            <button className='create-channel' onClick={createChan}>Create</button>
+                        </>
+                        )
                         }
-                            return null;
-                        })}
-                    </ul>
-                )}
-                    <input type="text" value={newChan} onChange={setNewChannel} />
-                    <button className='create-channel' onClick={createChan}>Create</button>
-                </div>
-            }
+                        <button className='cancel-create-channel' onClick={cancelCreate}>Cancel</button>
+                    </div>
+                }
 
-            {isOwner &&
-                <button className="new-channel-button" onClick={newChannel}>+ Create Channel</button>
-            }
-        </section>
+                {isOwner &&
+                    <button className="new-channel-button" onClick={newChannel}>+ Create Channel</button>
+                }
+            </section>
             {/* adding the messages for channels */}
-            {selectedChannelId &&  <ChannelMessages channelId={selectedChannelId}/> }
+            {selectedChannelId && <ChannelMessages channelId={selectedChannelId} />}
 
-            </div>
+        </div>
     )
 }
 
