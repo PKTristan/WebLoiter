@@ -8,8 +8,9 @@
     display: flex;
     flex-direction: column;
     background-color: transparent;
-    border-right: 1px solid black;
+    border-right: 4px solid #b39bc8;
     padding: 20px;
+    color: #f0ebf4;
     justify-content: center;
     align-items: center;
 }
@@ -27,8 +28,9 @@
     border: none;
     cursor: pointer;
     margin-bottom: 10px;
+    color: #f0ebf4;
     font-size: 16px;
-    border-bottom: 4px solid #677bc4;
+    border-bottom: 4px solid #b39bc8;
     padding: 20px;
 }
 
@@ -61,8 +63,8 @@
 }
 
 .new-channel-button {
-    background-color: #677bc4;
-    color: #202225;
+    background-color: #f172a1;
+    color: #f0ebf4;
     border: none;
     padding: 15px;
     font-size: 16px;
