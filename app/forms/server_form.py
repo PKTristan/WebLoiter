@@ -24,7 +24,7 @@ class ServerForm(FlaskForm):
     def validate_avatar(self, field):
         if field.data and not validate_url_format(field.data):
             raise ValidationError('Invalid URL format for avatar')
-        else: 
+        elif not field.data: 
             raise ValidationError('please enter url')
         
 
