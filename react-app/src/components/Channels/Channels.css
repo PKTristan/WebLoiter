@@ -28,8 +28,9 @@
     border: none;
     cursor: pointer;
     margin-bottom: 10px;
+    font-family: 'Monomaniac One', sans-serif;
     color: #f0ebf4;
-    font-size: 16px;
+    font-size: 22px;
     border-bottom: 4px solid #b39bc8;
     padding: 20px;
 }
@@ -71,6 +72,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
     cursor: pointer;
+    font-family: 'Monomaniac One', sans-serif;
     border-radius: 4px;
 }
 
