@@ -47,7 +47,10 @@ function SignupFormModal() {
 		<div>
 			{showSignupForm && (
 				<div>
-				<h2>Create an account</h2>
+					<div className="signup-header">
+				<h2>Join Your Friends</h2>
+				<img className='group-img' src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Friendly_stickman.svg/400px-Friendly_stickman.svg.png?20110713230618"/>
+						</div>
 			<form className="signup-form" onSubmit={handleSubmit}>
 				<ul>
 					{errors.map((error, idx) => (
@@ -55,8 +58,9 @@ function SignupFormModal() {
 						))}
 				</ul>
 				<label>
-					Email
+					
 					<input
+					placeholder="Email"
 						type="text"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
@@ -64,8 +68,9 @@ function SignupFormModal() {
 						/>
 				</label>
 				<label>
-					Username
+					
 					<input
+					placeholder="Username"
 						type="text"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
@@ -73,8 +78,9 @@ function SignupFormModal() {
 						/>
 				</label>
 				<label>
-					Display Name
+					
 					<input
+					placeholder="Display Name"
 						type="text"
 						value={display_name}
 						onChange={(e) => setDisplayName(e.target.value)}
@@ -82,24 +88,27 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					Profile Pic
+					
 					<input
+					placeholder="Profile Pic"
 						type="url"
 						value={profile_pic}
 						onChange={(e) => setProfilePic(e.target.value)}
 						/>
 				</label>
 				<label>
-					Bio
+				<label>
+					
 					<textarea className="bio_txt"
+						placeholder="Tell us about yourself"
 						type="textarea"
 						value={bio}
 						onChange={(e) => setBio(e.target.value)}
 						/>
 				</label>
-				<label>
-					Password
+					
 					<input
+					placeholder="Password"
 						type="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
@@ -107,8 +116,9 @@ function SignupFormModal() {
 						/>
 				</label>
 				<label>
-					Confirm Password
+					
 					<input
+					placeholder="Confirm Password"
 						type="password"
 						value={confirmPassword}
 						onChange={(e) => setConfirmPassword(e.target.value)}
