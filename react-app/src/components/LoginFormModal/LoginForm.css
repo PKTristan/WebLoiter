@@ -13,10 +13,11 @@
 }
 
 .login-form button {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
-.login-submit-btn{
+.login-submit-btn,
+.demo-btn {
     margin-left: 14px;
     margin-right: 15px;
 }
@@ -37,5 +38,5 @@ h2 {
     color: blue;
     text-decoration: none;
     cursor: pointer;
-    margin-left: 7.5px;
+    margin-left: 15px;
 }

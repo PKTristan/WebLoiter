@@ -1,5 +1,6 @@
 import userImg from "../../assets/user.png";
 import tristan from "../../assets/tristan.jpeg";
+import collin from '../../assets/collin.jpg'
 
 function Founders() {
 
@@ -14,7 +15,7 @@ function Founders() {
             </div>
 
             <div className="collin">
-                <img src={userImg} alt="collin" />
+                <img src={collin} alt="collin" />
                 <h4>Collin</h4>
                 <p>
                     Founder slay.
