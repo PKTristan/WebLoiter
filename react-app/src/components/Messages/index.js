@@ -14,6 +14,7 @@ function ChannelMessages() {
     const messages = useSelector((state) => state.messages.messages);
     const [hoveredMessage, setHoveredMessage] = useState(null)
     const [editMessage, setEditMessage] = useState({ id: null, text: '' });
+    const [isEditing, setIsEditing] = useState(false);
     const { channelId } = useParams();
 
     const history = useHistory();
@@ -46,6 +47,18 @@ function ChannelMessages() {
         }
     }, [dispatch, channelId])
 
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                setIsEditing(false)
+            }
+        }
+        document.addEventListener('keydown', handleKeyDown)
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown)
+        }
+    }, []);
 
     const handleMessageHover = (messageId) => {
         setHoveredMessage(messageId);
@@ -61,6 +74,7 @@ function ChannelMessages() {
         }
     };
 
+    
     const handleKeyUp = (e, messageId, updatedMessage) => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
@@ -74,6 +88,7 @@ function ChannelMessages() {
         const message = Object.values(messages).find((msg) => msg.id === messageId);
         if (message) {
             setEditMessage({ id: messageId, text: message.message });
+            setIsEditing(true)
         }
     };
 
@@ -98,7 +113,7 @@ function ChannelMessages() {
                                 onMouseLeave={handleMessageleave}
                                 className="message-container"
                             >
-                                {editMessage && editMessage.id === message.id ? (
+                                {editMessage && editMessage.id === message.id && isEditing ? (
                                     <textarea className='textarea-container edit-message'
                                         value={editMessage.text}
                                         onChange={(e) => setEditMessage({ ...editMessage, text: e.target.value })}
