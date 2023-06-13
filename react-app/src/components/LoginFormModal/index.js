@@ -28,6 +28,18 @@ function LoginFormModal() {
     }
   };
 
+  const demoLogin = async (e) => {
+    e.preventDefault();
+
+    const data = await dispatch(login('demo@aa.io', 'password'));
+    if (data) {
+      setErrors(data);
+    } else {
+      closeModal()
+      history.push("/servers");
+    }
+  };
+
   const openSignupForm = () => {
 		setShowLoginForm(false);
 		setShowSignupForm(true);
@@ -64,6 +76,7 @@ function LoginFormModal() {
             />
         </label>
         <button className="login-submit-btn" type="submit">Log In</button>
+        <button className="demo-btn" type="button" onClick={demoLogin}>Demo User</button>
       </form>
       <button className="signup-redirect-btn" onClick={openSignupForm}>
 				Don't have an account?
@@ -79,7 +92,7 @@ function LoginFormModal() {
           <SignupFormModal />
         </div>
       )}
-      
+
     </>
   );
 }
