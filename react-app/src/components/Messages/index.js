@@ -12,11 +12,12 @@ function ChannelMessages({channelId}) {
     const currentUserId = useSelector((state) => state.session.user.id) || null
     const [hoveredMessage, setHoveredMessage] = useState(null)
     const [editMessage, setEditMessage] = useState({id: null, text:''});
+    const params = useParams();
 
     const history = useHistory();
-    
+
     useEffect(() => {
-        console.log('this is channel in messages', currChannel)
+        console.log('params', params);
         if (currChannel) {
                 dispatch(loadMessagesByChannel(currChannel.id))
         }
@@ -37,7 +38,7 @@ function ChannelMessages({channelId}) {
           e.stopPropagation();
         }
       };
-      
+
       const handleKeyUp = (e, messageId, updatedMessage) => {
         if (e.key === "Enter" && !e.shiftKey) {
           e.preventDefault();

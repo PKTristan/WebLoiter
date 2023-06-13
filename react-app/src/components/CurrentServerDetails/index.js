@@ -8,13 +8,14 @@ import ConfirmServerDeleteModal from "../ConfirmServerDeleteModal";
 import * as sessionActions from "../../store/session";
 import Channels from "../Channels";
 import "./CurrServer.css"
+import { clearChannel } from "../../store/channel";
 
 function CurrServer(){
     const dispatch = useDispatch();
     const currServer = useSelector(state => state.server.currentServer);
     const user = useSelector(state => state.session.user);
     const allUsers = useSelector(state => state.session.allUsers);
-    const { id } = useParams()
+    const { id } = useParams();
 
     const update_server_button = () => {
         if (user.id === currServer.owner_id) {
@@ -40,6 +41,8 @@ function CurrServer(){
     }
 
     useEffect(() => {
+        dispatch(clearChannel());
+
         if (currServer.direct_message === true) {
             console.log('-------', currServer)
             dispatch(sessionActions.fetchAllUsers());
@@ -47,6 +50,7 @@ function CurrServer(){
         }
         dispatch(serverActions.fetchCurrentServer(id))
     }, [dispatch, id, currServer.direct_message]);
+
 
     return user && currServer ? (
         <div>
@@ -64,7 +68,7 @@ function CurrServer(){
             <Channels allUsers={allUsers} currServer={currServer}/>
         </div>
         </div>
-            
+
     ) : null
 }
 
