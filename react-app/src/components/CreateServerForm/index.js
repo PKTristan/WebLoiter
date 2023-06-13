@@ -31,8 +31,7 @@ const CreateServerForm = ({ hideForm }) => {
         console.log(data, avatar);
         dispatch(serverActions.fetchServers());
         if (data.errors) {
-
-            console.log(errors)
+            setErrors(data.errors)
             } else {
                 closeModal()
 
