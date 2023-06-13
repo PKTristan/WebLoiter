@@ -20,7 +20,7 @@ function ChannelMessages({channelId}) {
         if (currChannel) {
                 dispatch(loadMessagesByChannel(currChannel.id))
         }
-    }, [dispatch, channelId, currentUserId, history, currChannel]);
+    }, [dispatch, channelId, currChannel]);
 
     const messages = useSelector((state) => state.messages.messages);
 

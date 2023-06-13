@@ -1,11 +1,12 @@
 import Founders from "./Founders";
 import placeholder from "../../assets/placeholder.png";
+import topLeftLogo from "../../assets/top-left-webloiter-homepage.png"
 
 
 function About() {
     return (
         <section className="about-founders-wrapper">
-            <img src={placeholder} alt="logo" className="logo-img"></img>
+            <img src={topLeftLogo || placeholder} alt="logo" className="logo-img"></img>
             <div className="about">
                 <h1>Welcome to Webloiter</h1>
                 <p>
