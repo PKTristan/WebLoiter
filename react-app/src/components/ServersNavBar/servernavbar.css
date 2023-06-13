@@ -1,5 +1,5 @@
 .avatar:hover + .alt-text {
-    opacity: 1; /* Show the alt text on hover */
+    opacity: 1; 
 }
 
 .alt-text {
@@ -8,18 +8,18 @@
     left: 50%;
     transform: translate(-50%);
     background-color: #dfb2f4;
-    color: #fff; /* Set text color */
-    padding: 4px 8px; /* Add padding */
-    border-radius: 4px; /* Add border radius */
-    font-size: 12px; /* Set font size */
-    opacity: 0; /* Initially hide the name tag */
+    color: #fff; 
+    padding: 4px 8px; 
+    border-radius: 4px; 
+    font-size: 12px; 
+    opacity: 0; 
     transition: opacity 0.3s ease-in-out; 
 }
 
 
 .server-navbar {
     display: flex;
-    background-color: #a7bed3;
+    background-color: #b39bc8;
     padding: 8px;
     border-right: 1px solid #202225;
 }
@@ -45,7 +45,7 @@
 }
 
 .server-link:hover {
-    background-color: #dfb2f4;
+    background-color: #e64398;
 }
 
 .avatar {
@@ -57,11 +57,11 @@
 }
 
 .server-navbar button {
-    background-color: #fdffb6;
+    background-color: #e64398;
     padding: 6px;
     margin-left: 8px;
     border: none;
-    color: #a0c4ff;
+    color: #f0ebf4;
     font-weight: bold;
     font-size: 24px;
     width: 40px;
@@ -75,5 +75,5 @@
 }
 
 .server-navbar button:hover {
-    background-color: #ffc6ff;
+    background-color: #f172a1;
 }
