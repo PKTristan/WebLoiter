@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import SignupFormModal from "../SignupFormModal";
 import { useHistory } from "react-router-dom";
-import topLeftLogo from "../../assets/top-left-webloiter-homepage.png"
+import loginImage from "../../assets/waving.png"
 import "./LoginForm.css";
 
 
@@ -60,13 +60,13 @@ function LoginFormModal() {
         </h2>
         <h2 className="welcome-back-txt"> <br/>
           <span className="h2-text">
-        Welcome Back 
+        Welcome Back
             </span>
             <span className="arrow-down">
             ↓
             </span>
         </h2>
-        <img className="login-img" src={topLeftLogo}/>
+        <img className="login-img" src={loginImage}/>
           </div>
       <form className="login-form" onSubmit={handleSubmit}>
         <ul>
