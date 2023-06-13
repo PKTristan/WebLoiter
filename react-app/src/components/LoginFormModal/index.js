@@ -4,7 +4,9 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import SignupFormModal from "../SignupFormModal";
 import { useHistory } from "react-router-dom";
+import topLeftLogo from "../../assets/top-left-webloiter-homepage.png"
 import "./LoginForm.css";
+
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -49,7 +51,23 @@ function LoginFormModal() {
     <>
       {showLoginForm && (
         <div className="sign-in-box">
-        <h2>Welcome Back</h2>
+          <div className="login-header">
+        <h2
+        >
+          <span className="h2-text">
+            It's You Again
+            </span>
+        </h2>
+        <h2 className="welcome-back-txt"> <br/>
+          <span className="h2-text">
+        Welcome Back 
+            </span>
+            <span className="arrow-down">
+            ↓
+            </span>
+        </h2>
+        <img className="login-img" src={topLeftLogo}/>
+          </div>
       <form className="login-form" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
@@ -57,8 +75,8 @@ function LoginFormModal() {
           ))}
         </ul>
         <label>
-          Email
           <input
+            placeholder="Email"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -66,8 +84,8 @@ function LoginFormModal() {
             />
         </label>
         <label>
-          Password
           <input
+            placeholder="Password"
             type="password"
             value={password}
             onChange={(e) => {
