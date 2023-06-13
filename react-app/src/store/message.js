@@ -46,6 +46,7 @@ export const newMessageChannel = (message, channelId) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(newMessage(data));
+        dispatch(loadMessagesByChannel(channelId))
         return null;
     } else if (response.status < 500) {
         const data = await response.json();
