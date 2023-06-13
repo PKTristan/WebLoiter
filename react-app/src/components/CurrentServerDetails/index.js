@@ -15,7 +15,7 @@ function CurrServer() {
     const currServer = useSelector(state => state.server.currentServer);
     const user = useSelector(state => state.session.user);
     const allUsers = useSelector(state => state.session.allUsers);
-    const {serverId} = useParams();
+    const {serverId, channelId} = useParams();
 
     const update_server_button = () => {
         if (user.id === currServer.owner_id) {
@@ -51,7 +51,7 @@ function CurrServer() {
 
     useEffect (() => {
         dispatch(clearChannel())
-    }, [serverId, dispatch]);
+    }, [serverId, channelId, dispatch]);
 
     return user && currServer ? (
         <div>
