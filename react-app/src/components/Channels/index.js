@@ -248,9 +248,8 @@ function Channels() {
             </section>
             {/* adding the messages for channels */}
             <div className='messages-wrapper'>
-            {selectedChannelId && <ChannelMessages channelId={selectedChannelId} />}
+            {<ChannelMessages channelId={channelId} />}
             </div>
-            {channelId && <ChannelMessages />}
             {!channelId && members && <ServerMembers  members={members} />}
 
         </div>

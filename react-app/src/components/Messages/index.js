@@ -118,8 +118,10 @@ function ChannelMessages() {
                                 )}
                                 {user && (
                                     <div className="user-info">
-                                        <img className="user-avatar" src={user.profile_pic} alt={user.displayname} />
-                                        <div className="user-displayname">{user.displayname}</div>
+                                        <div className='user-avatar-box'>
+                                        <img className='user-avatar' src={user.profile_pic} alt={user.display_name} />
+                                            </div>
+                                        <div className="user-displayname">{user.display_name}</div>
                                     </div>
                                 )}
                             </div>
