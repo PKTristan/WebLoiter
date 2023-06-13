@@ -8,22 +8,22 @@ import ChannelMessages from '../Messages';
 import CustomerContextMenu from './CustomContextMenu';
 
 function Channels({allUsers}) {
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const { id } = useParams();
     const serverChannels = useSelector(selChannels);
     const currUser = useSelector(state => state.session.user);
     const currServer = useSelector(state => state.server.currentServer)
     const currChannel = useSelector((state) => state.channels.channel)
-    const dispatch = useDispatch();
     const [isOwner, setIsOwner] = useState(false);
     const [channels, setChannels] = useState([]);
     const [newChan, setNewChan] = useState('');
     const [createMode, setCreateMode] = useState(false);
-    const { id } = useParams();
     const [selectedChannelId, setSelectedChannelId] = useState(id)
     const [contextMenu, setContextMenu] = useState({
         visible: false,
         channel: null
     });
-    const history = useHistory();
     const [errors, setErrors] = useState([]);
 
     useEffect(() => {
@@ -38,7 +38,7 @@ function Channels({allUsers}) {
         if(currChannel === null) dispatch(loadMessagesByChannel(id))
         else {dispatch(loadMessagesByChannel(currChannel.id))}
         // dispatch(getChannelById(id))
-        
+
     }, [id, dispatch, currChannel]);
 
     useEffect(() => {
