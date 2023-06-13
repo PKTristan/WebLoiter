@@ -10,20 +10,20 @@ import Channels from "../Channels";
 import "./CurrServer.css"
 import { clearChannel } from "../../store/channel";
 
-function CurrServer(){
+function CurrServer() {
     const dispatch = useDispatch();
     const currServer = useSelector(state => state.server.currentServer);
     const user = useSelector(state => state.session.user);
     const allUsers = useSelector(state => state.session.allUsers);
-    const { id } = useParams();
+    const params = useParams();
 
     const update_server_button = () => {
         if (user.id === currServer.owner_id) {
             return (
                 <OpenModalButton
-                buttonText="Update"
-                modalComponent={<UpdateServerModal />}
-                className="button-1"
+                    buttonText="Update"
+                    modalComponent={<UpdateServerModal />}
+                    className="button-1"
                 />
             )
         }
@@ -33,8 +33,8 @@ function CurrServer(){
         if (user.id === currServer.owner_id) {
             return (
                 <OpenModalButton
-                buttonText="Delete"
-                modalComponent={<ConfirmServerDeleteModal />}
+                    buttonText="Delete"
+                    modalComponent={<ConfirmServerDeleteModal />}
                 />
             )
         }
@@ -48,25 +48,25 @@ function CurrServer(){
             dispatch(sessionActions.fetchAllUsers());
 
         }
-        dispatch(serverActions.fetchCurrentServer(id))
-    }, [dispatch, id, currServer.direct_message]);
+        dispatch(serverActions.fetchCurrentServer(params.serverId))
+    }, [dispatch, params.serverId, currServer.direct_message]);
 
 
     return user && currServer ? (
         <div>
-        <div className="curr-server">
-            <div className="server-name">
-            <h3>{currServer.server_name}</h3>
+            <div className="curr-server">
+                <div className="server-name">
+                    <h3>{currServer.server_name}</h3>
+                </div>
+                <div className="buttons-container">
+                    <div className="button-1">{update_server_button()}</div>
+                    <div className="button-2">{delete_server_button()}</div>
+                </div>
+                <br />
             </div>
-            <div className="buttons-container">
-                <div className="button-1">{update_server_button()}</div>
-                <div className="button-2">{delete_server_button()}</div>
+            <div className="channels-container">
+                <Channels allUsers={allUsers} currServer={currServer} />
             </div>
-            <br/>
-        </div>
-        <div className="channels-container">
-            <Channels allUsers={allUsers} currServer={currServer}/>
-        </div>
         </div>
 
     ) : null
