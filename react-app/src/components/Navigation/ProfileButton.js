@@ -41,9 +41,11 @@ function ProfileButton({ user }) {
   const closeMenu = () => setShowMenu(false);
 
   return (
-    <>
+    <div className="profile-container">
       <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+        <span class="material-symbols-outlined">
+            account_circle
+        </span>
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
@@ -71,7 +73,7 @@ function ProfileButton({ user }) {
           </>
         )}
       </ul>
-    </>
+    </div>
   );
 }
 
