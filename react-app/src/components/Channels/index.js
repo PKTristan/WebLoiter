@@ -37,10 +37,12 @@ function Channels({ allUsers }) {
                 setErrors(err);
             }
         });
+
     }, [serverId, dispatch, currChannel]);
 
 
     useEffect(() => {
+        
         if (serverChannels) {
             setChannels(serverChannels);
         }
@@ -169,6 +171,7 @@ function Channels({ allUsers }) {
             setNewChan('');
         })
     }
+
 
     const cancelCreate = (e) => {
         e.preventDefault();
