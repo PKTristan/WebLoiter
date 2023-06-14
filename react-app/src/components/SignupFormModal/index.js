@@ -81,7 +81,7 @@ function SignupFormModal() {
 			errors.push('username field is required');
 		}
 
-		if (isEmail(email)) {
+		if (!isEmail(email)) {
 			errors.push('email field is invalid');
 		}
 
