@@ -24,7 +24,7 @@ function SignupFormModal() {
 		e.preventDefault();
 		if (password === confirmPassword) {
 			const data = await dispatch(signUp(username, display_name, email, password, profile_pic, bio));
-			if (data) {
+			if (data.errors) {
 				setErrors(data);
 			} else {
 				closeModal();
@@ -33,8 +33,10 @@ function SignupFormModal() {
 			}
 		} else {
 			setErrors([
-				"Confirm Password field must be the same as the Password field",
+				{"password": "Confirm Password field must be the same as the Password field"},
+				{"url": "Profile Pic field must be a valid url"}
 			]);
+			console.log(errors)
 		}
 	};
 
@@ -45,18 +47,23 @@ function SignupFormModal() {
 
 	return (
 		<div className="signup-container">
+			{showLoginForm && (
+				errors.map((error, idx) => (
+					<li key={idx}>{error}</li>
+				))
+			)}
 			{showSignupForm && (
 				<div>
-					<div className="signup-header">
-				<h2>Join Your Friends</h2>
-				<img className='group-img' src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Friendly_stickman.svg/400px-Friendly_stickman.svg.png?20110713230618"/>
-						</div>
-			<form className="signup-form" onSubmit={handleSubmit}>
+				<div className="signup-header">
+					<h2>Join Your Friends</h2>
+					<img className='group-img' src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Friendly_stickman.svg/400px-Friendly_stickman.svg.png?20110713230618"/>
+				</div>
 				<ul>
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>
 						))}
 				</ul>
+			<form className="signup-form" onSubmit={handleSubmit}>
 				<label>
 					
 					<input
@@ -87,8 +94,8 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
-				<label>
-					
+				<label style={{ fontWeight: "bold" }}>
+					url example: https://i.imgur.com/YnEnRlg.jpg
 					<input
 					placeholder="Profile Pic"
 						type="url"
@@ -99,8 +106,9 @@ function SignupFormModal() {
 				<label>
 				<label>
 					
-					<textarea className="bio_txt"
-						placeholder="Tell us about yourself"
+					<textarea 
+						className="bio_txt"
+						placeholder="Tell us about yourself..."
 						type="textarea"
 						value={bio}
 						onChange={(e) => setBio(e.target.value)}
