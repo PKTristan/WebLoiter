@@ -12,6 +12,8 @@
 .errors-create {
     color: red;
     display: flex;
+    font-size: 12px;
+    text-align: center;
     font-weight: bold;
     font-family: cursive;
     justify-content: center;
