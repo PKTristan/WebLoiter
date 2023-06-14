@@ -11,7 +11,7 @@ function NewMessage({ initialValue, channelId }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if(message){
+        if(message.trim() !== ""){
             const data = await dispatch(newMessageChannel(message, channelId));
             console.log(data)
             if(data) {

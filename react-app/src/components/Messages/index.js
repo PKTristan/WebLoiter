@@ -78,7 +78,9 @@ function ChannelMessages() {
     const handleKeyUp = (e, messageId, updatedMessage) => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
-            dispatch(editMessageChannel(updatedMessage, currChannel.id, messageId));
+            if (updatedMessage.trim() !== '') {
+                dispatch(editMessageChannel(updatedMessage, currChannel.id, messageId));
+            }
             setEditMessage({ id: null, text: '' });
         }
     };

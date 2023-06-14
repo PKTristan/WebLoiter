@@ -91,10 +91,12 @@ export const signUp = (username, display_name, email, password, profile_pic, bio
 
 	if (response.ok) {
 		const data = await response.json();
+		console.log(data)
 		dispatch(setUser(data));
 		return null;
-	} else if (response.status < 500) {
+	} else if (response.status < 400) {
 		const data = await response.json();
+		console.log(data)
 		if (data.errors) {
 			return data.errors;
 		}
