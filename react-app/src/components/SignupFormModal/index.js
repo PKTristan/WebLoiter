@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory } from 'react-router-dom';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { signUp } from "../../store/session";
 import LoginFormModal from "../LoginFormModal";
@@ -8,6 +8,8 @@ import "./SignupForm.css";
 
 function SignupFormModal() {
 	const dispatch = useDispatch();
+	const user = useSelector((state) => state.session.user);
+	const [disabled, setDisabled] = useState(true);
 	const [email, setEmail] = useState("");
 	const [username, setUsername] = useState("");
 	const [display_name, setDisplayName] = useState('')
@@ -28,19 +30,30 @@ function SignupFormModal() {
 			console.log('data', data)
 			if (data) {
 				setErrors(data);
-			} else {
-				closeModal();
-				history.push("/servers");
-
 			}
 		} else {
 			setErrors([
-				{"password": "Confirm Password field must be the same as the Password field"},
-				{"url": "Profile Pic field must be a valid url"}
+				{"password": "Confirm Password field must be the same as the Password field"}
 			]);
 			console.log(errors)
 		}
 	};
+
+	useEffect(() => {
+		if(user) {
+			closeModal();
+			history.push('/servers');
+		}
+	}, [user]);
+
+	useEffect(() => {
+		if (password  !== confirmPassword) {
+			setDisabled(true);
+		}
+		else {
+			setDisabled(false);
+		}
+	}, [password, confirmPassword]);
 
 	const openLoginForm = () => {
 		setShowLoginForm(true);
@@ -135,7 +148,7 @@ function SignupFormModal() {
 						required
 						/>
 				</label>
-				<button className="signup-submit-btn" type="submit">Continue</button>
+				<button className="signup-submit-btn" disabled={disabled} type="submit">Continue</button>
 			</form>
 			<button className="login-redirect-btn" onClick={openLoginForm}>
 				<Link className="login-redirect-btn" to='/login'>Already have an account?</Link>
