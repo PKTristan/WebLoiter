@@ -42,11 +42,12 @@ const initialState = {
 }
 
 
-export const fetchServers = () => async (dispatch) => {
+export const fetchServers = (setFetchedServers) => async (dispatch) => {
     const response = await fetch("/api/servers");
     if (response.ok) {
         const data = await response.json();
         dispatch(setServers(data));
+        setFetchedServers(data);
     }
 }
 
