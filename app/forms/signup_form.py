@@ -26,8 +26,7 @@ def validate_url_format(url='https://i.imgur.com/YnEnRlg.jpg') -> bool:
 
 class SignUpForm(FlaskForm):
     email = StringField('email', validators=[DataRequired(), user_exists])
-    username = StringField(
-        'username', validators=[DataRequired(), username_exists])
+    username = StringField('username', validators=[DataRequired(), username_exists])
     display_name = StringField('display_name', validators=[DataRequired()])
     profile_pic = StringField('profile_pic')
     bio = StringField('bio')
