@@ -53,6 +53,7 @@ function UpdateServerModal() {
             setErrors(data.errors);
             } else {
                 closeModal()
+                history.push('/servers')
             }
     }
 
