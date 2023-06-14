@@ -95,8 +95,8 @@ export const signUp = (username, display_name, email, password, profile_pic, bio
 		return null;
 	} else if (response.status < 500) {
 		const data = await response.json();
-		if (data) {
-			return data;
+		if (data.errors) {
+			return data.errors;
 		}
 	} else {
 		return ["An error occurred. Please try again."];

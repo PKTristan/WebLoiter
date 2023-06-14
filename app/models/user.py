@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(50), nullable=False, unique=True)
     display_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
-    profile_pic = db.Column(db.String(255), nullable=True)
+    profile_pic = db.Column(db.String(255), default='https://i.imgur.com/PdTFRoE.jpg', nullable=True)
     bio = db.Column(db.String(1000), nullable=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
@@ -27,12 +27,6 @@ class User(db.Model, UserMixin):
         if not validate_email_format(email):
             raise AssertionError('Invalid email format')
         return email
-
-    @db.validates('profile_pic')
-    def validate_avi(self, key, avi):
-        if not validate_url_format(avi):
-            raise AssertionError('Invalid URL format for profile_pic')
-        return avi
 
     @property
     def password(self):
@@ -60,7 +54,3 @@ class User(db.Model, UserMixin):
 def validate_email_format(email) -> bool:
     email_pattern = re.compile(r'^[\w\.-]+@[\w\.-]+\.\w+$')
     return bool(email_pattern.match(email))
-
-def validate_url_format(url) -> bool:
-    url_pattern = re.compile(r'^https?://[\w\-]+(\.[\w\-]+){1,2}\.[\w\-]{2,3}[/#?]?.*$')
-    return bool(url_pattern.match(url))
