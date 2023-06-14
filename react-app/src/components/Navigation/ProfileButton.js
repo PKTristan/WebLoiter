@@ -43,7 +43,7 @@ function ProfileButton({ user }) {
   return (
     <div className="profile-container">
       <button onClick={openMenu}>
-        <span class="material-symbols-outlined">
+        <span className="material-symbols-outlined">
             account_circle
         </span>
       </button>
