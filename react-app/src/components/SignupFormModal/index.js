@@ -87,22 +87,22 @@ function SignupFormModal() {
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						required
-						/>
+					/>
 				</label>
 				<label>
 
 					<input
-					placeholder="Username"
+						placeholder="Username"
 						type="text"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 						required
-						/>
+					/>
 				</label>
 				<label>
 
 					<input
-					placeholder="Display Name"
+						placeholder="Display Name"
 						type="text"
 						value={display_name}
 						onChange={(e) => setDisplayName(e.target.value)}
@@ -112,11 +112,11 @@ function SignupFormModal() {
 				<label style={{ fontWeight: "bold" }}>
 					url example: https://i.imgur.com/YnEnRlg.jpg
 					<input
-					placeholder="Profile Pic"
+						placeholder="Profile Pic"
 						type="url"
 						value={profile_pic}
 						onChange={(e) => setProfilePic(e.target.value)}
-						/>
+					/>
 				</label>
 				<label>
 				<label>
@@ -127,7 +127,7 @@ function SignupFormModal() {
 						type="textarea"
 						value={bio}
 						onChange={(e) => setBio(e.target.value)}
-						/>
+					/>
 				</label>
 
 					<input
@@ -136,17 +136,17 @@ function SignupFormModal() {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						required
-						/>
+					/>
 				</label>
 				<label>
 
 					<input
-					placeholder="Confirm Password"
+						placeholder="Confirm Password"
 						type="password"
 						value={confirmPassword}
 						onChange={(e) => setConfirmPassword(e.target.value)}
 						required
-						/>
+					/>
 				</label>
 				<button className="signup-submit-btn" disabled={disabled} type="submit">Continue</button>
 			</form>
