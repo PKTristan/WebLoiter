@@ -20,11 +20,13 @@ function SignupFormModal() {
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 	const history = useHistory();
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (password === confirmPassword) {
 			const data = await dispatch(signUp(username, display_name, email, password, profile_pic, bio));
-			if (data.errors) {
+			console.log('data', data)
+			if (data) {
 				setErrors(data);
 			} else {
 				closeModal();
@@ -65,17 +67,17 @@ function SignupFormModal() {
 				</ul>
 			<form className="signup-form" onSubmit={handleSubmit}>
 				<label>
-					
+
 					<input
 					placeholder="Email"
-						type="text"
+						type="email"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						required
 						/>
 				</label>
 				<label>
-					
+
 					<input
 					placeholder="Username"
 						type="text"
@@ -85,7 +87,7 @@ function SignupFormModal() {
 						/>
 				</label>
 				<label>
-					
+
 					<input
 					placeholder="Display Name"
 						type="text"
@@ -105,8 +107,8 @@ function SignupFormModal() {
 				</label>
 				<label>
 				<label>
-					
-					<textarea 
+
+					<textarea
 						className="bio_txt"
 						placeholder="Tell us about yourself..."
 						type="textarea"
@@ -114,7 +116,7 @@ function SignupFormModal() {
 						onChange={(e) => setBio(e.target.value)}
 						/>
 				</label>
-					
+
 					<input
 					placeholder="Password"
 						type="password"
@@ -124,7 +126,7 @@ function SignupFormModal() {
 						/>
 				</label>
 				<label>
-					
+
 					<input
 					placeholder="Confirm Password"
 						type="password"

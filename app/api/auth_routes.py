@@ -66,7 +66,7 @@ def sign_up():
     if form.validate_on_submit():
         user = User(
             username=form.data['username'],
-            display_name = form.data['username'],
+            display_name = form.data['display_name'],
             email=form.data['email'],
             password=form.data['password'],
             profile_pic=form.data['profile_pic'],
@@ -88,13 +88,6 @@ def sign_up():
             direct_message=True
         )
         db.session.add(usersDMServer)
-        db.session.commit()
-        
-        genChannel = Channel(
-            server_id=usersDMServer.id,
-            channel_name='general'
-        )
-        db.session.add(genChannel)
         db.session.commit()
 
         login_user(user)
