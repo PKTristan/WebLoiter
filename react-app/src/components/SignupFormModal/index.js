@@ -33,7 +33,7 @@ function SignupFormModal() {
 			}
 		} else {
 			setErrors([
-				{"password": "Confirm Password field must be the same as the Password field"}
+				"password: Confirm Password field must be the same as the Password field"
 			]);
 			console.log(errors)
 		}
@@ -47,7 +47,7 @@ function SignupFormModal() {
 	}, [user]);
 
 	useEffect(() => {
-		if (password  !== confirmPassword) {
+		if (!password.length || !confirmPassword.length || (password !== confirmPassword)) {
 			setDisabled(true);
 		}
 		else {
@@ -60,13 +60,56 @@ function SignupFormModal() {
 		setShowSignupForm(false)
 	}
 
+	function isEmail(email) {
+		const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
+		return emailRegex.test(email);
+	}
+
+	function isURL(url) {
+		try {
+			new URL(url);
+			return true;
+		} catch (error) {
+			return false;
+		}
+	}
+
+	useEffect(() => {
+		let errors = [];
+
+		if (!username.length) {
+			errors.push('username field is required');
+		}
+
+		if (!isEmail(email)) {
+			errors.push('email field is invalid');
+		}
+
+		if (!display_name.length) {
+			errors.push('display name field is required');
+		}
+
+		if (!password.length) {
+			errors.push('password field is required');
+		}
+
+		if(!confirmPassword.length) {
+			errors.push('confirm password field is required');
+		}
+
+		if (password !== confirmPassword) {
+			errors.push('password: Confirm Password field must be the same as the Password field');
+		}
+
+		if (!isURL(profile_pic)) {
+			errors.push('profile pic field is not valid url');
+		}
+
+		setErrors(errors);
+	}, [username, display_name, email, password, confirmPassword, profile_pic]);
+
 	return (
 		<div className="signup-container">
-			{showLoginForm && (
-				errors.map((error, idx) => (
-					<li key={idx}>{error}</li>
-				))
-			)}
 			{showSignupForm && (
 				<div>
 				<div className="signup-header">
