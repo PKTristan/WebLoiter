@@ -99,9 +99,11 @@ function LoginFormModal() {
           <button className="demo-btn" type="button" onClick={demoLogin}>Demo User</button>
         </div>
       </form>
-      <button className="signup-redirect-btn" onClick={openSignupForm}>
-				Don't have an account?
-			</button>
+      <div className="signup-redirect-btn">
+        <button  onClick={openSignupForm}>
+          Don't have an account?
+        </button>
+      </div>
 			<div className="terms-div">
 				By logging in, you agree to Webloiter's Terms of service and Privacy Policy
 			</div>
