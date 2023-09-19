@@ -52,22 +52,21 @@ function LoginFormModal() {
       {showLoginForm && (
         <div className="sign-in-box">
           <div className="login-header">
-        <h2
-        >
+        <h2>
           <span className="h2-text">
             It's You Again
-            </span>
+          </span>
         </h2>
         <h2 className="welcome-back-txt"> <br/>
           <span className="h2-text">
-        Welcome Back
-            </span>
-            <span className="arrow-down">
+              Welcome Back
+          </span>
+          <span className="arrow-down">
             ↓
-            </span>
+          </span>
         </h2>
-        <img className="login-img" src={loginImage}/>
-          </div>
+          <img className="login-img" alt="login-img" src={loginImage}/>
+        </div>
       <form className="login-form" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
@@ -75,6 +74,7 @@ function LoginFormModal() {
           ))}
         </ul>
         <label>
+          Email:
           <input
             placeholder="Email"
             type="text"
@@ -84,6 +84,7 @@ function LoginFormModal() {
             />
         </label>
         <label>
+          Password:
           <input
             placeholder="Password"
             type="password"
@@ -93,12 +94,16 @@ function LoginFormModal() {
             required
             />
         </label>
-        <button className="login-submit-btn" type="submit">Log In</button>
-        <button className="demo-btn" type="button" onClick={demoLogin}>Demo User</button>
+        <div className="login-buttons-grid">
+          <button className="login-submit-btn" type="submit">Log In</button>
+          <button className="demo-btn" type="button" onClick={demoLogin}>Demo User</button>
+        </div>
       </form>
-      <button className="signup-redirect-btn" onClick={openSignupForm}>
-				Don't have an account?
-			</button>
+      <div className="signup-redirect-btn">
+        <button  onClick={openSignupForm}>
+          Don't have an account?
+        </button>
+      </div>
 			<div className="terms-div">
 				By logging in, you agree to Webloiter's Terms of service and Privacy Policy
 			</div>
