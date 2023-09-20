@@ -7,7 +7,9 @@ function Founders() {
     return (
         <div className="founders-cards">
             <div className="alfonso">
-                <img src='https://i.imgur.com/5T32dlj.jpg' alt="alfonso"/>
+                <a href="https://www.linkedin.com/in/alfonsogswe">
+                    <img src='https://i.imgur.com/5T32dlj.jpg' alt="alfonso" />
+                </a>
                 <h4>Alfonso</h4>
                 <p>
                     Literal founder right here, Top G.
@@ -15,7 +17,9 @@ function Founders() {
             </div>
 
             <div className="collin">
-                <img src={collin} alt="collin" />
+                <a href="https://www.linkedin.com/in/collin-smith-a18b80237/">
+                    <img src={collin} alt="collin" />
+                </a>
                 <h4>Collin</h4>
                 <p>
                     Founder slay.
@@ -23,7 +27,9 @@ function Founders() {
             </div>
 
             <div className="tristan">
-                <img src={tristan || userImg} alt="Tristan" />
+                <a href="https://github.com/PKTristan">
+                    <img src={tristan || userImg} alt="Tristan" />
+                </a>
                 <h4>Tristan</h4>
                 <p>
                     Queen.

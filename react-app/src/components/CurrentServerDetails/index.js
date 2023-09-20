@@ -17,7 +17,7 @@ function CurrServer() {
     const {serverId, channelId} = useParams();
 
     const update_server_button = () => {
-        if (user.id === currServer.owner_id) {
+        if ((user.id === currServer.owner_id) && (currServer.private !== true)) {
             return (
                 <OpenModalButton
                     buttonText="Update"
@@ -29,7 +29,7 @@ function CurrServer() {
     }
 
     const delete_server_button = () => {
-        if (user.id === currServer.owner_id) {
+        if ((user.id === currServer.owner_id) && (currServer.private !== true)) {
             return (
                 <OpenModalButton
                     buttonText="Delete"
