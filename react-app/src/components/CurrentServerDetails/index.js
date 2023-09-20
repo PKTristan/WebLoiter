@@ -15,6 +15,7 @@ function CurrServer() {
     const currServer = useSelector(state => state.server.currentServer);
     const user = useSelector(state => state.session.user);
     const {serverId, channelId} = useParams();
+    console.log(currServer)
 
     const update_server_button = () => {
         if (user.id === currServer.owner_id) {
@@ -54,10 +55,12 @@ function CurrServer() {
                 <div className="server-name">
                     <h3>{currServer.server_name}</h3>
                 </div>
-                <div className="buttons-container">
-                    <div className="button-1">{update_server_button()}</div>
-                    <div className="button-2">{delete_server_button()}</div>
-                </div>
+                { !currServer.direct_message ? (
+                    <div className="buttons-container">
+                        <div className="button-1">{update_server_button()}</div>
+                        <div className="button-2">{delete_server_button()}</div>
+                    </div>
+                ): null }
                 <br />
             </div>
             <div className="channels-container">
