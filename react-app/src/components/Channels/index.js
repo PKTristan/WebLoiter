@@ -230,13 +230,15 @@ function Channels() {
                                 })}
                             </ul>
                         )}
-                        {currServer.direct_message === false && (<>
-                            <input type="text" value={newChan} onChange={setNewChannel} />
-                            <button className='create-channel' onClick={createChan}>Create</button>
-                        </>
-                        )
-                        }
-                        <button className='cancel-create-channel' onClick={cancelCreate}>Cancel</button>
+                        <div className='new-channel-buttons'>
+                            {currServer.direct_message === false && (<>
+                                <input className="new-channel-input" type="text" value={newChan} onChange={setNewChannel} />
+                                <button className='create-channel' onClick={createChan}>Create</button>
+                            </>
+                            )
+                            }
+                            <button className='cancel-create-channel' onClick={cancelCreate}>Cancel</button>
+                        </div>
                     </div>
                 }
 

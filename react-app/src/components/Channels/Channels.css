@@ -63,7 +63,29 @@
     background-color: #ebebeb;
 }
 
-.new-channel-button {
+.new-channel-buttons {
+    display: grid;
+    grid-template-areas:
+        'input input'
+        'create cancel';
+}
+
+.new-channel-input {
+    grid-area: input;
+    border: 2px solid #fdaac9;
+}
+
+.create-channel {
+    grid-area: create;
+}
+
+.cancel-create-channel {
+    grid-area: cancel;
+}
+
+.new-channel-button,
+.create-channel,
+.cancel-create-channel {
     background-color: #f172a1;
     color: #f0ebf4;
     border: none;
