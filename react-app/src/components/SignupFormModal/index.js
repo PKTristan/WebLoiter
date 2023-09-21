@@ -22,6 +22,7 @@ function SignupFormModal() {
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 	const history = useHistory();
+	console.log('this is errors', errors)
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -157,10 +158,14 @@ function SignupFormModal() {
 						Profile Pic:
 						<input
 							placeholder="ex:https://i.imgur.com/YnEnRlg.jpg"
+							label="image url must be from imgur.com"
 							type="url"
 							value={profile_pic}
 							onChange={(e) => setProfilePic(e.target.value)}
 						/>
+						<div className="url-valid-note">
+							(image url must be from imgur.com)
+							</div>
 					</label>
 					<label>
 						Bio:

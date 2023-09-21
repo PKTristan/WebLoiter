@@ -29,6 +29,11 @@
     color: red;
 }
 
+.url-valid-note{
+    font-size: 11px;
+    color: red;
+}
+
 .signup-form label {
     display: flex;
     flex-direction: column;
