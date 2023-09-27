@@ -10,11 +10,9 @@ function Navigation({ isLoaded }){
 	const renderServer = () => {
 		if (sessionUser) {
 			return (
-				<div style={{ display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'center', color: 'black' }}>
-					<NavLink to={`/servers`} className='nav-link'>
+					<NavLink to={`/servers`} className="server-links">
 						Servers
 					</NavLink>
-				</div>
 			);
 		}
 	}
@@ -22,15 +20,17 @@ function Navigation({ isLoaded }){
 	return (
 		<div className='navigation-container'>
 		<h1>WEBLOITER</h1>
-		<div style={{ display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'center', color: 'black' }}>
-			{renderServer()}
-		</div>
 		<ul>
 			{isLoaded && (
-				<div className='profile-button-container'>
-					<li>
-						<ProfileButton user={sessionUser} />
-					</li>
+				<div className='server-profile'> 
+					<div className='all-servers'>
+						{renderServer()}
+					</div>
+					<div className='profile-button-container'>
+						<li>
+							<ProfileButton user={sessionUser} />
+						</li>
+					</div>
 				</div>
 			)}
 		</ul>
