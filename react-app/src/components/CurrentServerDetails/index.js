@@ -18,7 +18,7 @@ function CurrServer() {
     console.log(currServer)
 
     const update_server_button = () => {
-        if ((user.id === currServer.owner_id) && (currServer.private !== true)) {
+        if ((user.id === currServer.owner_id)) {
             return (
                 <OpenModalButton
                     buttonText="Update"
@@ -30,7 +30,7 @@ function CurrServer() {
     }
 
     const delete_server_button = () => {
-        if ((user.id === currServer.owner_id) && (currServer.private !== true)) {
+        if ((user.id === currServer.owner_id)) {
             return (
                 <OpenModalButton
                     buttonText="Delete"
