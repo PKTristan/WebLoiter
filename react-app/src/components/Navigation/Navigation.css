@@ -21,6 +21,14 @@
   list-style: none;
 }
 
+.server-profile {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
 /* Profile Dropdown */
 .profile-dropdown {
   position: absolute;
@@ -145,4 +153,17 @@ i {
   justify-content: center;
   margin: 20px;
   padding: 30px;
+}
+
+.server-links {
+  display: flex;
+  color: #202225;
+  background-color: #b39bc8;
+  border-radius: 5px;
+  border: 2px solid #202225;
+  padding: 5px;
+  font-size: 1em;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: 'Bagel Fat One', cursive;
 }
