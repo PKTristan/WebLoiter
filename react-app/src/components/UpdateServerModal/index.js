@@ -23,7 +23,7 @@ function UpdateServerModal() {
     const history = useHistory();
 
     useEffect(() => {
-        console.log(currServer)
+        // console.log(currServer)
         setServerName(currServer.server_name)
         setServerType(currServer.server_type)
         setAvatar(currServer.avatar)

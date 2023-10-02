@@ -5,6 +5,7 @@ import { loadMessagesByChannel, editMessageChannel, deleteMessageChannel } from 
 import { fetchAllUsers } from '../../store/session';
 import NewMessage from './post';
 import './Messages.css'
+import stickman from  '../../assets/stickman.jpeg'
 
 function ChannelMessages() {
     const dispatch = useDispatch();
@@ -24,7 +25,7 @@ function ChannelMessages() {
     }, [dispatch])
     useEffect(() => {
         // console.log('params', params);
-        console.log('this is messages', Object.values(messages).length)
+        // console.log('this is messages', Object.values(messages).length)
         if (currChannel) {
             dispatch(loadMessagesByChannel(currChannel.id))
         }
@@ -146,7 +147,7 @@ function ChannelMessages() {
                 </div>
             ) : (
                 <div className='no-message'>
-                    <img src='http://www.clipartbest.com/cliparts/aiq/e9o/aiqe9o7kT.jpeg' alt='No messages' className='no-message-img'/>
+                    <img src={stickman} alt='No messages' className='no-message-img'/>
                    <span>Be the first to send a message in this channel!</span> 
                     </div>
             )}
