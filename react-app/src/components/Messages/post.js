@@ -13,7 +13,7 @@ function NewMessage({ initialValue, channelId }) {
         e.preventDefault();
         if(message){
             const data = await dispatch(newMessageChannel(message, channelId));
-            console.log(data)
+            // console.log(data)
             if(data) {
                 setErrors(data)
             }

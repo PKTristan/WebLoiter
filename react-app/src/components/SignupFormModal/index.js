@@ -22,12 +22,13 @@ function SignupFormModal() {
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 	const history = useHistory();
+	// console.log('this is errors', errors)
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (password === confirmPassword) {
 			const data = await dispatch(signUp(username, display_name, email, password, profile_pic, bio));
-			console.log('data', data)
+			// console.log('data', data)
 			if (data) {
 				setErrors(data);
 			}
@@ -35,7 +36,7 @@ function SignupFormModal() {
 			setErrors([
 				"password: Confirm Password field must be the same as the Password field"
 			]);
-			console.log(errors)
+			// console.log(errors)
 		}
 	};
 
@@ -157,10 +158,14 @@ function SignupFormModal() {
 						Profile Pic:
 						<input
 							placeholder="ex:https://i.imgur.com/YnEnRlg.jpg"
+							label="image url must be from imgur.com"
 							type="url"
 							value={profile_pic}
 							onChange={(e) => setProfilePic(e.target.value)}
 						/>
+						<div className="url-valid-note">
+							(image url must be from imgur.com)
+							</div>
 					</label>
 					<label>
 						Bio:
