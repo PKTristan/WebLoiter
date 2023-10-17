@@ -7,33 +7,61 @@ function Founders() {
     return (
         <div className="founders-cards">
             <div className="alfonso">
-                <a href="https://www.linkedin.com/in/alfonsogswe">
-                    <img src='https://i.imgur.com/5T32dlj.jpg' alt="alfonso" />
-                </a>
-                <h4>Alfonso</h4>
+                <img src='https://i.imgur.com/1VJ5DUn.jpg' alt="alfonso" />
+                <h4>Alfonso Gabriel</h4>
                 <p>
-                    Literal founder right here, Top G.
+                    Recent App Academy graduate, looking forward to learning 
+                    and growing in the industry.
                 </p>
+                <ul>
+                    <li>
+                        <a href="https://github.com/agabriele73">
+                            <i className="fab fa-github"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/alfonsogswe">
+                            <i className="fab fa-linkedin"></i>
+                        </a>
+                    </li>
+                </ul>
             </div>
-
             <div className="collin">
-                <a href="https://www.linkedin.com/in/collin-smith-a18b80237/">
-                    <img src={collin} alt="collin" />
-                </a>
-                <h4>Collin</h4>
+                <img src={collin} alt="collin" />
+                <h4>Collin Smith</h4>
                 <p>
-                    Founder slay.
+                    Full Stack Web Developer, and collaborator to this project.
                 </p>
+                <ul>
+                    <li>
+                        <a href="https://github.com/collin-smith23">
+                            <i className="fab fa-github"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/collin-smith-a18b80237/">
+                            <i className="fab fa-linkedin"></i>
+                        </a>
+                    </li>
+                </ul>
             </div>
-
             <div className="tristan">
-                <a href="https://github.com/PKTristan">
-                    <img src={tristan || userImg} alt="Tristan" />
-                </a>
-                <h4>Tristan</h4>
+                <img src={tristan || userImg} alt="Tristan" />
+                <h4>Tristan Calderon</h4>
                 <p>
-                    Queen.
+                    Queen. Engineer. Developer.
                 </p>
+                <ul>
+                    <li>
+                        <a href="https://github.com/PKTristan">
+                            <i className="fab fa-github"></i>
+                        </a>
+                    </li><li>
+                        <a href="https://www.linkedin.com/in/tristan-calderon-276774115/">
+                            <i className="fab fa-linkedin"></i>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     )
