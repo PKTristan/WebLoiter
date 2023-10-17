@@ -28,7 +28,7 @@ const CreateServerForm = ({ hideForm }) => {
         }
     
         const data = await dispatch(serverActions.createServerAction(newServer));
-        console.log(data, avatar);
+        // console.log(data, avatar);
         dispatch(serverActions.fetchServers());
         if (data.errors) {
             setErrors(data.errors)

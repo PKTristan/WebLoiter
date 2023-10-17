@@ -4,7 +4,7 @@ import CreateServerForm from "../CreateServerForm";
 
 const CreateServerModal = () => {
     const [showModal, setShowModal] = useState(false);
-    console.log('this is my create server modal')
+    // console.log('this is my create server modal')
 
     return (
         <div>

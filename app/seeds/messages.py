@@ -5,21 +5,21 @@ from sqlalchemy.sql import text
 def seed_messages():
     # Define your seed data for messages
     seed_data = [
-        {'message': 'First message in Channel 1', 'user_id': 1, 'channel_id': 1},
-        {'message': 'Second message in Channel 1', 'user_id': 1, 'channel_id': 1},
-        {'message': 'First message in Channel 3', 'user_id': 1, 'channel_id': 3},
-        {'message': 'First message in Channel 5', 'user_id': 1, 'channel_id': 5},
-        {'message': 'First message in Channel 1 from User 2', 'user_id': 2, 'channel_id': 1},
-        {'message': 'First message in Channel 2 from User 2', 'user_id': 2, 'channel_id': 2},
-        {'message': 'First message in Channel 4 from User 2', 'user_id': 2, 'channel_id': 4},
-        {'message': 'First message in Channel 1 from User 3', 'user_id': 3, 'channel_id': 1},
-        {'message': 'First message in Channel 3 from User 3', 'user_id': 3, 'channel_id': 3},
-        {'message': 'First message in Channel 4 from User 3', 'user_id': 3, 'channel_id': 4},
-        {'message': 'First message in Channel 1 from User 4', 'user_id': 4, 'channel_id': 1},
-        {'message': 'First message in Channel 5 from User 4', 'user_id': 4, 'channel_id': 5},
-        {'message': 'First message in Channel 1 from User 5', 'user_id': 5, 'channel_id': 1},
-        {'message': 'First message in Channel 2 from User 5', 'user_id': 5, 'channel_id': 2},
-        {'message': 'First message in Channel 4 from User 5', 'user_id': 5, 'channel_id': 4}
+        {'message': 'Hi or should I say', 'user_id': 1, 'channel_id': 1},
+        {'message': 'Hello there...', 'user_id': 1, 'channel_id': 1},
+        {'message': 'Any fun plans?', 'user_id': 1, 'channel_id': 3},
+        {'message': 'Any starwars fans here?', 'user_id': 1, 'channel_id': 5},
+        {'message': 'Thanks for letting me join!', 'user_id': 2, 'channel_id': 1},
+        {'message': 'Thanks for the invite!', 'user_id': 2, 'channel_id': 2},
+        {'message': 'Thanks for joining!', 'user_id': 2, 'channel_id': 4},
+        {'message': 'General Kenobi!', 'user_id': 3, 'channel_id': 1},
+        {'message': 'Did anyone catch the fight last night', 'user_id': 3, 'channel_id': 3},
+        {'message': 'Who has tried the new Mortal Kombat?', 'user_id': 3, 'channel_id': 4},
+        {'message': 'I Love starwars!!!', 'user_id': 4, 'channel_id': 1},
+        {'message': 'Is water wet?', 'user_id': 4, 'channel_id': 5},
+        {'message': 'I love pepperoni pizza!', 'user_id': 5, 'channel_id': 1},
+        {'message': 'I am so excited for the new COD', 'user_id': 5, 'channel_id': 2},
+        {'message': 'I am finally playing the new Zelda game, whoop!', 'user_id': 5, 'channel_id': 4}
     ]
 
     # Create Message objects from the seed data and add them to the database
